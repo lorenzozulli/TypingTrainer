@@ -1,6 +1,7 @@
-class ControllerTest(object):
+import json
 
-    # --- CUD TEST ---
+class ControllerTest(object):
+    '''
     def aggiungiTest():
         #TODO: fare questa funzione
     
@@ -21,3 +22,7 @@ class ControllerTest(object):
     
     def visualizzaListaTest():
         #TODO: fare questa funzione
+    '''
+    def caricaListaTest(self):
+        with open('listaTest.json') as f:
+            self.listaTest = json.load(f)

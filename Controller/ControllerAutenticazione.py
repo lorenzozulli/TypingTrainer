@@ -1,10 +1,27 @@
+import json
+import os
+
+from PyQt5 import QtGui, QtWidgets
+from PyQt5.QtCore import *
+
+from View import LandingPageUtenteView
 class ControllerAutenticazione(object):
-    def caricaListaUtenti():
-        #TODO: fare questa funzione
-    
-    def logIn():
-        #TODO: fare questa funzione
-    
+
+    #--- metodo per caricare la lista degli utenti ---
+    def caricaListaUtenti(self):
+        with open('listaUtenti.json') as f:
+            self.listaUtenti = json.load(f)
+
+    def logIn(self):
+        for utente in self.listaUtenti:
+            if self.UsernameInput.text() == utente.utente['username']:
+                if self.PasswordInput.text() == utente.utente['password']:
+                    self.authorized = QtWidgets.QMainWindow()
+                    LandingPageUtenteView().setupUi(self.authorized)
+                    self.authorized.show()
+
+
+        '''
     def logOut():
         #TODO: fare questa funzione
     
@@ -13,4 +30,4 @@ class ControllerAutenticazione(object):
     
     def salvaListaUtenti():
         #TODO: fare questa funzione
-    
+    '''

@@ -1,7 +1,14 @@
-[
-    {
-        "id": 0,
-        "username": "Admin",
-        "password": "Admin"
-    }
-]
+{
+    "Utenti": [
+        {   
+            "id": 0,
+            "username": "Admin",
+            "password": "Admin"
+        },
+        {
+            "id": 1,
+            "username": "Lorenzo",
+            "password": "Zulli"
+        }
+    ]
+}

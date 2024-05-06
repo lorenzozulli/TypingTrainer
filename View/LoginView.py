@@ -10,6 +10,7 @@
 import os
 
 from View.RegistrazioneView import RegistrazioneView
+from View.RecuperaPasswordView import RecuperaPasswordView
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -29,6 +30,7 @@ class LoginView(object):
         self.RecuperaPasswordButton = QtWidgets.QPushButton(self.centralwidget)
         self.RecuperaPasswordButton.setGeometry(QtCore.QRect(490, 490, 150, 30))
         self.RecuperaPasswordButton.setObjectName("RecuperaPasswordButton")
+        self.RecuperaPasswordButton.clicked.connect(self.goRecuperaPassword)
         self.UsernameInput = QtWidgets.QLineEdit(self.centralwidget)
         self.UsernameInput.setGeometry(QtCore.QRect(150, 390, 491, 30))
         self.UsernameInput.setObjectName("UsernameInput")
@@ -67,4 +69,7 @@ class LoginView(object):
         self.registrazione.show()
           
 
-    #def goRecuperaPassword(self):
+    def goRecuperaPassword(self):
+        self.recuperaPassword = QtWidgets.QMainWindow()
+        RecuperaPasswordView().setupUi(self.recuperaPassword)
+        self.recuperaPassword.show()

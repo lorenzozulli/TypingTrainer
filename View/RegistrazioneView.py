@@ -9,9 +9,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QWidget
 
-
-class Ui_MainWindow(object):
+class RegistrazioneView(QWidget):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 800)
@@ -48,17 +48,10 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.RegistrazioneButton.setText(_translate("MainWindow", "Registrazione"))
-        self.UsernameInput.setText(_translate("MainWindow", "Username"))
-        self.PasswordInput.setText(_translate("MainWindow", "Password"))
+        self.UsernameInput.setText(_translate("MainWindow", ""))
+        self.PasswordInput.setText(_translate("MainWindow", ""))
+        self.UsernameInput.setPlaceholderText(_translate("MainWindow", "Username"))
+        self.PasswordInput.setPlaceholderText(_translate("MainWindow", "Password"))
         self.label1.setText(_translate("MainWindow", "Crea le tue Credenziali!"))
-        self.EmailInput.setText(_translate("MainWindow", "Email"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
+        self.EmailInput.setText(_translate("MainWindow", ""))
+        self.EmailInput.setPlaceholderText(_translate("MainWindow", "Email"))

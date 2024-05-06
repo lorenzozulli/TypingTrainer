@@ -48,13 +48,3 @@ class Ui_MainWindow(object):
         self.UsernameInput.setText(_translate("MainWindow", "Nome"))
         self.label1.setText(_translate("MainWindow", "Aggiungi il nuovo Test!"))
         self.plainTextEdit.setPlainText(_translate("MainWindow", "Ricordati di separare ogni parola con il carattere ,"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())

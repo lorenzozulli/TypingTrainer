@@ -51,13 +51,3 @@ class Ui_MainWindow(object):
         self.gestioneUtentiButton.setText(_translate("MainWindow", "Gestione Utenti"))
         self.logOutButton.setText(_translate("MainWindow", "Log Out"))
         self.gestioneTestButton.setText(_translate("MainWindow", "Gestione Test"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())

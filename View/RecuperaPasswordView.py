@@ -45,16 +45,8 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.RecuperaPasswordButton.setText(_translate("MainWindow", "Recupera Password"))
-        self.UsernameInput.setText(_translate("MainWindow", "Username"))
-        self.NuovaPasswordInput.setText(_translate("MainWindow", "Nuova Password"))
+        self.UsernameInput.setText(_translate("MainWindow", ""))
+        self.UsernameInput.setPlaceholderText(_translate("MainWindow", "Username"))
+        self.NuovaPasswordInput.setText(_translate("MainWindow", ""))
+        self.NuovaPasswordInput.setPlaceholderText(_translate("MainWindow", "Nuova Password"))
         self.label1.setText(_translate("MainWindow", "Recupera la tua Password!"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())

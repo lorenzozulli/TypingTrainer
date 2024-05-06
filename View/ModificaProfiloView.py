@@ -52,13 +52,3 @@ class Ui_MainWindow(object):
         self.PasswordInput.setText(_translate("MainWindow", "Password"))
         self.label1.setText(_translate("MainWindow", "Modifica le tue credenziali!"))
         self.EmailInput.setText(_translate("MainWindow", "Email"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())

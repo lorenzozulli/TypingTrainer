@@ -12,7 +12,9 @@ class ControllerAutenticazione(object):
         with open('listaUtenti.json') as f:
             self.listaUtenti = json.load(f)
 
+    #--- metodo per effettuare il login ---
     def logIn(self):
+        self.caricaListaUtenti()
         for utente in self.listaUtenti:
             if self.UsernameInput.text() == utente.utente['username']:
                 if self.PasswordInput.text() == utente.utente['password']:

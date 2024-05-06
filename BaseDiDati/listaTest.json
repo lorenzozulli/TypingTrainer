@@ -2,7 +2,8 @@
     "listaTest":[
         {
             "id": 0,
-            "nome": "Test di prova"
+            "nome": "Test di prova",
+            "contenuto": ["ciao", "mi", "chiamo", "lorenzo"]
         }
     ]
 }

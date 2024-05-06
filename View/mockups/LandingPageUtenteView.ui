@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="IniziaTestButton">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>730</y>
+      <width>150</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Inizia Test</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label1">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>10</y>
+      <width>351</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>36</pointsize>
+     </font>
+    </property>
+    <property name="acceptDrops">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string>Benvenuto in Typing Trainer!</string>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="tableWidget">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>210</y>
+      <width>731</width>
+      <height>511</height>
+     </rect>
+    </property>
+    <column>
+     <property name="text">
+      <string>ID</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Nome</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Data Creazione</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Seleziona</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Numeri</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Punteggiatura</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QPushButton" name="cercaButton">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>170</y>
+      <width>75</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Cerca</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="searchBarInput">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>170</y>
+      <width>350</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Inserisci ID oppure Nome</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="profiloButton">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>30</y>
+      <width>101</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Vai a profilo</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

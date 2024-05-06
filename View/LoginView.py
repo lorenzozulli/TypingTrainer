@@ -9,11 +9,8 @@
 
 import os
 
-#from RegistrazioneView import RegistrazioneView
-#from main import widget
+from View.RegistrazioneView import RegistrazioneView
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMainWindow
-from PyQt5.uic import loadUi
 
 
 class LoginView(object):
@@ -65,8 +62,9 @@ class LoginView(object):
         self.label1.setText(_translate("MainWindow", "Benvenuto in Typing Trainer!"))
 
     def goRegistrazione(self):
-          registrazione = RegistrazioneView()
-          widget.addWidget(registrazione)
-          widget.setCurrentWidget(registrazione)
+        self.registrazione = QtWidgets.QMainWindow()
+        RegistrazioneView().setupUi(self.registrazione)
+        self.registrazione.show()
+          
 
     #def goRecuperaPassword(self):

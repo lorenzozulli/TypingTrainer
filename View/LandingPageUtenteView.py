@@ -33,6 +33,7 @@ class LandingPageUtenteView(object):
         self.label1.setAcceptDrops(False)
         self.label1.setWordWrap(True)
         self.label1.setObjectName("label1")
+        
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
         self.tableWidget.setGeometry(QtCore.QRect(20, 210, 731, 511))
         self.tableWidget.setObjectName("tableWidget")

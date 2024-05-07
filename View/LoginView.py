@@ -78,7 +78,6 @@ class LoginView(object):
         self.registrazione = QtWidgets.QMainWindow()
         RegistrazioneView().setupUi(self.registrazione)
         self.registrazione.show()
-          
 
     def goRecuperaPassword(self):
         self.recuperaPassword = QtWidgets.QMainWindow()

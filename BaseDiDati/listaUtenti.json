@@ -3,12 +3,14 @@
         {   
             "id": 0,
             "username": "Admin",
-            "password": "Admin"
+            "password": "Admin",
+            "isAdmin": "True"
         },
         {
             "id": 1,
-            "username": "Lorenzo",
-            "password": "Zulli"
+            "username": "Pluto",
+            "password": "Zulli",
+            "isAdmin": "False"
         }
     ]
 }

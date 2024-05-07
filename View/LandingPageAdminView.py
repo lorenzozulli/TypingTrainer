@@ -12,12 +12,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 from View.GestioneUtentiView import GestioneUtentiView
 from View.GestioneTestView import GestioneTestView
-from View import LoginView
-#from Controller.ControllerAutenticazione import ControllerAutenticazione
+from Model import Utilizzatore
 
 
 class LandingPageAdminView(object):
-    def setupUi(self, MainWindow):
+    def setupUi(self, MainWindow, currentUtilizzatore):
+        self.gestioneUtilizzatore = Utilizzatore.Utilizzatore(currentUtilizzatore)
+
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 800)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -28,18 +29,22 @@ class LandingPageAdminView(object):
         font.setPointSize(40)
         self.adminLabel.setFont(font)
         self.adminLabel.setObjectName("adminLabel")
+
         self.gestioneUtentiButton = QtWidgets.QPushButton(self.centralwidget)
         self.gestioneUtentiButton.setGeometry(QtCore.QRect(440, 210, 150, 30))
         self.gestioneUtentiButton.setObjectName("gestioneUtentiButton")
         self.gestioneUtentiButton.clicked.connect(self.goGestioneUtenti)
+
         self.logOutButton = QtWidgets.QPushButton(self.centralwidget)
         self.logOutButton.setGeometry(QtCore.QRect(440, 260, 150, 30))
         self.logOutButton.setObjectName("logOutButton")
         self.logOutButton.clicked.connect(self.goLogOut)
+
         self.gestioneTestButton = QtWidgets.QPushButton(self.centralwidget)
         self.gestioneTestButton.setGeometry(QtCore.QRect(440, 160, 150, 30))
         self.gestioneTestButton.setObjectName("gestioneTestButton")
         self.gestioneTestButton.clicked.connect(self.goGestioneTest)
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
@@ -61,11 +66,13 @@ class LandingPageAdminView(object):
         self.gestioneTestButton.setText(_translate("MainWindow", "Gestione Test"))
 
     def goGestioneUtenti(self):
+        print('clicked')
         self.gestioneUtenti = QtWidgets.QMainWindow()
         GestioneUtentiView().setupUi(self.gestioneUtenti)
         self.gestioneUtenti.show()
 
     def goGestioneTest(self):
+        print('clicked')
         self.gestioneTest = QtWidgets.QMainWindow()
         GestioneTestView().setupUi(self.gestioneTest)
         self.gestioneTest.show()
@@ -73,7 +80,5 @@ class LandingPageAdminView(object):
     def goLogOut(self):
         #self.controllerAutenticazione = ControllerAutenticazione()
         #self.controllerAutenticazione.logOut()
-        self.loginView = QtWidgets.QMainWindow()
-        LoginView.LoginView().setupUi(self.loginView)
-        self.loginView.show()
+        print('clicked')
 

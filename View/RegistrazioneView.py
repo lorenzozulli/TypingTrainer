@@ -60,6 +60,7 @@ class RegistrazioneView(object):
         self.EmailInput.setPlaceholderText(_translate("MainWindow", "Email"))
 
     def goProceduraRegistrazione(self):
+        print('clicked')
         if self.UsernameInput.text() == "":
             usernameVuoto = QMessageBox()
             usernameVuoto.setWindowTitle("Errore!")

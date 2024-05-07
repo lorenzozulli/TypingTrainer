@@ -1,11 +1,12 @@
 import json
 import os
+import time
 
 from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
-from Model import Utente
+from Model import Utilizzatore, Utente
 class ControllerAutenticazione(object):
 
     #--- metodo per caricare la lista degli utenti ---
@@ -21,9 +22,17 @@ class ControllerAutenticazione(object):
             if i['username'] == username:
                 if i['password'] == password:
                     if i['isAdmin'] == "False":
-                        return "Utente"
+                        utente = Utilizzatore.Utilizzatore()
+                        utente.setId(i['id'])
+                        utente.setUsername(i['username'])
+                        utente.setPassword(i['password'])
+                        return "Utente", utente
                     else:
-                        return "Admin"
+                        admin = Utilizzatore.Utilizzatore()
+                        admin.setId(i['id'])
+                        admin.setUsername(i['username'])
+                        admin.setPassword(i['password'])
+                        return "Admin", admin
                 else:
                     return "PasswordErrata"
         return "UsernameNonTrovato"
@@ -40,6 +49,8 @@ class ControllerAutenticazione(object):
         nuovoUtente.setUsername(username)
         nuovoUtente.setPassword(password)
         nuovoUtente.setEmail(email)
+        nuovoUtente.setDataOraCreazione(time.time())
+        nuovoUtente.setStatistiche("")
         self.salvaListaUtenti(nuovoUtente)
     
     # --- metodo per salvare la lista di utenti ---

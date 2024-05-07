@@ -10,10 +10,13 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from View import VisualizzaProfiloView
+from Model import Utilizzatore
 
 
 class LandingPageUtenteView(object):
-    def setupUi(self, MainWindow):
+    def setupUi(self, MainWindow, currentUtilizzatore):
+        self.gestioneUtilizzatore = Utilizzatore.Utilizzatore(currentUtilizzatore)
+
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 800)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -21,6 +24,7 @@ class LandingPageUtenteView(object):
         self.IniziaTestButton = QtWidgets.QPushButton(self.centralwidget)
         self.IniziaTestButton.setGeometry(QtCore.QRect(320, 730, 150, 30))
         self.IniziaTestButton.setObjectName("IniziaTestButton")
+
         self.label1 = QtWidgets.QLabel(self.centralwidget)
         self.label1.setGeometry(QtCore.QRect(0, 10, 351, 121))
         font = QtGui.QFont()
@@ -52,10 +56,12 @@ class LandingPageUtenteView(object):
         self.searchBarInput = QtWidgets.QLineEdit(self.centralwidget)
         self.searchBarInput.setGeometry(QtCore.QRect(20, 170, 350, 30))
         self.searchBarInput.setObjectName("searchBarInput")
+
         self.profiloButton = QtWidgets.QToolButton(self.centralwidget)
         self.profiloButton.setGeometry(QtCore.QRect(650, 30, 101, 71))
         self.profiloButton.setObjectName("profiloButton")
         self.profiloButton.clicked.connect(self.goVisualizzaProfilo)
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -87,6 +93,7 @@ class LandingPageUtenteView(object):
         self.profiloButton.setText(_translate("MainWindow", "Vai a profilo"))
     
     def goVisualizzaProfilo(self):
+        print('clicked')
         self.visualizzaProfilo = QtWidgets.QMainWindow()
         VisualizzaProfiloView().setupUi(self.visualizzaProfilo)
         self.visualizzaProfilo.show()

@@ -10,6 +10,10 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+from View.GestioneUtentiView import GestioneUtentiView
+from View.GestioneTestView import GestioneTestView
+from Controller.ControllerAutenticazione import ControllerAutenticazione
+
 
 class LandingPageAdminView(object):
     def setupUi(self, MainWindow):
@@ -26,12 +30,15 @@ class LandingPageAdminView(object):
         self.gestioneUtentiButton = QtWidgets.QPushButton(self.centralwidget)
         self.gestioneUtentiButton.setGeometry(QtCore.QRect(440, 210, 150, 30))
         self.gestioneUtentiButton.setObjectName("gestioneUtentiButton")
+        self.gestioneUtentiButton.clicked.connect(self.goGestioneUtenti)
         self.logOutButton = QtWidgets.QPushButton(self.centralwidget)
         self.logOutButton.setGeometry(QtCore.QRect(440, 260, 150, 30))
         self.logOutButton.setObjectName("logOutButton")
+        self.logOutButton.clicked.connect(self.goLogOut)
         self.gestioneTestButton = QtWidgets.QPushButton(self.centralwidget)
         self.gestioneTestButton.setGeometry(QtCore.QRect(440, 160, 150, 30))
         self.gestioneTestButton.setObjectName("gestioneTestButton")
+        self.gestioneTestButton.clicked.connect(self.goGestioneTest)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
@@ -51,3 +58,17 @@ class LandingPageAdminView(object):
         self.gestioneUtentiButton.setText(_translate("MainWindow", "Gestione Utenti"))
         self.logOutButton.setText(_translate("MainWindow", "Log Out"))
         self.gestioneTestButton.setText(_translate("MainWindow", "Gestione Test"))
+
+    def goGestioneUtenti(self):
+        self.gestioneUtentiView = QtWidgets.QMainWindow()
+        GestioneUtentiView().setupUi(self.gestioneUtentiView)
+        self.gestioneUtentiView.show()
+
+    def goGestioneTest(self):
+        self.gestioneTestView = QtWidgets.QMainWindow()
+        GestioneTestView().setupUi(self.gestioneTestView)
+        self.gestioneTestView.show()
+
+    def goLogOut(self):
+        self.controllerAutenticazione = ControllerAutenticazione()
+        self.controllerAutenticazione.logOut()

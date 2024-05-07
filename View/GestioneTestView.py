@@ -80,5 +80,6 @@ class GestioneTestView(object):
         item = self.tableWidget.horizontalHeaderItem(5)
         item.setText(_translate("MainWindow", "Punteggiatura"))
         self.cercaButton.setText(_translate("MainWindow", "Cerca"))
-        self.searchBarInput.setText(_translate("MainWindow", "Inserisci ID oppure Nome"))
+        self.searchBarInput.setText(_translate("MainWindow", ""))
+        self.searchBarInput.setPlaceholderText(_translate("MainWindow", "Inserisci ID oppure Nome"))
         self.profiloButton.setText(_translate("MainWindow", "Vai a profilo"))

@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from View import VisualizzaProfiloView
 
 
 class LandingPageUtenteView(object):
@@ -54,6 +55,7 @@ class LandingPageUtenteView(object):
         self.profiloButton = QtWidgets.QToolButton(self.centralwidget)
         self.profiloButton.setGeometry(QtCore.QRect(650, 30, 101, 71))
         self.profiloButton.setObjectName("profiloButton")
+        self.profiloButton.clicked.connect(self.goVisualizzaProfilo)
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -80,5 +82,11 @@ class LandingPageUtenteView(object):
         item = self.tableWidget.horizontalHeaderItem(5)
         item.setText(_translate("MainWindow", "Punteggiatura"))
         self.cercaButton.setText(_translate("MainWindow", "Cerca"))
-        self.searchBarInput.setText(_translate("MainWindow", "Inserisci ID oppure Nome"))
+        self.searchBarInput.setText(_translate("MainWindow", ""))
+        self.searchBarInput.setPlaceholderText(_translate("MainWindow", "Inserisci ID oppure Nome"))
         self.profiloButton.setText(_translate("MainWindow", "Vai a profilo"))
+    
+    def goVisualizzaProfilo(self):
+        self.visualizzaProfilo = QtWidgets.QMainWindow()
+        VisualizzaProfiloView().setupUi(self.visualizzaProfilo)
+        self.visualizzaProfilo.show()

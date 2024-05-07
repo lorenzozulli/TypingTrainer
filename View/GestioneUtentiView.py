@@ -72,5 +72,6 @@ class GestioneUtentiView(object):
         item = self.tableWidget.horizontalHeaderItem(4)
         item.setText(_translate("MainWindow", "Elimina"))
         self.cercaButton.setText(_translate("MainWindow", "Cerca"))
-        self.searchBarInput.setText(_translate("MainWindow", "Inserisci ID oppure Nome"))
+        self.searchBarInput.setText(_translate("MainWindow", ""))
+        self.searchBarInput.setPlaceholderText(_translate("MainWindow", "Inserisci ID oppure Nome"))
         self.profiloButton.setText(_translate("MainWindow", "Vai a profilo"))

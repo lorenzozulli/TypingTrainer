@@ -99,7 +99,6 @@ class LoginView(object):
         
         self.controllerAutenticazione = ControllerAutenticazione()
         currentUtente = self.controllerAutenticazione.logIn(self.UsernameInput.text(), self.PasswordInput.text())
-        print(currentUtente)
         match currentUtente:
             case "Admin":
                 self.authorizedAdmin = QtWidgets.QMainWindow()

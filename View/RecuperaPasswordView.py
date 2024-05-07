@@ -49,4 +49,5 @@ class RecuperaPasswordView(object):
         self.UsernameInput.setPlaceholderText(_translate("MainWindow", "Username"))
         self.NuovaPasswordInput.setText(_translate("MainWindow", ""))
         self.NuovaPasswordInput.setPlaceholderText(_translate("MainWindow", "Nuova Password"))
+        self.NuovaPasswordInput.setEchoMode(QtWidgets.QLineEdit.Password)
         self.label1.setText(_translate("MainWindow", "Recupera la tua Password!"))

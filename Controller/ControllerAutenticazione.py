@@ -6,7 +6,7 @@ from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
-from Model import Utilizzatore, Utente
+from Model import Utilizzatore, Utente, Admin
 class ControllerAutenticazione(object):
 
     #--- metodo per caricare la lista degli utenti ---
@@ -22,14 +22,14 @@ class ControllerAutenticazione(object):
             if i['username'] == username:
                 if i['password'] == password:
                     if i['isAdmin'] == "False":
-                        utente = Utilizzatore.Utilizzatore()
+                        utente = Utente.Utente()
                         utente.setId(i['id'])
                         utente.setUsername(i['username'])
                         utente.setPassword(i['password'])
                         return "Utente", utente
                     else:
-                        admin = Utilizzatore.Utilizzatore()
-                        admin.setId(i['id'])
+                        admin = Admin.Admin()
+                        admin.Admin.setId(i['id'])
                         admin.setUsername(i['username'])
                         admin.setPassword(i['password'])
                         return "Admin", admin
@@ -44,14 +44,16 @@ class ControllerAutenticazione(object):
     # --- metodo per effettuare la registrazione nel sistema ---
     def registrazione(self, username, password, email):
         self.caricaListaUtenti()
-        nuovoUtente = Utente.Utente()
-        nuovoUtente.setId(len(self.listaUtenti)+1)
-        nuovoUtente.setUsername(username)
-        nuovoUtente.setPassword(password)
-        nuovoUtente.setEmail(email)
-        nuovoUtente.setDataOraCreazione(time.time())
-        nuovoUtente.setStatistiche("")
-        self.salvaListaUtenti(nuovoUtente)
+        self.nuovoUtente = Utente.Utente()
+        self.nuovoUtente.setId(len(self.listaUtenti)+1)
+        self.nuovoUtente.setUsername(username)
+        self.nuovoUtente.setPassword(password)
+        self.nuovoUtente.setEmail(email)
+        self.nuovoUtente.setDataOraCreazione(time.time())
+        self.nuovoUtente.setStatistiche("")
+        self.nuovoUtente.setIsAdmin("False")
+        self.salvaListaUtenti(self.nuovoUtente)
+        return True
     
     # --- metodo per salvare la lista di utenti ---
     def salvaListaUtenti(self, data):

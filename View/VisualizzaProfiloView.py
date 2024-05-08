@@ -10,6 +10,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+from Controller import ControllerAutenticazione, ControllerUtente
+from View.ModificaProfiloView import ModificaProfiloView
 
 class VisualizzaProfiloView(object):
     def setupUi(self, MainWindow):
@@ -26,9 +28,13 @@ class VisualizzaProfiloView(object):
         self.modificaProfiloButton = QtWidgets.QPushButton(self.centralwidget)
         self.modificaProfiloButton.setGeometry(QtCore.QRect(440, 210, 150, 30))
         self.modificaProfiloButton.setObjectName("modificaProfiloButton")
+        self.modificaProfiloButton.clicked.connect(self.goModificaProfilo)
+
         self.logOutButton = QtWidgets.QPushButton(self.centralwidget)
         self.logOutButton.setGeometry(QtCore.QRect(440, 260, 150, 30))
         self.logOutButton.setObjectName("logOutButton")
+        self.logOutButton.clicked.connect(self.goLogOut)
+
         self.joinedInLabel = QtWidgets.QLabel(self.centralwidget)
         self.joinedInLabel.setGeometry(QtCore.QRect(150, 270, 71, 21))
         font = QtGui.QFont()
@@ -80,12 +86,22 @@ class VisualizzaProfiloView(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.usernameLabel.setText(_translate("MainWindow", "Username"))
+        self.usernameLabel.setText(_translate("MainWindow", self.utente.getUsername()))
         self.modificaProfiloButton.setText(_translate("MainWindow", "Modifica Profilo"))
         self.logOutButton.setText(_translate("MainWindow", "Log Out"))
         self.joinedInLabel.setText(_translate("MainWindow", "Joined in,"))
-        self.dateLabel.setText(_translate("MainWindow", "YYYY/MM/DD"))
+        self.dateLabel.setText(_translate("MainWindow", self.utente.getDataOraCreazione()))
         self.label.setText(_translate("MainWindow", "Totale Test Eseguiti"))
         self.label_2.setText(_translate("MainWindow", "Precisione Media (%)"))
         self.label_3.setText(_translate("MainWindow", "Media WPM"))
         self.label_4.setText(_translate("MainWindow", "Media errori per test"))
+
+    def goModificaProfilo(self):
+        self.modificaProfilo = QtWidgets.QMainWindow()
+        self.ui = ModificaProfiloView()
+        self.ui.setupUi(self.modificaProfilo)
+        self.modificaProfilo.show()
+    
+    def goLogOut(self):
+        self.controllerAutenticazione = ControllerAutenticazione()
+        self.controllerAutenticazione.logOut()

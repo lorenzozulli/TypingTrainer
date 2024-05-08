@@ -3,6 +3,7 @@ class Utilizzatore(object):
         self.id = ""
         self.password = ""
         self.username = ""
+        self.isAdmin = ""
     
     def getId(self):
         return self.id
@@ -12,6 +13,9 @@ class Utilizzatore(object):
 
     def getUsername(self):
         return self.username
+    
+    def getIsAdmin(self):
+        return self.isAdmin
 
     def setId(self, id):
         self.id = id
@@ -21,3 +25,6 @@ class Utilizzatore(object):
 
     def setUsername(self, username):
         self.username = username
+
+    def setIsAdmin(self, isAdmin):
+        self.isAdmin = isAdmin

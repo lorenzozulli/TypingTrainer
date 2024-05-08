@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from Controller import ControllerAutenticazione
 
 class GestioneUtentiView(object):
     def setupUi(self, MainWindow):
@@ -40,6 +40,8 @@ class GestioneUtentiView(object):
         self.tableWidget.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(4, item)
+        self.tableWidget.setColumnWidth(1,300)
+
         self.cercaButton = QtWidgets.QPushButton(self.centralwidget)
         self.cercaButton.setGeometry(QtCore.QRect(380, 170, 75, 30))
         self.cercaButton.setObjectName("cercaButton")
@@ -56,6 +58,8 @@ class GestioneUtentiView(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+        self.visualizzaListaUtenti()
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -75,3 +79,16 @@ class GestioneUtentiView(object):
         self.searchBarInput.setText(_translate("MainWindow", ""))
         self.searchBarInput.setPlaceholderText(_translate("MainWindow", "Inserisci ID oppure Nome"))
         self.profiloButton.setText(_translate("MainWindow", "Vai a profilo"))
+
+        def visualizzaListaUtenti(self):
+            self.controllerAutenticazione = ControllerAutenticazione()
+            self.controllerAutenticazione.caricaListaUtenti()
+            row = 0
+            self.tableWidget.setRowCount(len(self.listaUtenti['Utenti']))
+            for i in self.listaUtenti['Utenti']:
+                self.tableWidget.setItem(row, 0, QtWidgets.QTableWidgetItem(i['id']))
+                self.tableWidget.setItem(row, 1, QtWidgets.QTableWidgetItem(i['username']))
+                self.tableWidget.setItem(row, 2, QtWidgets.QTableWidgetItem(i['dataOraCreazione']))
+                self.tableWidget.setItem(row, 3, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(row, 4, QtWidgets.QTableWidgetItem())
+                row = row+1

@@ -76,12 +76,14 @@ class LoginView(object):
 
     def goRegistrazione(self):
         self.registrazione = QtWidgets.QMainWindow()
-        RegistrazioneView().setupUi(self.registrazione)
+        self.ui = RegistrazioneView()
+        self.ui.setupUi(self.registrazione)
         self.registrazione.show()
 
     def goRecuperaPassword(self):
         self.recuperaPassword = QtWidgets.QMainWindow()
-        RecuperaPasswordView().setupUi(self.recuperaPassword)
+        self.ui = RecuperaPasswordView()
+        self.ui.setupUi(self.recuperaPassword)
         self.recuperaPassword.show()
     
     def goLogin(self):
@@ -100,16 +102,16 @@ class LoginView(object):
         
         self.controllerAutenticazione = ControllerAutenticazione()
         loginResult = self.controllerAutenticazione.logIn(self.UsernameInput.text(), self.PasswordInput.text())
-        print(loginResult)
         match loginResult[0]:
             case "Admin":
                 self.authorizedAdmin = QtWidgets.QMainWindow()
-                LandingPageAdminView().setupUi(self.authorizedAdmin, self.loginResult[1])
+                self.ui = LandingPageAdminView()
+                self.ui.setupUi(self.authorizedAdmin)
                 self.authorizedAdmin.show()
             case "Utente":
                 self.authorizedUtente = QtWidgets.QMainWindow()
-                print(type(loginResult[1]))
-                LandingPageUtenteView().setupUi(self.authorizedUtente, self.loginResult[1])
+                self.ui = LandingPageUtenteView()
+                self.ui.setupUi(self.authorizedUtente)
                 self.authorizedUtente.show()
             case "PasswordErrata":
                 popup = QMessageBox()

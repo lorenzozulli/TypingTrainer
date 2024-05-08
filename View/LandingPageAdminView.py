@@ -12,12 +12,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 from View.GestioneUtentiView import GestioneUtentiView
 from View.GestioneTestView import GestioneTestView
-from Model import Utilizzatore
+from Model import Admin
+
+from Controller import ControllerAutenticazione
 
 
 class LandingPageAdminView(object):
-    def setupUi(self, MainWindow, currentUtilizzatore):
-        self.gestioneUtilizzatore = Utilizzatore.Utilizzatore(currentUtilizzatore)
+    def setupUi(self, MainWindow):
 
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 800)
@@ -68,17 +69,18 @@ class LandingPageAdminView(object):
     def goGestioneUtenti(self):
         print('clicked')
         self.gestioneUtenti = QtWidgets.QMainWindow()
-        GestioneUtentiView().setupUi(self.gestioneUtenti)
+        self.ui = GestioneUtentiView()
+        self.ui.setupUi(self.gestioneUtenti)
         self.gestioneUtenti.show()
 
     def goGestioneTest(self):
         print('clicked')
         self.gestioneTest = QtWidgets.QMainWindow()
-        GestioneTestView().setupUi(self.gestioneTest)
+        self.ui = GestioneTestView()
+        self.ui.setupUi(self.gestioneTest)
         self.gestioneTest.show()
 
     def goLogOut(self):
-        #self.controllerAutenticazione = ControllerAutenticazione()
-        #self.controllerAutenticazione.logOut()
-        print('clicked')
+        self.controllerAutenticazione = ControllerAutenticazione()
+        self.controllerAutenticazione.logOut()
 

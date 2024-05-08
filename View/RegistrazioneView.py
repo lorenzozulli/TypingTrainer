@@ -64,7 +64,6 @@ class RegistrazioneView(object):
         self.EmailInput.setPlaceholderText(_translate("MainWindow", "Email"))
 
     def goProceduraRegistrazione(self):
-        print('clicked')
         '''
         if self.UsernameInput.text() == "":
             usernameVuoto = QMessageBox()
@@ -85,5 +84,8 @@ class RegistrazioneView(object):
             passwordVuoto.exec_()
             return 
         self.controllerAutenticazione = ControllerAutenticazione()
-        self.ControllerAutenticazione.registrazione(self.UsernameInput.text(), self.PasswordInput.text, self.EmailInput.text())
+        registered = self.ControllerAutenticazione.registrazione(self.UsernameInput.text(), self.PasswordInput.text, self.EmailInput.text())
+
+        if registered == True:
+            return
         '''

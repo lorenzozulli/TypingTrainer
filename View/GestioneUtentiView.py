@@ -59,7 +59,7 @@ class GestioneUtentiView(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        self.visualizzaListaUtenti()
+        #self.visualizzaListaUtenti()
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate

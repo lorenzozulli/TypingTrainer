@@ -10,7 +10,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 
-from Controller import ControllerAutenticazione
+from Controller.ControllerAutenticazione import ControllerAutenticazione
 from View import LandingPageUtenteView
 
 class RegistrazioneView(object):
@@ -84,12 +84,15 @@ class RegistrazioneView(object):
             passwordVuoto.exec_()
             return 
         self.controllerAutenticazione = ControllerAutenticazione()
-        registered = self.controllerAutenticazione.registrazione(self.UsernameInput.text(), self.PasswordInput.text, self.EmailInput.text())
-
-        if registered == True:
-            self.authorizedUtente = QtWidgets.QMainWindow()
-            self.ui = LandingPageUtenteView()
-            self.ui.setupUi(self.authorizedUtente)
-            self.authorizedUtente.show()
+        registered = self.controllerAutenticazione.registrazione(self.UsernameInput.text(), self.PasswordInput.text(), self.EmailInput.text())
+        if registered==True:
+            registrazioneOK = QMessageBox()
+            registrazioneOK.setWindowTitle("OK")
+            registrazioneOK.setText("Registrazione effettuata con successo!")
+            registrazioneOK.exec_()
         else:
-            return
+            registrazioneNonOK = QMessageBox()
+            registrazioneNonOK.setWindowTitle("Errore!")
+            registrazioneNonOK.setText("Registrazione non effettuata!")
+            registrazioneNonOK.exec_()
+            

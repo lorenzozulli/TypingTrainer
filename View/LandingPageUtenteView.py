@@ -13,7 +13,8 @@ from Model import Utente
 
 
 class LandingPageUtenteView(object):
-    def setupUi(self, MainWindow):
+    def setupUi(self, MainWindow, currentUtilizzatore):
+        self.currentUtilizzatore = currentUtilizzatore
 
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 800)
@@ -103,4 +104,3 @@ class LandingPageUtenteView(object):
         self.ui = VisualizzaProfiloView()
         self.ui.setupUi(self.iniziaTest)
         self.iniziaTest.show()
-

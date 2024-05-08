@@ -106,12 +106,12 @@ class LoginView(object):
             case "Admin":
                 self.authorizedAdmin = QtWidgets.QMainWindow()
                 self.ui = LandingPageAdminView()
-                self.ui.setupUi(self.authorizedAdmin)
+                self.ui.setupUi(self.authorizedAdmin, loginResult[1])
                 self.authorizedAdmin.show()
             case "Utente":
                 self.authorizedUtente = QtWidgets.QMainWindow()
                 self.ui = LandingPageUtenteView()
-                self.ui.setupUi(self.authorizedUtente)
+                self.ui.setupUi(self.authorizedUtente, loginResult[1])
                 self.authorizedUtente.show()
             case "PasswordErrata":
                 popup = QMessageBox()

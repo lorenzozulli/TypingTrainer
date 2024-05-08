@@ -18,7 +18,8 @@ from Controller import ControllerAutenticazione
 
 
 class LandingPageAdminView(object):
-    def setupUi(self, MainWindow):
+    def setupUi(self, MainWindow, currentUtilizzatore):
+        self.currentUtilizzatore = currentUtilizzatore
 
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 800)
@@ -68,11 +69,13 @@ class LandingPageAdminView(object):
 
     def goGestioneUtenti(self):
         print('clicked')
-        self.gestioneUtenti = QtWidgets.QMainWindow()
-        self.ui = GestioneUtentiView()
-        self.ui.setupUi(self.gestioneUtenti)
-        self.gestioneUtenti.show()
-
+        try:
+            self.gestioneUtenti = QtWidgets.QMainWindow()
+            self.ui = GestioneUtentiView()
+            self.ui.setupUi(self.gestioneUtenti)
+            self.gestioneUtenti.show()
+        except Exception as errore:
+            print(errore)
     def goGestioneTest(self):
         print('clicked')
         self.gestioneTest = QtWidgets.QMainWindow()

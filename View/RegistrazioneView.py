@@ -84,7 +84,7 @@ class RegistrazioneView(object):
             passwordVuoto.exec_()
             return 
         self.controllerAutenticazione = ControllerAutenticazione()
-        registered = self.ControllerAutenticazione.registrazione(self.UsernameInput.text(), self.PasswordInput.text, self.EmailInput.text())
+        registered = self.controllerAutenticazione.registrazione(self.UsernameInput.text(), self.PasswordInput.text, self.EmailInput.text())
 
         if registered == True:
             self.authorizedUtente = QtWidgets.QMainWindow()

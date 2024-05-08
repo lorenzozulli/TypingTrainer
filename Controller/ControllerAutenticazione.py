@@ -44,7 +44,9 @@ class ControllerAutenticazione(object):
     
     # --- metodo per effettuare la registrazione nel sistema ---
     def registrazione(self, username, password, email):
+        print("registering")
         self.caricaListaUtenti()
+
         nuovoUtente = Utente.Utente()
         nuovoUtente.setId(len(self.listaUtenti)+1)
         nuovoUtente.setUsername(username)
@@ -53,8 +55,9 @@ class ControllerAutenticazione(object):
         nuovoUtente.setDataOraCreazione(time.time())
         nuovoUtente.setStatistiche("")
         nuovoUtente.setIsAdmin("False")
+        print(nuovoUtente)
 
-        self.listaUtenti['Utenti'].append(nuovoUtente)
+        self.listaUtenti['Utenti'].append(json.dumps(nuovoUtente))
         self.salvaListaUtenti()
         return True
     

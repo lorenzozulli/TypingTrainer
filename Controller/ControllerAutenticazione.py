@@ -14,6 +14,11 @@ class ControllerAutenticazione(object):
         with open(os.path.join('BaseDiDati', 'listaUtenti.json'), 'r') as f:
             self.listaUtenti = json.load(f)
 
+    # --- metodo per salvare la lista di utenti ---
+    def salvaListaUtenti(self):
+        with open(os.path.join('BaseDiDati', 'listaUtenti.json'), 'w') as f:
+            json.dump(self.listaUtenti['Utenti'], f, indent=2)
+
     #--- metodo per entrare nel sistema ---
     def logIn(self, username, password):
         self.caricaListaUtenti()
@@ -36,28 +41,25 @@ class ControllerAutenticazione(object):
                 else:
                     return "PasswordErrata"
         return "UsernameNonTrovato"
-    '''
-    # --- metodo per uscire dal sistema ---
-    def logOut():
-        #TODO: fare questa funzione
-    '''
+    
     # --- metodo per effettuare la registrazione nel sistema ---
     def registrazione(self, username, password, email):
         self.caricaListaUtenti()
-        self.nuovoUtente = Utente.Utente()
-        self.nuovoUtente.setId(len(self.listaUtenti)+1)
-        self.nuovoUtente.setUsername(username)
-        self.nuovoUtente.setPassword(password)
-        self.nuovoUtente.setEmail(email)
-        self.nuovoUtente.setDataOraCreazione(time.time())
-        self.nuovoUtente.setStatistiche("")
-        self.nuovoUtente.setIsAdmin("False")
-        self.salvaListaUtenti(self.nuovoUtente)
+        nuovoUtente = Utente.Utente()
+        nuovoUtente.setId(len(self.listaUtenti)+1)
+        nuovoUtente.setUsername(username)
+        nuovoUtente.setPassword(password)
+        nuovoUtente.setEmail(email)
+        nuovoUtente.setDataOraCreazione(time.time())
+        nuovoUtente.setStatistiche("")
+        nuovoUtente.setIsAdmin("False")
+
+        self.listaUtenti['Utenti'].append(nuovoUtente)
+        self.salvaListaUtenti()
         return True
     
-    # --- metodo per salvare la lista di utenti ---
-    def salvaListaUtenti(self, data):
-        self.caricaListaUtenti()
-        self.datiEsistenti.append(data)
-        with open(os.path.join('BaseDiDati', 'listaUtenti.json'), 'w') as f:
-            json.dump(self.datiEsistenti, f, indent=2)
+    '''
+     # --- metodo per uscire dal sistema ---
+    def logOut():
+        #TODO: fare questa funzione
+    '''

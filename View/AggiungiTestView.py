@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QMessageBox
 
 
 class AggiungiTestView(object):
@@ -17,12 +18,13 @@ class AggiungiTestView(object):
         MainWindow.resize(800, 800)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.RegistrazioneButton = QtWidgets.QPushButton(self.centralwidget)
-        self.RegistrazioneButton.setGeometry(QtCore.QRect(310, 590, 150, 30))
-        self.RegistrazioneButton.setObjectName("RegistrazioneButton")
-        self.UsernameInput = QtWidgets.QLineEdit(self.centralwidget)
-        self.UsernameInput.setGeometry(QtCore.QRect(150, 390, 491, 30))
-        self.UsernameInput.setObjectName("UsernameInput")
+        self.AggiungiTestButton = QtWidgets.QPushButton(self.centralwidget)
+        self.AggiungiTestButton.setGeometry(QtCore.QRect(310, 590, 150, 30))
+        self.AggiungiTestButton.setObjectName("AggiungiTestButton")
+        self.AggiungiTestButton.clicked.connect(self.actionAggiungiTest)
+        self.NomeTestInput = QtWidgets.QLineEdit(self.centralwidget)
+        self.NomeTestInput.setGeometry(QtCore.QRect(150, 390, 491, 30))
+        self.NomeTestInput.setObjectName("UsernameInput")
         self.label1 = QtWidgets.QLabel(self.centralwidget)
         self.label1.setGeometry(QtCore.QRect(130, 230, 631, 121))
         font = QtGui.QFont()
@@ -44,7 +46,26 @@ class AggiungiTestView(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.RegistrazioneButton.setText(_translate("MainWindow", "Aggiungi"))
-        self.UsernameInput.setText(_translate("MainWindow", "Nome"))
+        self.AggiungiTestButton.setText(_translate("MainWindow", "Aggiungi"))
+        self.NomeTestInput.setText(_translate("MainWindow", "Nome"))
         self.label1.setText(_translate("MainWindow", "Aggiungi il nuovo Test!"))
         self.plainTextEdit.setPlainText(_translate("MainWindow", "Ricordati di separare ogni parola con il carattere ,"))
+
+    def actionAggiungiTest(self):
+        if self.NomeTestInput.text() == "":
+            NomeTestVuoto = QMessageBox()
+            NomeTestVuoto.setWindowTitle("Errore!")
+            NomeTestVuoto.setText("Nessun nome inserito!")
+            NomeTestVuoto.exec_()
+            return
+        if self.plainTextEdit.text() == "":
+            contenutoTestVuoto = QMessageBox()
+            contenutoTestVuoto.setWindowTitle("Errore!")
+            contenutoTestVuoto.setText("Nessun contenuto inserito!")
+            contenutoTestVuoto.exec_()
+            return
+        self.controllerTest = ControllerTest()
+        added = self.controllerTest.aggiungiTest(self.NomeTestInput.text(), self.plainTextEdit.text())
+
+        if added == True:
+        

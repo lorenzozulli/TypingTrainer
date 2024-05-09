@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from View.AggiungiTestView import AggiungiTestView
 
 
 class GestioneTestView(object):
@@ -20,6 +21,8 @@ class GestioneTestView(object):
         self.aggiungiTestButton = QtWidgets.QPushButton(self.centralwidget)
         self.aggiungiTestButton.setGeometry(QtCore.QRect(600, 170, 150, 30))
         self.aggiungiTestButton.setObjectName("aggiungiTestButton")
+        self.aggiungiTestButton.clicked.connect(self.goAggiungiTest)
+
         self.label1 = QtWidgets.QLabel(self.centralwidget)
         self.label1.setGeometry(QtCore.QRect(0, 10, 351, 121))
         font = QtGui.QFont()
@@ -83,3 +86,10 @@ class GestioneTestView(object):
         self.searchBarInput.setText(_translate("MainWindow", ""))
         self.searchBarInput.setPlaceholderText(_translate("MainWindow", "Inserisci ID oppure Nome"))
         self.profiloButton.setText(_translate("MainWindow", "Vai a profilo"))
+
+    def goAggiungiTest(self):
+        self.aggiungiTest = QtWidgets.QMainWindow()
+        self.ui = AggiungiTestView()
+        self.ui.setupUi(self.aggiungiTest)
+        self.aggiungiTest.show()
+        

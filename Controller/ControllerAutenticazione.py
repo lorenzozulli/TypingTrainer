@@ -18,7 +18,6 @@ class ControllerAutenticazione(object):
             listaUtilizzatori = controllerPickle.listaUtilizzatori
 
             for i in listaUtilizzatori:
-                print(type(i))
                 if username == i.username:
                     if password == i.password:
                         if i.isAdmin == False:

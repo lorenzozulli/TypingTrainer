@@ -1,8 +1,16 @@
-from Model.Utilizzatore import Utilizzatore
+import os
+import pickle
 
-
-class Admin(Utilizzatore):
-    def __init__(self):
-        self.id = 0
-        self.password = ""
-        self.username = ""
+class Admin:
+    def __init__(self, identifier, password, username, isAdmin):
+        self.identifier = identifier
+        self.password = password
+        self.username = username
+        self.isAdmin = isAdmin
+    def loadAdmin(self):
+        with open(os.path.join('BaseDiDati', 'listaUtenti.pickle'), 'wb') as f:
+            pickle.dump(admin, f)
+            
+if __name__ == "__main__":
+    admin = Admin(0, 'Admin', 'Admin', True) 
+    admin.loadAdmin()

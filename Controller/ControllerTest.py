@@ -1,6 +1,7 @@
 from Model import Test
 from Controller import ControllerPickle
 class ControllerTest(object):
+    '''
     def aggiungiTest(self, nome, contenuto):
         controllerPickle = ControllerPickle()
         controllerPickle.caricaListaTest()
@@ -35,3 +36,4 @@ class ControllerTest(object):
     
     def visualizzaListaTest():
         #TODO: fare questa funzione
+    '''

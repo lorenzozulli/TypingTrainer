@@ -4,5 +4,7 @@ import pickle
 from Model.Utilizzatore import Utilizzatore
 
 class Admin(Utilizzatore):
-    def __init__(self):
-       Utilizzatore.__init__() 
+     
+    def loadAdmin(self):
+        with open(os.path.join('BaseDiDati', 'listaUtenti.pickle'), 'wb') as f:
+            pickle.dump(self, f)

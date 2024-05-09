@@ -64,8 +64,7 @@ class AggiungiTestView(object):
             contenutoTestVuoto.setText("Nessun contenuto inserito!")
             contenutoTestVuoto.exec_()
             return
+        '''
         self.controllerTest = ControllerTest()
-        added = self.controllerTest.aggiungiTest(self.NomeTestInput.text(), self.plainTextEdit.text())
-
-        if added == True:
-        
+        added = self.controllerTest.aggiungiTest(self.NomeTestInput.text(), self.plainTextEdit.text()) 
+        '''

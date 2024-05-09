@@ -11,34 +11,36 @@ class ControllerAutenticazione(object):
 
     #--- metodo per entrare nel sistema ---
     def logIn(self, username, password):
-        controllerPickle = ControllerPickle()
-        controllerPickle.caricaListaUtenti()
+        try:
+            controllerPickle = ControllerPickle()
+            controllerPickle.caricaListaUtilizzatori()
 
-        listaUtenti = controllerPickle.listaUtenti
+            listaUtilizzatori = controllerPickle.listaUtilizzatori
 
-        for i in self.listaUtenti:
-            if username == i.username:
-                if password == i.password:
-                    if i.isAdmin == False:
-                        return "Utente", i
+            for i in listaUtilizzatori:
+                print(type(i))
+                if username == i.username:
+                    if password == i.password:
+                        if i.isAdmin == False:
+                            return "Utente", i
+                        else:
+                            return "Admin", i
                     else:
-                        return "Admin", i
-                else:
-                    return "PasswordErrata"
-        return "UsernameNonTrovato"
+                        return "PasswordErrata"
+            return "UsernameNonTrovato"
+        except Exception as error:
+            print(error)
     
     # --- metodo per effettuare la registrazione nel sistema ---
     def registrazione(self, username, password, email):
-        print("registering")
         try:
             controllerPickle = ControllerPickle() 
-            controllerPickle.caricaListaUtenti()
+            controllerPickle.caricaListaUtilizzatori()
 
-            listaUtenti = controllerPickle.listaUtenti
+            listaUtilizzatori = controllerPickle.listaUtilizzatori
 
-
-            nuovoUtente = Utente.Utente()
-            nuovoUtente.setId(len(self.listaUtenti)+1)
+            nuovoUtente = Utente()
+            nuovoUtente.setId(len(listaUtilizzatori)+1)
             nuovoUtente.setUsername(username)
             nuovoUtente.setPassword(password)
             nuovoUtente.setEmail(email)
@@ -46,11 +48,13 @@ class ControllerAutenticazione(object):
             nuovoUtente.setStatistiche("")
             nuovoUtente.setIsAdmin(False)
 
-            listaUtenti.append(nuovoUtente)
+            listaUtilizzatori.append(nuovoUtente)
 
-            controllerPickle.salvaListaUtenti()
+            controllerPickle.salvaListaUtilizzatori()
         except Exception as error:
-            print(error) 
+            print(error)
+            return False
+        return True
     '''
      # --- metodo per uscire dal sistema ---
     def logOut():

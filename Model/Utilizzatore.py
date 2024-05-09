@@ -3,7 +3,7 @@ class Utilizzatore(object):
         self.id = ""
         self.password = ""
         self.username = ""
-        self.isAdmin = ""
+        self.isAdmin: bool
     
     def getId(self):
         return self.id

@@ -1,33 +1,25 @@
-import json
-import os
 import time
-import pickle
 
 from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
-from Model import Utilizzatore, Utente, Admin
-class ControllerAutenticazione(object):
+from Model.Utente import Utente
+from Controller.ControllerPickle import ControllerPickle
 
-    #--- metodo per caricare la lista degli utenti ---
-    def caricaListaUtenti(self):
-        with open(os.path.join('BaseDiDati', 'listaUtenti.pickle'), "rb") as f:
-            self.listaUtenti = pickle.load(f)
-    
-    # --- metodo per salvare la lista di utenti ---
-    def salvaListaUtenti(self):
-        with open(os.path.join('BaseDiDati', 'listaUtenti.pickle'), "wb") as f:
-            pickle.dump(self.listaUtenti, f, pickle.HIGHEST_PROTOCOL)
+class ControllerAutenticazione(object):
 
     #--- metodo per entrare nel sistema ---
     def logIn(self, username, password):
-        self.caricaListaUtenti()
+        controllerPickle = ControllerPickle()
+        controllerPickle.caricaListaUtenti()
+
+        listaUtenti = controllerPickle.listaUtenti
 
         for i in self.listaUtenti:
             if username == i.username:
                 if password == i.password:
-                    if self.isAdmin == "False":
+                    if i.isAdmin == False:
                         return "Utente", i
                     else:
                         return "Admin", i
@@ -39,8 +31,11 @@ class ControllerAutenticazione(object):
     def registrazione(self, username, password, email):
         print("registering")
         try:
-            
-            self.caricaListaUtenti()
+            controllerPickle = ControllerPickle() 
+            controllerPickle.caricaListaUtenti()
+
+            listaUtenti = controllerPickle.listaUtenti
+
 
             nuovoUtente = Utente.Utente()
             nuovoUtente.setId(len(self.listaUtenti)+1)
@@ -49,14 +44,13 @@ class ControllerAutenticazione(object):
             nuovoUtente.setEmail(email)
             nuovoUtente.setDataOraCreazione(time.time())
             nuovoUtente.setStatistiche("")
-            nuovoUtente.setIsAdmin("False")
+            nuovoUtente.setIsAdmin(False)
 
-            self.listaUtenti.append(nuovoUtente)
+            listaUtenti.append(nuovoUtente)
 
-            self.salvaListaUtenti()
+            controllerPickle.salvaListaUtenti()
         except Exception as error:
-            print(error)
-        return True 
+            print(error) 
     '''
      # --- metodo per uscire dal sistema ---
     def logOut():

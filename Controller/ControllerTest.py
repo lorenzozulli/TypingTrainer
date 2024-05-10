@@ -16,7 +16,7 @@ class ControllerTest(object):
         listaTest.append(test)
         controllerPickle.salvaListaTest()
 
-    def eliminaTest(self, id):
+    def eliminaTest(self, identifier):
         controllerPickle = ControllerPickle()
         controllerPickle.caricaListaTest()
 
@@ -25,15 +25,15 @@ class ControllerTest(object):
 
         controllerPickle.salvaListaTest()
     
-    def modificaTest(id):
+    def modificaTest(self, identifier):
         #TODO: fare questa funzione
 
-    def iniziaTest():
+    def iniziaTest(self):
         #TODO: fare questa funzione
     
-    def interrompiTest():
+    def interrompiTest(self):
         #TODO: fare questa funzione
     
-    def visualizzaListaTest():
+    def visualizzaListaTest(self):
         #TODO: fare questa funzione
     '''

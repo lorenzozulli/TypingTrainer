@@ -1,18 +1,18 @@
 class Test(object):
     def __init__(self):
         self.contenutoTest = ""
-        self.dataOraCreazione = ""
-        self.id = id
+        self.dataCreazione = ""
+        self.identifier = ""
         self.nome = ""
     
     def getContenutoTest(self):
         return self.contenutoTest
     
-    def getDataOraCreazione(self):
+    def getDataCreazione(self):
         return self.dataOraCreazione
     
-    def getId(self):
-        return self.id
+    def getIdentifier(self):
+        return self.identifier
     
     def getNome(self):
         return self.nome
@@ -20,11 +20,11 @@ class Test(object):
     def setContenutoTest(self, contenutoTest):
         self.contenutoTest = contenutoTest
 
-    def setDataOraCreazione(self, dataOraCreazione):
-        self.dataOraCreazione = dataOraCreazione
+    def setDataCreazione(self, dataCreazione):
+        self.dataCreazione = dataCreazione
 
-    def setId(self, id):
-        self.id = id
+    def setIdentifier(self, identifier):
+        self.identifier = identifier
 
     def setNome(self, nome):
         self.nome = nome

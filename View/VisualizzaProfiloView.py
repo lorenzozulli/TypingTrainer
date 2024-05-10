@@ -14,7 +14,8 @@ from Controller import ControllerAutenticazione, ControllerUtente
 from View.ModificaProfiloView import ModificaProfiloView
 
 class VisualizzaProfiloView(object):
-    def setupUi(self, MainWindow):
+    def setupUi(self, MainWindow, currentUtilizzatore):
+        self.currentUtilizzatore = currentUtilizzatore
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 800)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -22,7 +23,7 @@ class VisualizzaProfiloView(object):
         self.usernameLabel = QtWidgets.QLabel(self.centralwidget)
         self.usernameLabel.setGeometry(QtCore.QRect(140, 190, 251, 81))
         font = QtGui.QFont()
-        font.setPointSize(40)
+        font.setPointSize(24)
         self.usernameLabel.setFont(font)
         self.usernameLabel.setObjectName("usernameLabel")
         self.modificaProfiloButton = QtWidgets.QPushButton(self.centralwidget)
@@ -86,11 +87,11 @@ class VisualizzaProfiloView(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.usernameLabel.setText(_translate("MainWindow", self.utente.getUsername()))
+        self.usernameLabel.setText(_translate("MainWindow", str(self.currentUtilizzatore.getUsername())))
         self.modificaProfiloButton.setText(_translate("MainWindow", "Modifica Profilo"))
         self.logOutButton.setText(_translate("MainWindow", "Log Out"))
         self.joinedInLabel.setText(_translate("MainWindow", "Joined in,"))
-        self.dateLabel.setText(_translate("MainWindow", self.utente.getDataOraCreazione()))
+        self.dateLabel.setText(_translate("MainWindow", str(self.currentUtilizzatore.getDataCreazione())))
         self.label.setText(_translate("MainWindow", "Totale Test Eseguiti"))
         self.label_2.setText(_translate("MainWindow", "Precisione Media (%)"))
         self.label_3.setText(_translate("MainWindow", "Media WPM"))

@@ -4,10 +4,10 @@ from PyQt5.QtWidgets import *
 
 class ControllerUtente(object):
     '''
-    def eliminaUtente(id):
+    def eliminaUtente(self, identifier):
         #TODO: fare questa funzione
     
-    def modificaUtente(id):
+    def modificaUtente(self, identifier):
         #TODO: fare questa funzione
     '''
     def visualizzaListaUtenti(self):
@@ -15,13 +15,14 @@ class ControllerUtente(object):
         controllerPickle.caricaListaUtenti()
 
         listaUtilizzatori = controllerPickle.listaUtilizzatori
+        print(len(listaUtilizzatori))
 
         row = 0
         self.tableWidget.setRowCount(len(listaUtilizzatori))
         for i in listaUtilizzatori:
-            self.tableWidget.setItem(row, 0, QtWidgets.QTableWidgetItem(str(i.id)))
-            self.tableWidget.setItem(row, 1, QtWidgets.QTableWidgetItem(i.username))
-            self.tableWidget.setItem(row, 2, QtWidgets.QTableWidgetItem(str(i.dataOraCreazione)))
+            self.tableWidget.setItem(row, 0, QtWidgets.QTableWidgetItem(str(i.identifier)))
+            self.tableWidget.setItem(row, 1, QtWidgets.QTableWidgetItem(i.getUsername()))
+            self.tableWidget.setItem(row, 2, QtWidgets.QTableWidgetItem(str(i.getDataOraCreazione())))
             '''
             self.tableWidget.setItem(row, 3, QtWidgets.QTableWidgetItem())
             self.tableWidget.setItem(row, 4, QtWidgets.QTableWidgetItem())

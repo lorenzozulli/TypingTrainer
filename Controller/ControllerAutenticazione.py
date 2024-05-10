@@ -1,4 +1,4 @@
-import time
+from datetime import date
 import re
 
 from PyQt5 import QtGui, QtWidgets
@@ -40,7 +40,7 @@ class ControllerAutenticazione(object):
             listaUtilizzatori = controllerPickle.listaUtilizzatori
 
             nuovoUtente = Utente()
-            nuovoUtente.setId(len(listaUtilizzatori)+1)
+            nuovoUtente.setIdentifier(len(listaUtilizzatori)+1)
             for i in listaUtilizzatori:
                 if not (username == i.username):
                     if len(username) >= 8:
@@ -78,7 +78,7 @@ class ControllerAutenticazione(object):
                 registrazioneNonOK.exec_()
                 return False
 
-            nuovoUtente.setDataOraCreazione(time.time())
+            nuovoUtente.setDataCreazione(date.today())
             nuovoUtente.setStatistiche("")
             nuovoUtente.setIsAdmin(False)
 
@@ -90,7 +90,7 @@ class ControllerAutenticazione(object):
             return False
         return True
     
-    def recuperaPassword(self, id, username, nuovaPassword):
+    def recuperaPassword(self, identifier, username, nuovaPassword):
         try:
             controllerPickle = ControllerPickle()
             controllerPickle.caricaListaUtilizzatori()
@@ -99,7 +99,7 @@ class ControllerAutenticazione(object):
 
             for i in listaUtilizzatori:
                 if username == i.username:
-                    if id == i.id:
+                    if identifier == i.identifier:
                         i.setPassword(nuovaPassword)
 
             listaUtilizzatori.append(i) 

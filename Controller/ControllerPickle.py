@@ -8,7 +8,7 @@ class ControllerPickle(object):
     def __init__(self):
         if not os.path.isfile(os.path.join('BaseDiDati', 'listaUtilizzatori.pickle')): 
             admin = Admin()
-            admin.setId(0)
+            admin.setIdentifier(0)
             admin.setUsername("Admin")
             admin.setPassword("Admin")
             admin.setIsAdmin(True)

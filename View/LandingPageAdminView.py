@@ -70,10 +70,10 @@ class LandingPageAdminView(object):
         print('clicked')
         try:
             self.gestioneUtenti = QtWidgets.QMainWindow()
-            self.ui = GestioneUtentiView()
-            self.ui.setupUi(self.gestioneUtenti)
+            ui = GestioneUtentiView()
+            ui.setupUi(self.gestioneUtenti)
             self.gestioneUtenti.show()
-            self.ui.goVisualizzaListaUtenti()
+            ui.goVisualizzaListaUtenti()
         except Exception as errore:
             print(errore)
     def goGestioneTest(self):

@@ -1,14 +1,13 @@
 from Model.Utilizzatore import Utilizzatore
 
-
 class Utente(Utilizzatore):
     def __init__(self):
-        self.dataOraCreazione = ""
+        self.dataCreazione = ''
         self.email = ""
         self.statistiche = ""
 
-    def getDataOraCreazione(self):
-        return self.dataOraCreazione
+    def getDataCreazione(self):
+        return self.dataCreazione
 
     def getEmail(self):
         return self.email
@@ -16,8 +15,8 @@ class Utente(Utilizzatore):
     def getStatistiche(self):
         return self.statistiche
     
-    def setDataOraCreazione(self, dataOraCreazione):
-        self.dataOraCreazione = dataOraCreazione
+    def setDataCreazione(self, dataCreazione):
+        self.dataCreazione = dataCreazione
     
     def setEmail(self, email):
         self.email = email

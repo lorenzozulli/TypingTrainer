@@ -1,3 +1,6 @@
+import os
+import pickle
+
 class Test(object):
     def __init__(self):
         self.contenutoTest = ""
@@ -28,3 +31,9 @@ class Test(object):
 
     def setNome(self, nome):
         self.nome = nome
+
+    def loadTest(self):
+        listaTest = [self]
+        with open(os.path.join('BaseDiDati', 'listaTest.pickle'), 'wb') as f:
+            pickle.dump(listaTest, f)
+    

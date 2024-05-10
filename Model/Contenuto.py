@@ -12,8 +12,3 @@ class Contenuto(Test):
     
     def setElemento(self, elemento, i):
         self.elemento[i] = elemento[i]
-
-    def loadTest(self):
-        listaTest = [self]
-        with open(os.path.join('BaseDiDati', 'listaTest.pickle'), 'wb') as f:
-            pickle.dump(listaTest, f)

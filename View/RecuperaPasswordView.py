@@ -9,6 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from Controller import ControllerAutenticazione
+from PyQt5.QtWidgets import QMessageBox
 
 
 class RecuperaPasswordView(object):
@@ -18,14 +20,22 @@ class RecuperaPasswordView(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.RecuperaPasswordButton = QtWidgets.QPushButton(self.centralwidget)
-        self.RecuperaPasswordButton.setGeometry(QtCore.QRect(310, 490, 150, 30))
+        self.RecuperaPasswordButton.setGeometry(QtCore.QRect(320, 490, 150, 30))
         self.RecuperaPasswordButton.setObjectName("RecuperaPasswordButton")
+        self.RecuperaPasswordButton.clicked.connect(self.goRecuperaPassword)
+
         self.UsernameInput = QtWidgets.QLineEdit(self.centralwidget)
         self.UsernameInput.setGeometry(QtCore.QRect(150, 390, 491, 30))
         self.UsernameInput.setObjectName("UsernameInput")
+
         self.NuovaPasswordInput = QtWidgets.QLineEdit(self.centralwidget)
         self.NuovaPasswordInput.setGeometry(QtCore.QRect(150, 440, 491, 30))
         self.NuovaPasswordInput.setObjectName("NuovaPasswordInput")
+
+        self.IdInput = QtWidgets.QLineEdit(self.centralwidget)
+        self.IdInput.setGeometry(QtCore.QRect(150, 340, 491, 30))
+        self.IdInput.setObjectName("IdInput")
+
         self.label1 = QtWidgets.QLabel(self.centralwidget)
         self.label1.setGeometry(QtCore.QRect(80, 240, 631, 121))
         font = QtGui.QFont()
@@ -50,4 +60,40 @@ class RecuperaPasswordView(object):
         self.NuovaPasswordInput.setText(_translate("MainWindow", ""))
         self.NuovaPasswordInput.setPlaceholderText(_translate("MainWindow", "Nuova Password"))
         self.NuovaPasswordInput.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.NuovaPasswordInput.setText(_translate("MainWindow", ""))
+        self.IdInput.setText(_translate("MainWindow", ""))
+        self.IdInput.setPlaceholderText(_translate("MainWindow", "Id"))
         self.label1.setText(_translate("MainWindow", "Recupera la tua Password!"))
+    
+    def goRecuperaPassword(self):
+        if self.UsernameInput.text() == "":
+            usernameVuoto = QMessageBox()
+            usernameVuoto.setWindowTitle("Errore!")
+            usernameVuoto.setText("Nessun username inserito!")
+            usernameVuoto.exec_()
+            return
+        if self.NuovaPasswordInput.text() == "":
+            nuovaPasswordVuoto = QMessageBox()
+            nuovaPasswordVuoto.setWindowTitle("Errore!")
+            nuovaPasswordVuoto.setText("Nessuna password inserita!")
+            nuovaPasswordVuoto.exec_()
+            return
+        if self.IdInput.text() == "":
+            IdVuoto = QMessageBox()
+            IdVuoto.setWindowTitle("Errore!")
+            IdVuoto.setText("Nessun Id inserito!")
+            IdVuoto.exec_()
+            return
+
+        self.controllerAutenticazione = ControllerAutenticazione()
+        recovered = self.controllerAutenticazione.recuperaPassword(self.IdInput.text(), self.UsernameInput.text(), self.NuovaPasswordInput.text())
+        if recovered==True:
+            recuperoOK = QMessageBox()
+            recuperoOK.setWindowTitle("OK")
+            recuperoOK.setText("Recupero effettuato con successo!")
+            recuperoOK.exec_()
+        else:
+            recuperoNonOK = QMessageBox()
+            recuperoNonOK.setWindowTitle("Errore!")
+            recuperoNonOK.setText("Recupero non effettuato con successo!")
+            recuperoNonOK.exec_()

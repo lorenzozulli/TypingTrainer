@@ -1,4 +1,5 @@
 import time
+import re
 
 from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtCore import *
@@ -40,9 +41,43 @@ class ControllerAutenticazione(object):
 
             nuovoUtente = Utente()
             nuovoUtente.setId(len(listaUtilizzatori)+1)
-            nuovoUtente.setUsername(username)
-            nuovoUtente.setPassword(password)
-            nuovoUtente.setEmail(email)
+            for i in listaUtilizzatori:
+                if not (username == i.username):
+                    if len(username) >= 8:
+                        nuovoUtente.setUsername(username)
+                    else:
+                        registrazioneNonOK = QMessageBox()
+                        registrazioneNonOK.setWindowTitle("Errore!")
+                        registrazioneNonOK.setText("Lunghezza Username minore di 8 caratteri!")
+                        registrazioneNonOK.exec_()
+                        return False
+                else:
+                    registrazioneNonOK = QMessageBox()
+                    registrazioneNonOK.setWindowTitle("Errore!")
+                    registrazioneNonOK.setText("Username già esistente!")
+                    registrazioneNonOK.exec_()
+                    return False
+            
+            pattern = r'\d'
+
+            if re.search(pattern, password):
+                nuovoUtente.setPassword(password)
+            else:
+                registrazioneNonOK = QMessageBox()
+                registrazioneNonOK.setWindowTitle("Errore!")
+                registrazioneNonOK.setText("La password non contiene almeno un numero che va da 0 a 9!")
+                registrazioneNonOK.exec_()
+                return False
+
+            if email.__contains__('@'):
+                nuovoUtente.setEmail(email)
+            else:
+                registrazioneNonOK = QMessageBox()
+                registrazioneNonOK.setWindowTitle("Errore!")
+                registrazioneNonOK.setText("La email non contiene il carattere @!")
+                registrazioneNonOK.exec_()
+                return False
+
             nuovoUtente.setDataOraCreazione(time.time())
             nuovoUtente.setStatistiche("")
             nuovoUtente.setIsAdmin(False)
@@ -54,6 +89,27 @@ class ControllerAutenticazione(object):
             print(error)
             return False
         return True
+    
+    def recuperaPassword(self, id, username, nuovaPassword):
+        try:
+            controllerPickle = ControllerPickle()
+            controllerPickle.caricaListaUtilizzatori()
+
+            listaUtilizzatori = controllerPickle.listaUtilizzatori
+
+            for i in listaUtilizzatori:
+                if username == i.username:
+                    if id == i.id:
+                        i.setPassword(nuovaPassword)
+
+            listaUtilizzatori.append(i) 
+            controllerPickle.salvaListaUtilizzatori()
+        except Exception as error:
+            print(error)
+            return False
+        return True
+
+        
     '''
      # --- metodo per uscire dal sistema ---
     def logOut():

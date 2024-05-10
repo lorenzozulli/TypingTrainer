@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from Controller import ControllerAutenticazione
+from Controller.ControllerUtente import ControllerUtente
 
 class GestioneUtentiView(object):
     def setupUi(self, MainWindow):
@@ -59,8 +59,6 @@ class GestioneUtentiView(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        #self.visualizzaListaUtenti()
-
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -80,15 +78,6 @@ class GestioneUtentiView(object):
         self.searchBarInput.setPlaceholderText(_translate("MainWindow", "Inserisci ID oppure Nome"))
         self.profiloButton.setText(_translate("MainWindow", "Vai a profilo"))
 
-        def visualizzaListaUtenti(self):
-            self.controllerAutenticazione = ControllerAutenticazione()
-            self.controllerAutenticazione.caricaListaUtenti()
-            row = 0
-            self.tableWidget.setRowCount(len(self.listaUtenti['Utenti']))
-            for i in self.listaUtenti['Utenti']:
-                self.tableWidget.setItem(row, 0, QtWidgets.QTableWidgetItem(i['id']))
-                self.tableWidget.setItem(row, 1, QtWidgets.QTableWidgetItem(i['username']))
-                self.tableWidget.setItem(row, 2, QtWidgets.QTableWidgetItem(i['dataOraCreazione']))
-                self.tableWidget.setItem(row, 3, QtWidgets.QTableWidgetItem())
-                self.tableWidget.setItem(row, 4, QtWidgets.QTableWidgetItem())
-                row = row+1
+    def goVisualizzaListaUtenti(self):
+        controllerUtente = ControllerUtente()
+        controllerUtente.visualizzaListaUtenti()

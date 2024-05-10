@@ -1,12 +1,19 @@
+import os
+import pickle
+
 from Model.Test import Test
 
-
 class Contenuto(Test):
-    #TODO: non so ancora come fare con la lista
-    def __init__(self, ):
+    def __init__(self):
+        self.elemento 
 
     def getElemento(self, i):
         return self.elemento[i]
     
     def setElemento(self, elemento, i):
         self.elemento[i] = elemento[i]
+
+    def loadTest(self):
+        listaTest = [self]
+        with open(os.path.join('BaseDiDati', 'listaTest.pickle'), 'wb') as f:
+            pickle.dump(listaTest, f)

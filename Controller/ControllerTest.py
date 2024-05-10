@@ -1,21 +1,20 @@
 from Model import Test
 from Controller import ControllerPickle
 class ControllerTest(object):
-    '''
     def aggiungiTest(self, nome, contenuto):
         controllerPickle = ControllerPickle()
         controllerPickle.caricaListaTest()
 
         listaTest = controllerPickle.listaTest
 
-        test = Test.Test()
-        test.setId(len(listaTest)+1)
-        test.setNome(nome)
-        test.setContenuto(contenuto)
+        NuovoTest = Test.Test()
+        NuovoTest.setIdentifier(len(listaTest)+1)
+        NuovoTest.setNome(nome)
+        NuovoTest.setContenuto(contenuto)
 
-        listaTest.append(test)
+        listaTest.append(NuovoTest)
         controllerPickle.salvaListaTest()
-
+    '''
     def eliminaTest(self, identifier):
         controllerPickle = ControllerPickle()
         controllerPickle.caricaListaTest()

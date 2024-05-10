@@ -3,6 +3,7 @@ import pickle
 
 
 from Model.Admin import Admin
+from Model.Test import Test
 
 class ControllerPickle(object):
     def __init__(self):
@@ -12,8 +13,11 @@ class ControllerPickle(object):
             admin.setUsername("Admin")
             admin.setPassword("Admin")
             admin.setIsAdmin(True)
-
             admin.loadAdmin()
+        if not os.path.isfile(os.path.join('BaseDiDati', 'listaTest.pickle')): 
+            test = Test()
+            test.loadTest()
+        
     #--- metodo per caricare la lista degli utenti ---
     def caricaListaUtilizzatori(self):
         with open(os.path.join('BaseDiDati', 'listaUtilizzatori.pickle'), "rb") as f:

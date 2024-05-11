@@ -97,8 +97,6 @@ class ControllerAutenticazione(object):
 
             listaUtilizzatori = controllerPickle.listaUtilizzatori
 
-            print("Numero di utilizzatori nella lista:", len(listaUtilizzatori))
-
             for i in listaUtilizzatori:
                 if identifier == i.identifier:
                     i.password = nuovaPassword

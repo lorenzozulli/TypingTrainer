@@ -97,12 +97,14 @@ class ControllerAutenticazione(object):
 
             listaUtilizzatori = controllerPickle.listaUtilizzatori
 
-            for i in listaUtilizzatori:
-                if username == i.username:
-                    if identifier == i.identifier:
-                        i.setPassword(nuovaPassword)
+            print("Numero di utilizzatori nella lista:", len(listaUtilizzatori))
 
-            listaUtilizzatori.append(i) 
+            for index, i in listaUtilizzatori:
+                if identifier == i.identifier:
+                    print(type(i))
+                    listaUtilizzatori[index].setPassword(nuovaPassword)
+                    break
+            #listaUtilizzatori.append(i)
             controllerPickle.salvaListaUtilizzatori()
         except Exception as error:
             print(error)

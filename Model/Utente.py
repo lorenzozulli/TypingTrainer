@@ -2,7 +2,7 @@ from Model.Utilizzatore import Utilizzatore
 
 class Utente(Utilizzatore):
     def __init__(self):
-        self.dataCreazione = ''
+        self.dataCreazione = ""
         self.email = ""
         self.statistiche = ""
 

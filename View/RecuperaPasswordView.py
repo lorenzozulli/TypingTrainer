@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from Controller import ControllerAutenticazione
+from Controller.ControllerAutenticazione import ControllerAutenticazione
 from PyQt5.QtWidgets import QMessageBox
 
 
@@ -86,7 +86,7 @@ class RecuperaPasswordView(object):
             return
 
         self.controllerAutenticazione = ControllerAutenticazione()
-        recovered = self.controllerAutenticazione.recuperaPassword(self.IdInput.text(), self.UsernameInput.text(), self.NuovaPasswordInput.text())
+        recovered = self.controllerAutenticazione.recuperaPassword(int(self.IdInput.text()), self.UsernameInput.text(), self.NuovaPasswordInput.text())
         if recovered==True:
             recuperoOK = QMessageBox()
             recuperoOK.setWindowTitle("OK")
@@ -95,5 +95,5 @@ class RecuperaPasswordView(object):
         else:
             recuperoNonOK = QMessageBox()
             recuperoNonOK.setWindowTitle("Errore!")
-            recuperoNonOK.setText("Recupero non effettuato con successo!")
+            recuperoNonOK.setText("Recupero non effettuato!")
             recuperoNonOK.exec_()

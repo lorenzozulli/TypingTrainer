@@ -22,7 +22,7 @@ class GestioneTestView(object):
         self.aggiungiTestButton = QtWidgets.QPushButton(self.centralwidget)
         self.aggiungiTestButton.setGeometry(QtCore.QRect(600, 170, 150, 30))
         self.aggiungiTestButton.setObjectName("aggiungiTestButton")
-        self.aggiungiTestButton.clicked.connect(self.goAggiungiTest)
+        self.aggiungiTestButton.clicked.connect(self.goToAggiungiTestView)
 
         self.label1 = QtWidgets.QLabel(self.centralwidget)
         self.label1.setGeometry(QtCore.QRect(0, 10, 351, 121))
@@ -122,7 +122,7 @@ class GestioneTestView(object):
     def actionEliminaTest(self):
         print('clicked')
 
-    def goAggiungiTest(self):
+    def goToAggiungiTestView(self):
         self.aggiungiTest = QtWidgets.QMainWindow()
         self.ui = AggiungiTestView()
         self.ui.setupUi(self.aggiungiTest)

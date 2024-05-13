@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
+from Controller.ControllerTest import ControllerTest
 
 
 class AggiungiTestView(object):
@@ -64,7 +65,5 @@ class AggiungiTestView(object):
             contenutoTestVuoto.setText("Nessun contenuto inserito!")
             contenutoTestVuoto.exec_()
             return
-        '''
         self.controllerTest = ControllerTest()
         added = self.controllerTest.aggiungiTest(self.NomeTestInput.text(), self.plainTextEdit.text()) 
-        '''

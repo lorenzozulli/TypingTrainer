@@ -1,5 +1,9 @@
+from datetime import date
+
 from Model import Test
 from Controller import ControllerPickle
+from PyQt5.QtWidgets import *
+
 class ControllerTest(object):
     def aggiungiTest(self, nome, contenuto):
         controllerPickle = ControllerPickle()
@@ -7,12 +11,28 @@ class ControllerTest(object):
 
         listaTest = controllerPickle.listaTest
 
-        NuovoTest = Test.Test()
-        NuovoTest.setIdentifier(len(listaTest)+1)
-        NuovoTest.setNome(nome)
-        NuovoTest.setContenuto(contenuto)
+        nuovoTest = Test()
+        identifierCandidato = len(listaTest)
 
-        listaTest.append(NuovoTest)
+        for i in listaTest:
+            if not(identifierCandidato == i.identifier):
+                nuovoTest.setIdentifier(identifierCandidato)
+            else:
+                nuovoTest.setIdentifier(identifierCandidato+1)
+            
+            if not (nome == i.nome):
+                nuovoTest.setNome(nome)
+            else:
+                registrazioneNonOK = QMessageBox()
+                registrazioneNonOK.setWindowTitle("Errore!")
+                registrazioneNonOK.setText("Nome già esistente!")
+                registrazioneNonOK.exec_()
+                return False
+            
+            nuovoTest.setDataCreazione(date.today())
+
+            
+        listaTest.append(nuovoTest)
         controllerPickle.salvaListaTest()
     '''
     def eliminaTest(self, identifier):

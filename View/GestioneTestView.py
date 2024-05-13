@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from View.AggiungiTestView import AggiungiTestView
+from Controller.ControllerPickle import ControllerPickle
 
 
 class GestioneTestView(object):
@@ -31,10 +32,11 @@ class GestioneTestView(object):
         self.label1.setAcceptDrops(False)
         self.label1.setWordWrap(True)
         self.label1.setObjectName("label1")
+
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
         self.tableWidget.setGeometry(QtCore.QRect(20, 210, 731, 561))
         self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(6)
+        self.tableWidget.setColumnCount(5)
         self.tableWidget.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, item)
@@ -46,8 +48,7 @@ class GestioneTestView(object):
         self.tableWidget.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(4, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(5, item)
+    
         self.cercaButton = QtWidgets.QPushButton(self.centralwidget)
         self.cercaButton.setGeometry(QtCore.QRect(380, 170, 75, 30))
         self.cercaButton.setObjectName("cercaButton")
@@ -77,15 +78,49 @@ class GestioneTestView(object):
         item = self.tableWidget.horizontalHeaderItem(2)
         item.setText(_translate("MainWindow", "Data Creazione"))
         item = self.tableWidget.horizontalHeaderItem(3)
-        item.setText(_translate("MainWindow", "Seleziona"))
+        item.setText(_translate("MainWindow", "Modifica"))
         item = self.tableWidget.horizontalHeaderItem(4)
-        item.setText(_translate("MainWindow", "Numeri"))
-        item = self.tableWidget.horizontalHeaderItem(5)
-        item.setText(_translate("MainWindow", "Punteggiatura"))
+        item.setText(_translate("MainWindow", "Elimina"))
         self.cercaButton.setText(_translate("MainWindow", "Cerca"))
         self.searchBarInput.setText(_translate("MainWindow", ""))
         self.searchBarInput.setPlaceholderText(_translate("MainWindow", "Inserisci ID oppure Nome"))
         self.profiloButton.setText(_translate("MainWindow", "Vai a profilo"))
+
+    def visualizzaListaTest(self):
+        controllerPickle = ControllerPickle()
+        controllerPickle.caricaListaTest()
+
+        listaTest = controllerPickle.listaTest
+
+        row = 0
+        self.tableWidget.setRowCount(len(listaTest))
+        for i in listaTest:
+            identifierColumn = QtWidgets.QTableWidgetItem(str(i.identifier)) 
+            identifierColumn.setFlags(identifierColumn.flags() ^ QtCore.Qt.ItemIsEditable)
+            self.tableWidget.setItem(row, 0, identifierColumn)
+
+            nomeColumn = QtWidgets.QTableWidgetItem(i.getNome()) 
+            nomeColumn.setFlags(nomeColumn.flags() ^ QtCore.Qt.ItemIsEditable)
+            self.tableWidget.setItem(row, 1, nomeColumn)
+
+            dataCreazioneColumn = QtWidgets.QTableWidgetItem(str(i.getDataCreazione())) 
+            dataCreazioneColumn.setFlags(dataCreazioneColumn.flags() ^ QtCore.Qt.ItemIsEditable)
+            self.tableWidget.setItem(row, 2, dataCreazioneColumn)
+
+            bottoneModifica = QtWidgets.QPushButton("Modifica")
+            bottoneModifica.clicked.connect(self.goToModificaTestView)
+            self.tableWidget.setCellWidget(row, 3, bottoneModifica)
+
+            bottoneElimina = QtWidgets.QPushButton("Elimina")
+            bottoneElimina.clicked.connect(self.actionEliminaTest)
+            self.tableWidget.setCellWidget(row, 4, bottoneElimina)
+            row = row+1
+
+    def goToModificaTestView(self):
+        print('clicked')
+    
+    def actionEliminaTest(self):
+        print('clicked')
 
     def goAggiungiTest(self):
         self.aggiungiTest = QtWidgets.QMainWindow()

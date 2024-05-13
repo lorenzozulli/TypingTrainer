@@ -29,6 +29,12 @@ class ControllerTest(object):
                 registrazioneNonOK.exec_()
                 return False
             
+            nuovoTest.setContenutoTest([])
+
+            text = contenuto.toPlainText()
+            words = text.split(",")
+            nuovoTest.contenuto.extend(words)
+            
             nuovoTest.setDataCreazione(date.today())
 
             

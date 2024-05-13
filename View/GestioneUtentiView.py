@@ -12,6 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from Controller.ControllerUtente import ControllerUtente
 from Controller.ControllerPickle import ControllerPickle
 from View.ModificaUtenteView import ModificaUtenteView
+from PyQt5.QtWidgets import *
 
 class GestioneUtentiView(object):
     def setupUi(self, MainWindow):
@@ -102,11 +103,11 @@ class GestioneUtentiView(object):
                 self.tableWidget.setItem(row, 2, dataCreazioneColumn)
 
                 bottoneModifica = QtWidgets.QPushButton("Modifica")
-                bottoneModifica.clicked.connect(self.goToModificaUtenteView)
+                bottoneModifica.clicked.connect(self.goToModificaUtenteView(row))
                 self.tableWidget.setCellWidget(row, 3, bottoneModifica)
 
                 bottoneElimina = QtWidgets.QPushButton("Elimina")
-                bottoneElimina.clicked.connect(self.actionEliminaUtente)
+                bottoneElimina.clicked.connect(self.actionEliminaUtente(row))
                 self.tableWidget.setCellWidget(row, 4, bottoneElimina)
             else:
                 dataCreazioneColumn = QtWidgets.QTableWidgetItem(" ")
@@ -121,10 +122,25 @@ class GestioneUtentiView(object):
                 bottoneElimina.setFlags(bottoneElimina.flags() ^ QtCore.Qt.ItemIsEditable)
                 self.tableWidget.setItem(row, 4, bottoneElimina)
             row = row+1
-    def goToModificaUtenteView(self):
+
+    def goToModificaUtenteView(self, row):
             self.modificaUtenteView = QtWidgets.QMainWindow()
             ui = ModificaUtenteView()
-            ui.setupUi(self.modificaUtenteView)
+            ui.setupUi(self.modificaUtenteView, row)
             self.modificaUtenteView.show()
-    def actionEliminaUtente(self):
-         print('clicked')
+
+    def actionEliminaUtente(self, row):
+        controllerUtente = ControllerUtente()
+        deleted = controllerUtente.eliminaUtente(row)
+        if deleted==True:
+            registrazioneOK = QMessageBox()
+            registrazioneOK.setWindowTitle("OK")
+            registrazioneOK.setText("Utente eliminato con successo!")
+            registrazioneOK.exec_()
+        else:
+            registrazioneNonOK = QMessageBox()
+            registrazioneNonOK.setWindowTitle("Errore!")
+            registrazioneNonOK.setText("Utente non eliminato!")
+            registrazioneNonOK.exec_()
+
+

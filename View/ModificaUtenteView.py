@@ -12,7 +12,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class ModificaUtenteView(object):
-    def setupUi(self, MainWindow):
+    def setupUi(self, MainWindow, utenteDaModificare):
+        self.utenteDaModificare = utenteDaModificare
+
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 800)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -45,6 +47,8 @@ class ModificaUtenteView(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.ModificaButton.setText(_translate("MainWindow", "Modifica"))
-        self.UsernameInput.setText(_translate("MainWindow", "Username"))
-        self.emailInput.setText(_translate("MainWindow", "email"))
+        self.UsernameInput.setPlaceholderText(_translate("MainWindow", self.utenteDaModificare.getUsername()))
+        self.UsernameInput.setText(_translate("MainWindow", " "))
+        self.emailInput.setPlaceholderText(_translate("MainWindow", self.utenteDaModificare.getEmail()))
+        self.emailInput.setText(_translate("MainWindow", " "))
         self.label1.setText(_translate("MainWindow", "Modifica le credenziali!"))

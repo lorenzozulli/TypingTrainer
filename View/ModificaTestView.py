@@ -12,17 +12,19 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class ModificaTestView(object):
-    def setupUi(self, MainWindow):
+    def setupUi(self, MainWindow, testDaModificare):
+        self.testDaModificare = testDaModificare
+
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 800)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.RegistrazioneButton = QtWidgets.QPushButton(self.centralwidget)
-        self.RegistrazioneButton.setGeometry(QtCore.QRect(310, 590, 150, 30))
-        self.RegistrazioneButton.setObjectName("RegistrazioneButton")
-        self.UsernameInput = QtWidgets.QLineEdit(self.centralwidget)
-        self.UsernameInput.setGeometry(QtCore.QRect(150, 390, 491, 30))
-        self.UsernameInput.setObjectName("UsernameInput")
+        self.ModificaButton = QtWidgets.QPushButton(self.centralwidget)
+        self.ModificaButton.setGeometry(QtCore.QRect(310, 590, 150, 30))
+        self.ModificaButton.setObjectName("ModificaButton")
+        self.NomeInput = QtWidgets.QLineEdit(self.centralwidget)
+        self.NomeInput.setGeometry(QtCore.QRect(150, 390, 491, 30))
+        self.NomeInput.setObjectName("NomeInput")
         self.label1 = QtWidgets.QLabel(self.centralwidget)
         self.label1.setGeometry(QtCore.QRect(130, 230, 631, 121))
         font = QtGui.QFont()
@@ -44,7 +46,8 @@ class ModificaTestView(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.RegistrazioneButton.setText(_translate("MainWindow", "Aggiungi"))
-        self.UsernameInput.setText(_translate("MainWindow", "Nome"))
+        self.ModificaButton.setText(_translate("MainWindow", "Modifica"))
+        self.NomeInput.setText(_translate("MainWindow", " "))
+        self.NomeInput.setPlaceholderText(_translate("MainWindow", self.testDaModificare.getNome()))
         self.label1.setText(_translate("MainWindow", "Modifica il test!"))
-        self.plainTextEdit.setPlainText(_translate("MainWindow", "Ricordati di separare ogni parola con il carattere ,"))
+        self.plainTextEdit.setText(_translate("MainWindow", self.testDaModificare.getContenutoTest()))

@@ -9,9 +9,11 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import * 
 from View.AggiungiTestView import AggiungiTestView
+from View.ModificaTestView import ModificaTestView
 from Controller.ControllerPickle import ControllerPickle
-
+from Controller.ControllerTest import ControllerTest
 
 class GestioneTestView(object):
     def setupUi(self, MainWindow):
@@ -108,19 +110,33 @@ class GestioneTestView(object):
             self.tableWidget.setItem(row, 2, dataCreazioneColumn)
 
             bottoneModifica = QtWidgets.QPushButton("Modifica")
-            bottoneModifica.clicked.connect(self.goToModificaTestView)
+            bottoneModifica.clicked.connect(self.goToModificaTestView(row))
             self.tableWidget.setCellWidget(row, 3, bottoneModifica)
 
             bottoneElimina = QtWidgets.QPushButton("Elimina")
-            bottoneElimina.clicked.connect(self.actionEliminaTest)
+            bottoneElimina.clicked.connect(self.actionEliminaTest(row))
             self.tableWidget.setCellWidget(row, 4, bottoneElimina)
             row = row+1
 
-    def goToModificaTestView(self):
-        print('clicked')
+    def goToModificaTestView(self, row):
+        self.modificaTest = QtWidgets.QMainWindow()
+        self.ui = ModificaTestView()
+        self.ui.setupUi(self.modificaTest, row)
+        self.modificaTest.show()
     
-    def actionEliminaTest(self):
-        print('clicked')
+    def actionEliminaTest(self, row):
+        controllerTest = ControllerTest()
+        deleted = controllerTest.eliminaTest(row)
+        if deleted==True:
+            registrazioneOK = QMessageBox()
+            registrazioneOK.setWindowTitle("OK")
+            registrazioneOK.setText("Test eliminato con successo!")
+            registrazioneOK.exec_()
+        else:
+            registrazioneNonOK = QMessageBox()
+            registrazioneNonOK.setWindowTitle("Errore!")
+            registrazioneNonOK.setText("Test non eliminato!")
+            registrazioneNonOK.exec_()
 
     def goToAggiungiTestView(self):
         self.aggiungiTest = QtWidgets.QMainWindow()

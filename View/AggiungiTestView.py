@@ -48,9 +48,11 @@ class AggiungiTestView(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.AggiungiTestButton.setText(_translate("MainWindow", "Aggiungi"))
-        self.NomeTestInput.setText(_translate("MainWindow", "Nome"))
+        self.NomeTestInput.setText(_translate("MainWindow", ""))
+        self.NomeTestInput.setPlaceholderText(_translate("MainWindow", "Nome"))
         self.label1.setText(_translate("MainWindow", "Aggiungi il nuovo Test!"))
-        self.plainTextEdit.setPlainText(_translate("MainWindow", "Ricordati di separare ogni parola con il carattere ,"))
+        self.plainTextEdit.setPlainText(_translate("MainWindow", " "))
+        self.plainTextEdit.setPlaceholderText(_translate("MainWindow", "Ricordati di separare ogni parola con il carattere ,"))
 
     def actionAggiungiTest(self):
         if self.NomeTestInput.text() == "":
@@ -66,4 +68,14 @@ class AggiungiTestView(object):
             contenutoTestVuoto.exec_()
             return
         self.controllerTest = ControllerTest()
-        added = self.controllerTest.aggiungiTest(self.NomeTestInput.text(), self.plainTextEdit.text()) 
+        added = self.controllerTest.aggiungiTest(self.NomeTestInput.text(), self.plainTextEdit.text())
+        if added==True:
+            registrazioneOK = QMessageBox()
+            registrazioneOK.setWindowTitle("OK")
+            registrazioneOK.setText("Test aggiunto con successo!")
+            registrazioneOK.exec_()
+        else:
+            registrazioneNonOK = QMessageBox()
+            registrazioneNonOK.setWindowTitle("Errore!")
+            registrazioneNonOK.setText("Test non aggiunto!")
+            registrazioneNonOK.exec_()

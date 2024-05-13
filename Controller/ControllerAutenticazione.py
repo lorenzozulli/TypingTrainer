@@ -10,7 +10,7 @@ from Controller.ControllerPickle import ControllerPickle
 
 class ControllerAutenticazione(object):
 
-    #--- metodo per entrare nel sistema ---
+    #--- metodo per effettuare il LogIn nel sistema ---
     def logIn(self, username, password):
         try:
             controllerPickle = ControllerPickle()
@@ -26,8 +26,8 @@ class ControllerAutenticazione(object):
                         else:
                             return "Admin", i
                     else:
-                        return "PasswordErrata"
-            return "UsernameNonTrovato"
+                        return "PasswordErrata", "errore"
+            return "UsernameNonTrovato", "errore"
         except Exception as error:
             print(error)
     
@@ -40,8 +40,13 @@ class ControllerAutenticazione(object):
             listaUtilizzatori = controllerPickle.listaUtilizzatori
 
             nuovoUtente = Utente()
-            nuovoUtente.setIdentifier(len(listaUtilizzatori)+1)
+            identifierCandidato = len(listaUtilizzatori)
             for i in listaUtilizzatori:
+                if not (identifierCandidato == i.identifier): 
+                    nuovoUtente.setIdentifier(identifierCandidato)
+                else:
+                    nuovoUtente.setIdentifier(identifierCandidato+1)
+
                 if not (username == i.username):
                     if len(username) >= 8:
                         nuovoUtente.setUsername(username)
@@ -89,8 +94,9 @@ class ControllerAutenticazione(object):
             print(error)
             return False
         return True
-    
-    def recuperaPassword(self, identifier, username, nuovaPassword):
+
+    # --- metodo per effettuare il recupero della password ---
+    def recuperaPassword(self, identifier, nuovaPassword):
         try:
             controllerPickle = ControllerPickle()
             controllerPickle.caricaListaUtilizzatori()
@@ -99,8 +105,24 @@ class ControllerAutenticazione(object):
 
             for i in listaUtilizzatori:
                 if identifier == i.identifier:
-                    i.password = nuovaPassword
-                    break
+                    pattern = r'\d'
+                    if re.search(pattern, nuovaPassword):
+                        i.password = nuovaPassword
+                        break
+                    else:
+                        registrazioneNonOK = QMessageBox()
+                        registrazioneNonOK.setWindowTitle("Errore!")
+                        registrazioneNonOK.setText("La password non contiene almeno un numero che va da 0 a 9!")
+                        registrazioneNonOK.exec_()
+                else:
+                    continue
+                registrazioneNonOK = QMessageBox()
+                registrazioneNonOK.setWindowTitle("Errore!")
+                registrazioneNonOK.setText("Identificatore non trovato!")
+                registrazioneNonOK.exec_()
+            
+                return False
+
             listaUtilizzatori.append(i)
             controllerPickle.salvaListaUtilizzatori()
         except Exception as error:

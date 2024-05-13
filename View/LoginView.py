@@ -26,17 +26,17 @@ class LoginView(object):
         self.LogInButton = QtWidgets.QPushButton(self.centralwidget)
         self.LogInButton.setGeometry(QtCore.QRect(150, 490, 150, 30))
         self.LogInButton.setObjectName("LogInButton")
-        self.LogInButton.clicked.connect(self.goLogin)
+        self.LogInButton.clicked.connect(self.actionLogin)
 
         self.RegistrazioneButton = QtWidgets.QPushButton(self.centralwidget)
         self.RegistrazioneButton.setGeometry(QtCore.QRect(320, 490, 150, 30))
         self.RegistrazioneButton.setObjectName("RegistrazioneButton")
-        self.RegistrazioneButton.clicked.connect(self.goRegistrazione)
+        self.RegistrazioneButton.clicked.connect(self.goToRegistrazioneView)
 
         self.RecuperaPasswordButton = QtWidgets.QPushButton(self.centralwidget)
         self.RecuperaPasswordButton.setGeometry(QtCore.QRect(490, 490, 150, 30))
         self.RecuperaPasswordButton.setObjectName("RecuperaPasswordButton")
-        self.RecuperaPasswordButton.clicked.connect(self.goRecuperaPassword)
+        self.RecuperaPasswordButton.clicked.connect(self.goToRecuperaPasswordView)
         
         self.UsernameInput = QtWidgets.QLineEdit(self.centralwidget)
         self.UsernameInput.setGeometry(QtCore.QRect(150, 390, 491, 30))
@@ -71,19 +71,19 @@ class LoginView(object):
         self.PasswordInput.setEchoMode(QtWidgets.QLineEdit.Password)
         self.label1.setText(_translate("MainWindow", "Benvenuto in Typing Trainer!"))
 
-    def goRegistrazione(self):
+    def goToRegistrazioneView(self):
         self.registrazione = QtWidgets.QMainWindow()
         self.ui = RegistrazioneView()
         self.ui.setupUi(self.registrazione)
         self.registrazione.show()
 
-    def goRecuperaPassword(self):
+    def goToRecuperaPasswordView(self):
         self.recuperaPassword = QtWidgets.QMainWindow()
         self.ui = RecuperaPasswordView()
         self.ui.setupUi(self.recuperaPassword)
         self.recuperaPassword.show()
     
-    def goLogin(self):
+    def actionLogin(self):
         if self.UsernameInput.text() == "":
             usernameVuoto = QMessageBox()
             usernameVuoto.setWindowTitle("Errore!")

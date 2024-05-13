@@ -22,19 +22,15 @@ class RecuperaPasswordView(object):
         self.RecuperaPasswordButton = QtWidgets.QPushButton(self.centralwidget)
         self.RecuperaPasswordButton.setGeometry(QtCore.QRect(320, 490, 150, 30))
         self.RecuperaPasswordButton.setObjectName("RecuperaPasswordButton")
-        self.RecuperaPasswordButton.clicked.connect(self.goRecuperaPassword)
+        self.RecuperaPasswordButton.clicked.connect(self.actionRecuperaPassword)
 
-        self.UsernameInput = QtWidgets.QLineEdit(self.centralwidget)
-        self.UsernameInput.setGeometry(QtCore.QRect(150, 390, 491, 30))
-        self.UsernameInput.setObjectName("UsernameInput")
+        self.IdentifierInput = QtWidgets.QLineEdit(self.centralwidget)
+        self.IdentifierInput.setGeometry(QtCore.QRect(150, 390, 491, 30))
+        self.IdentifierInput.setObjectName("IdentifierInput")
 
         self.NuovaPasswordInput = QtWidgets.QLineEdit(self.centralwidget)
         self.NuovaPasswordInput.setGeometry(QtCore.QRect(150, 440, 491, 30))
         self.NuovaPasswordInput.setObjectName("NuovaPasswordInput")
-
-        self.IdInput = QtWidgets.QLineEdit(self.centralwidget)
-        self.IdInput.setGeometry(QtCore.QRect(150, 340, 491, 30))
-        self.IdInput.setObjectName("IdInput")
 
         self.label1 = QtWidgets.QLabel(self.centralwidget)
         self.label1.setGeometry(QtCore.QRect(80, 240, 631, 121))
@@ -55,38 +51,30 @@ class RecuperaPasswordView(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.RecuperaPasswordButton.setText(_translate("MainWindow", "Recupera Password"))
-        self.UsernameInput.setText(_translate("MainWindow", ""))
-        self.UsernameInput.setPlaceholderText(_translate("MainWindow", "Username"))
         self.NuovaPasswordInput.setText(_translate("MainWindow", ""))
         self.NuovaPasswordInput.setPlaceholderText(_translate("MainWindow", "Nuova Password"))
         self.NuovaPasswordInput.setEchoMode(QtWidgets.QLineEdit.Password)
         self.NuovaPasswordInput.setText(_translate("MainWindow", ""))
-        self.IdInput.setText(_translate("MainWindow", ""))
-        self.IdInput.setPlaceholderText(_translate("MainWindow", "Id"))
+        self.IdentifierInput.setText(_translate("MainWindow", ""))
+        self.IdentifierInput.setPlaceholderText(_translate("MainWindow", "Identificatore"))
         self.label1.setText(_translate("MainWindow", "Recupera la tua Password!"))
     
-    def goRecuperaPassword(self):
-        if self.UsernameInput.text() == "":
-            usernameVuoto = QMessageBox()
-            usernameVuoto.setWindowTitle("Errore!")
-            usernameVuoto.setText("Nessun username inserito!")
-            usernameVuoto.exec_()
-            return
+    def actionRecuperaPassword(self):
         if self.NuovaPasswordInput.text() == "":
             nuovaPasswordVuoto = QMessageBox()
             nuovaPasswordVuoto.setWindowTitle("Errore!")
             nuovaPasswordVuoto.setText("Nessuna password inserita!")
             nuovaPasswordVuoto.exec_()
             return
-        if self.IdInput.text() == "":
-            IdVuoto = QMessageBox()
-            IdVuoto.setWindowTitle("Errore!")
-            IdVuoto.setText("Nessun Id inserito!")
-            IdVuoto.exec_()
+        if self.IdentifierInput.text() == "":
+            IdentifierVuoto = QMessageBox()
+            IdentifierVuoto.setWindowTitle("Errore!")
+            IdentifierVuoto.setText("Nessun Id inserito!")
+            IdentifierVuoto.exec_()
             return
 
         self.controllerAutenticazione = ControllerAutenticazione()
-        recovered = self.controllerAutenticazione.recuperaPassword(int(self.IdInput.text()), self.UsernameInput.text(), self.NuovaPasswordInput.text())
+        recovered = self.controllerAutenticazione.recuperaPassword(int(self.IdentifierInput.text()), self.NuovaPasswordInput.text())
         if recovered==True:
             recuperoOK = QMessageBox()
             recuperoOK.setWindowTitle("OK")

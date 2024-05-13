@@ -23,7 +23,7 @@ class RegistrazioneView(object):
         self.RegistrazioneButton = QtWidgets.QPushButton(self.centralwidget)
         self.RegistrazioneButton.setGeometry(QtCore.QRect(320, 490, 150, 30))
         self.RegistrazioneButton.setObjectName("RegistrazioneButton")
-        self.RegistrazioneButton.clicked.connect(self.goProceduraRegistrazione)
+        self.RegistrazioneButton.clicked.connect(self.actionRegistrazione)
 
         self.UsernameInput = QtWidgets.QLineEdit(self.centralwidget)
         self.UsernameInput.setGeometry(QtCore.QRect(150, 390, 491, 30))
@@ -64,7 +64,7 @@ class RegistrazioneView(object):
         self.EmailInput.setText(_translate("MainWindow", ""))
         self.EmailInput.setPlaceholderText(_translate("MainWindow", "Email"))
 
-    def goProceduraRegistrazione(self):
+    def actionRegistrazione(self):
         if self.UsernameInput.text() == "":
             usernameVuoto = QMessageBox()
             usernameVuoto.setWindowTitle("Errore!")

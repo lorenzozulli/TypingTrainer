@@ -23,8 +23,4 @@ class ControllerUtente(object):
             self.tableWidget.setItem(row, 0, QtWidgets.QTableWidgetItem(str(i.identifier)))
             self.tableWidget.setItem(row, 1, QtWidgets.QTableWidgetItem(i.getUsername()))
             self.tableWidget.setItem(row, 2, QtWidgets.QTableWidgetItem(str(i.getDataOraCreazione())))
-            '''
-            self.tableWidget.setItem(row, 3, QtWidgets.QTableWidgetItem())
-            self.tableWidget.setItem(row, 4, QtWidgets.QTableWidgetItem())
-            '''
             row = row+1

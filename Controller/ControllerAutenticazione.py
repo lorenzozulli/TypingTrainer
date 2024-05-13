@@ -123,7 +123,6 @@ class ControllerAutenticazione(object):
             
                 return False
 
-            listaUtilizzatori.append(i)
             controllerPickle.salvaListaUtilizzatori()
         except Exception as error:
             print(error)

@@ -109,23 +109,23 @@ class GestioneTestView(object):
             self.tableWidget.setItem(row, 2, dataCreazioneColumn)
 
             bottoneModifica = QtWidgets.QPushButton("Modifica")
-            bottoneModifica.clicked.connect(self.goToModificaTestView(row))
+            bottoneModifica.clicked.connect(self.goToModificaTestView(i.identifier))
             self.tableWidget.setCellWidget(row, 3, bottoneModifica)
 
             bottoneElimina = QtWidgets.QPushButton("Elimina")
-            bottoneElimina.clicked.connect(self.actionEliminaTest(row))
+            bottoneElimina.clicked.connect(self.actionEliminaTest(i.identifier))
             self.tableWidget.setCellWidget(row, 4, bottoneElimina)
             row = row+1
 
-    def goToModificaTestView(self, row):
+    def goToModificaTestView(self, identifier):
         self.modificaTest = QtWidgets.QMainWindow()
         self.ui = ModificaTestView()
-        self.ui.setupUi(self.modificaTest, row)
+        self.ui.setupUi(self.modificaTest, identifier)
         self.modificaTest.show()
     
-    def actionEliminaTest(self, row):
+    def actionEliminaTest(self, identifier):
         controllerTest = ControllerTest()
-        self.deleted = controllerTest.eliminaTest(row)
+        self.deleted = controllerTest.eliminaTest(identifier)
         self.controllaTestEliminatoConSuccesso()
         
     def controllaTestEliminatoConSuccesso(self):

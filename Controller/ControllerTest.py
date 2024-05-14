@@ -8,50 +8,66 @@ class ControllerTest(object):
     def aggiungiTest(self, nome, contenuto):
         controllerPickle = ControllerPickle()
         controllerPickle.caricaListaTest()
-
         listaTest = controllerPickle.listaTest
 
-        nuovoTest = Test()
+        self.nuovoTest = Test()
         identifierCandidato = len(listaTest)
-
-        for i in listaTest:
-            if not(identifierCandidato == i.identifier):
-                nuovoTest.setIdentifier(identifierCandidato)
-            else:
-                nuovoTest.setIdentifier(identifierCandidato+1)
-            
-            if not (nome == i.nome):
-                nuovoTest.setNome(nome)
-            else:
-                registrazioneNonOK = QMessageBox()
-                registrazioneNonOK.setWindowTitle("Errore!")
-                registrazioneNonOK.setText("Nome già esistente!")
-                registrazioneNonOK.exec_()
+        for self.i in listaTest:
+            try:
+                self.assegnaIdentificatoreUnivoco(identifierCandidato)
+                self.assegnaNomeAppropriato(nome)
+            except Exception as error:
+                print(error)
                 return False
             
-            nuovoTest.setContenutoTest([])
+            self.assegnaContenutoTest(contenuto) 
+            self.nuovoTest.setDataCreazione(date.today())
+            
+        listaTest.append(self.nuovoTest)
+        controllerPickle.salvaListaTest()
+    
+    def assegnaIdentificatoreUnivoco(self, identifierCandidato):
+        if not(identifierCandidato == self.i.identifier):
+            self.nuovoTest.setIdentifier(identifierCandidato)
+        else:
+            self.nuovoTest.setIdentifier(identifierCandidato+1)
+    
+    def assegnaNomeAppropriato(self, nome):
+        if not (nome == self.i.nome):
+            self.nuovoTest.setNome(nome)
+        else:
+            registrazioneNonOK = QMessageBox()
+            registrazioneNonOK.setWindowTitle("Errore!")
+            registrazioneNonOK.setText("Nome già esistente!")
+            registrazioneNonOK.exec_()
+            return False
+    
+    def assegnaContenutoTest(self, contenuto):
+            self.nuovoTest.setContenutoTest([])
 
             text = contenuto.toPlainText()
             words = text.split(",")
-            nuovoTest.contenuto.extend(words)
-            
-            nuovoTest.setDataCreazione(date.today())
+            for i in words:
+                self.nuovoTest.setElemento(words[i], i)
 
-            
-        listaTest.append(nuovoTest)
-        controllerPickle.salvaListaTest()
-    '''
     def eliminaTest(self, identifier):
         controllerPickle = ControllerPickle()
         controllerPickle.caricaListaTest()
 
         listaTest = controllerPickle.listaTest
-        del listaTest[id]
+        listaTest.remove(listaTest[identifier])
 
         controllerPickle.salvaListaTest()
     
     def modificaTest(self, identifier):
-        #TODO: fare questa funzione
+        controllerPickle = ControllerPickle()
+        controllerPickle.caricaListaTest()
+
+        listaTest = controllerPickle.listaTest
+
+        for i in listaTest:
+            if identifier == i.identifier:
+        
 
     def iniziaTest(self):
         #TODO: fare questa funzione

@@ -9,6 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from Controller.ControllerTest import ControllerTest
+from PyQt5.QtWidgets import *
 
 
 class ModificaTestView(object):
@@ -51,3 +53,18 @@ class ModificaTestView(object):
         self.NomeInput.setPlaceholderText(_translate("MainWindow", self.testDaModificare.getNome()))
         self.label1.setText(_translate("MainWindow", "Modifica il test!"))
         self.plainTextEdit.setText(_translate("MainWindow", self.testDaModificare.getContenutoTest()))
+
+    def actionModificaTest(self):
+        self.controllaCampoNomeNonVuoto()
+        self.controllaCampoContenutoNonvuoto()
+
+        self.controllerTest = ControllerTest()
+        self.modified = self.controllerTest.modificaTest()
+    
+    def controllaCampoNomeNonVuoto(self):
+        if self.NomeInput.text() == "":
+            NomeVuoto = QMessageBox()
+            NomeVuoto.setWindowTitle("Errore!")
+            NomeVuoto.setText("Nessun Id inserito!")
+            NomeVuoto.exec_()
+            return

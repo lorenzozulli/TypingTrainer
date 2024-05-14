@@ -9,6 +9,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import *
+
+from Controller.ControllerUtente import ControllerUtente
 
 
 class ModificaUtenteView(object):
@@ -52,3 +55,42 @@ class ModificaUtenteView(object):
         self.emailInput.setPlaceholderText(_translate("MainWindow", self.utenteDaModificare.getEmail()))
         self.emailInput.setText(_translate("MainWindow", " "))
         self.label1.setText(_translate("MainWindow", "Modifica le credenziali!"))
+
+    def actionModificaUtente(self):
+        self.controllaCampoUsernameNonVuoto()
+        self.controllaCampoPasswordNonvuoto()
+        self.controllaCampoEmailNonVuoto()
+
+        self.controllerUtente = ControllerUtente()
+        self.modified = self.controllerUtente.modificaUtente(self.NomeInput.text(), self.emailInput.text())
+
+        self.controllaTestModificatoConSuccesso()
+    
+    def controllaCampoUsernameNonVuoto(self):
+        if self.UsernameInput.text() == "":
+            UsernameVuoto = QMessageBox()
+            UsernameVuoto.setWindowTitle("Errore!")
+            UsernameVuoto.setText("Nessun Username inserito!")
+            UsernameVuoto.exec_()
+            return
+
+    def controllaCampoEmailNonVuoto(self):
+        if self.emailInput.text() == "":
+            EmailVuoto = QMessageBox()
+            EmailVuoto.setWindowTitle("Errore!")
+            EmailVuoto.setText("Nessuna email inserita!")
+            EmailVuoto.exec_()
+            return
+
+    def controllaTestModificatoConSuccesso(self):
+        if self.modified==True:
+            modificaOK = QMessageBox()
+            modificaOK.setWindowTitle("OK")
+            modificaOK.setText("Modifica effettuata con successo!")
+            modificaOK.exec_()
+        else:
+            modificaNonOK = QMessageBox()
+            modificaNonOK.setWindowTitle("Errore!")
+            modificaNonOK.setText("Modifica non effettuata!")
+            modificaNonOK.exec_() 
+

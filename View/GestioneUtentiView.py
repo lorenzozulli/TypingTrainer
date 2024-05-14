@@ -102,11 +102,11 @@ class GestioneUtentiView(object):
                 self.tableWidget.setItem(row, 2, dataCreazioneColumn)
 
                 bottoneModifica = QtWidgets.QPushButton("Modifica")
-                bottoneModifica.clicked.connect(self.goToModificaUtenteView(row))
+                bottoneModifica.clicked.connect(self.goToModificaUtenteView(i))
                 self.tableWidget.setCellWidget(row, 3, bottoneModifica)
 
                 bottoneElimina = QtWidgets.QPushButton("Elimina")
-                bottoneElimina.clicked.connect(self.actionEliminaUtente(row))
+                bottoneElimina.clicked.connect(self.actionEliminaUtente(i.identifier))
                 self.tableWidget.setCellWidget(row, 4, bottoneElimina)
             else:
                 dataCreazioneColumn = QtWidgets.QTableWidgetItem(" ")
@@ -122,16 +122,26 @@ class GestioneUtentiView(object):
                 self.tableWidget.setItem(row, 4, bottoneElimina)
             row = row+1
 
-    def goToModificaUtenteView(self, row):
+    def goToModificaUtenteView(self, utenteDaModificare):
             self.modificaUtenteView = QtWidgets.QMainWindow()
             ui = ModificaUtenteView()
-            ui.setupUi(self.modificaUtenteView, row)
+            ui.setupUi(self.modificaUtenteView, utenteDaModificare)
             self.modificaUtenteView.show()
 
-    def actionEliminaUtente(self, row):
+    def actionEliminaUtente(self, identifier):
         controllerUtente = ControllerUtente()
-        deleted = controllerUtente.eliminaUtente(row)
-        if deleted==True:
+        self.deleted = controllerUtente.eliminaUtente(identifier)
+
+        self.controllaUtenteEliminatoConSuccesso()
+        
+    def actionVisualizzaListaUtenti(self):
+        try:
+            self.methodVisualizzaListaUtenti()
+        except Exception as e:
+            print(e)
+
+    def controllaUtenteEliminatoConSuccesso(self):
+        if self.deleted==True:
             registrazioneOK = QMessageBox()
             registrazioneOK.setWindowTitle("OK")
             registrazioneOK.setText("Utente eliminato con successo!")
@@ -141,9 +151,3 @@ class GestioneUtentiView(object):
             registrazioneNonOK.setWindowTitle("Errore!")
             registrazioneNonOK.setText("Utente non eliminato!")
             registrazioneNonOK.exec_()
-
-    def actionVisualizzaListaUtenti(self):
-        try:
-            self.methodVisualizzaListaUtenti()
-        except Exception as e:
-            print(e)

@@ -59,22 +59,18 @@ class ControllerTest(object):
 
         controllerPickle.salvaListaTest()
     
-    def modificaTest(self, identifier):
+    def modificaTest(self, nuovoNome, nuovoContenuto):
         controllerPickle = ControllerPickle()
         controllerPickle.caricaListaTest()
 
         listaTest = controllerPickle.listaTest
-
-        for i in listaTest:
-            if identifier == i.identifier:
         
-
+        self.testDaModificare.setNome(nuovoNome)
+        self.testDaModificare.setContenuto(nuovoContenuto)
+'''
     def iniziaTest(self):
         #TODO: fare questa funzione
     
     def interrompiTest(self):
-        #TODO: fare questa funzione
-    
-    def visualizzaListaTest(self):
         #TODO: fare questa funzione
     '''

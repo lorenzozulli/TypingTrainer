@@ -49,8 +49,7 @@ class ModificaTestView(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.ModificaButton.setText(_translate("MainWindow", "Modifica"))
-        self.NomeInput.setText(_translate("MainWindow", " "))
-        self.NomeInput.setPlaceholderText(_translate("MainWindow", self.testDaModificare.getNome()))
+        self.NomeInput.setText(_translate("MainWindow", self.testDaModificare.getNome()))
         self.label1.setText(_translate("MainWindow", "Modifica il test!"))
         self.plainTextEdit.setText(_translate("MainWindow", self.testDaModificare.getContenutoTest()))
 
@@ -59,7 +58,9 @@ class ModificaTestView(object):
         self.controllaCampoContenutoNonvuoto()
 
         self.controllerTest = ControllerTest()
-        self.modified = self.controllerTest.modificaTest()
+        self.modified = self.controllerTest.modificaTest(self.NomeInput.text(), self.plainTextEdit.text())
+
+        self.controllaTestModificatoConSuccesso()
     
     def controllaCampoNomeNonVuoto(self):
         if self.NomeInput.text() == "":
@@ -68,3 +69,23 @@ class ModificaTestView(object):
             NomeVuoto.setText("Nessun Id inserito!")
             NomeVuoto.exec_()
             return
+
+    def controllaCampoContenutoNonVuoto(self):
+        if self.plainTextEdit.text() == "":
+            ContenutoVuoto = QMessageBox()
+            ContenutoVuoto.setWindowTitle("Errore!")
+            ContenutoVuoto.setText("Nessun contenuto inserito!")
+            ContenutoVuoto.exec_()
+            return
+    
+    def controllaTestModificatoConSuccesso(self):
+        if self.modified==True:
+            modificaOK = QMessageBox()
+            modificaOK.setWindowTitle("OK")
+            modificaOK.setText("Modifica effettuata con successo!")
+            modificaOK.exec_()
+        else:
+            modificaNonOK = QMessageBox()
+            modificaNonOK.setWindowTitle("Errore!")
+            modificaNonOK.setText("Modifica non effettuata!")
+            modificaNonOK.exec_() 

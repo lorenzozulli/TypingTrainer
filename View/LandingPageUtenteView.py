@@ -61,7 +61,7 @@ class LandingPageUtenteView(object):
         self.profiloButton = QtWidgets.QToolButton(self.centralwidget)
         self.profiloButton.setGeometry(QtCore.QRect(650, 30, 101, 71))
         self.profiloButton.setObjectName("profiloButton")
-        self.profiloButton.clicked.connect(self.goToVisualizzaProfilo)
+        self.profiloButton.clicked.connect(self.goToVisualizzaProfiloView)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -93,7 +93,7 @@ class LandingPageUtenteView(object):
         self.searchBarInput.setPlaceholderText(_translate("MainWindow", "Inserisci ID oppure Nome"))
         self.profiloButton.setText(_translate("MainWindow", "Vai a profilo"))
     
-    def goToVisualizzaProfilo(self):
+    def goToVisualizzaProfiloView(self):
         self.visualizzaProfilo = QtWidgets.QMainWindow()
         self.ui = VisualizzaProfiloView()
         self.ui.setupUi(self.visualizzaProfilo, self.currentUtilizzatore)

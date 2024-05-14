@@ -9,6 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import *
+from Controller.ControllerUtente import ControllerUtente
 
 
 class ModificaProfiloView(object):
@@ -50,10 +52,53 @@ class ModificaProfiloView(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.modificaButton.setText(_translate("MainWindow", "Modifica"))
-        self.UsernameInput.setText(_translate("MainWindow", " "))
-        self.UsernameInput.setPlaceholderText(_translate("MainWindow", self.utenteDaModificare.getUsername()))
-        self.PasswordInput.setText(_translate("MainWindow", " "))
-        self.PasswordInput.setPlaceholderText(_translate("MainWindow", self.utenteDaModificare.getPassword()))
+        self.UsernameInput.setText(_translate("MainWindow", self.utenteDaModificare.getUsername()))
+        self.PasswordInput.setText(_translate("MainWindow", self.utenteDaModificare.getPassword()))
         self.label1.setText(_translate("MainWindow", "Modifica le tue credenziali!"))
-        self.EmailInput.setText(_translate("MainWindow", " "))
-        self.EmailInput.setPlaceholderText(_translate("MainWindow", self.utenteDaModificare.getEmail()))
+        self.EmailInput.setText(_translate("MainWindow", self.utenteDaModificare.getEmail()))
+
+    def actionModificaProfilo(self):
+        self.controllaCampoUsernameNonVuoto()
+        self.controllaCampoPasswordNonvuoto()
+        self.controllaCampoEmailNonVuoto()
+
+        self.controllerUtente = ControllerUtente()
+        self.modified = self.controllerUtente.modificaProfilo(self.NomeInput.text(), self.emailInput.text(), self.PasswordInput.text())
+
+        self.controllaTestModificatoConSuccesso()
+    
+    def controllaCampoUsernameNonVuoto(self):
+        if self.UsernameInput.text() == "":
+            UsernameVuoto = QMessageBox()
+            UsernameVuoto.setWindowTitle("Errore!")
+            UsernameVuoto.setText("Nessun Username inserito!")
+            UsernameVuoto.exec_()
+            return
+
+    def controllaCampoEmailNonVuoto(self):
+        if self.emailInput.text() == "":
+            EmailVuoto = QMessageBox()
+            EmailVuoto.setWindowTitle("Errore!")
+            EmailVuoto.setText("Nessuna email inserita!")
+            EmailVuoto.exec_()
+            return
+        
+    def controllaCampoPasswordNonVuoto(self):
+        if self.PasswordInput.text() == "":
+            PasswordVuoto = QMessageBox()
+            PasswordVuoto.setWindowTitle("Errore!")
+            PasswordVuoto.setText("Nessuna password inserita!")
+            PasswordVuoto.exec_()
+            return
+
+    def controllaTestModificatoConSuccesso(self):
+        if self.modified==True:
+            modificaOK = QMessageBox()
+            modificaOK.setWindowTitle("OK")
+            modificaOK.setText("Modifica effettuata con successo!")
+            modificaOK.exec_()
+        else:
+            modificaNonOK = QMessageBox()
+            modificaNonOK.setWindowTitle("Errore!")
+            modificaNonOK.setText("Modifica non effettuata!")
+            modificaNonOK.exec_() 

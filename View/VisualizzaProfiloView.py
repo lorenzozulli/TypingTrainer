@@ -16,6 +16,7 @@ from View.ModificaProfiloView import ModificaProfiloView
 class VisualizzaProfiloView(object):
     def setupUi(self, MainWindow, currentUtilizzatore):
         self.currentUtilizzatore = currentUtilizzatore
+
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 800)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -97,10 +98,10 @@ class VisualizzaProfiloView(object):
         self.label_3.setText(_translate("MainWindow", "Media WPM"))
         self.label_4.setText(_translate("MainWindow", "Media errori per test"))
 
-    def goToModificaProfilo(self):
+    def goToModificaProfiloView(self):
         self.modificaProfilo = QtWidgets.QMainWindow()
         self.ui = ModificaProfiloView()
-        self.ui.setupUi(self.modificaProfilo)
+        self.ui.setupUi(self.modificaProfilo, self.currentUtilizzatore)
         self.modificaProfilo.show()
     
     def actionLogOut(self):

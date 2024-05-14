@@ -63,10 +63,11 @@ class ModificaProfiloView(object):
         self.controllaCampoEmailNonVuoto()
 
         self.controllerUtente = ControllerUtente()
-        self.modified = self.controllerUtente.modificaProfilo(self.NomeInput.text(), self.emailInput.text(), self.PasswordInput.text())
+        self.modified = self.controllerUtente.modificaProfilo(self.utenteDaModificare.getIdentifier(), self.NomeInput.text(), self.emailInput.text(), self.PasswordInput.text())
 
-        self.controllaTestModificatoConSuccesso()
-    
+        self.controllaUtenteModificatoConSuccesso()
+
+    # --- METODI DI SUPPORTO ---
     def controllaCampoUsernameNonVuoto(self):
         if self.UsernameInput.text() == "":
             UsernameVuoto = QMessageBox()
@@ -91,7 +92,7 @@ class ModificaProfiloView(object):
             PasswordVuoto.exec_()
             return
 
-    def controllaTestModificatoConSuccesso(self):
+    def controllaUtenteModificatoConSuccesso(self):
         if self.modified==True:
             modificaOK = QMessageBox()
             modificaOK.setWindowTitle("OK")

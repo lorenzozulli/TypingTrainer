@@ -30,7 +30,7 @@ class VisualizzaProfiloView(object):
         self.modificaProfiloButton = QtWidgets.QPushButton(self.centralwidget)
         self.modificaProfiloButton.setGeometry(QtCore.QRect(440, 210, 150, 30))
         self.modificaProfiloButton.setObjectName("modificaProfiloButton")
-        self.modificaProfiloButton.clicked.connect(self.goToModificaProfilo)
+        self.modificaProfiloButton.clicked.connect(self.goToModificaProfiloView)
 
         self.logOutButton = QtWidgets.QPushButton(self.centralwidget)
         self.logOutButton.setGeometry(QtCore.QRect(440, 260, 150, 30))

@@ -60,12 +60,23 @@ class RecuperaPasswordView(object):
         self.label1.setText(_translate("MainWindow", "Recupera la tua Password!"))
     
     def actionRecuperaPassword(self):
+        self.controllaCampoIdentifierNonVuoto()
+        self.controllaCampoNuovaPasswordNonVuoto()
+
+        self.controllerAutenticazione = ControllerAutenticazione()
+        self.recovered = self.controllerAutenticazione.recuperaPassword(int(self.IdentifierInput.text()), self.NuovaPasswordInput.text())
+        
+        self.controllaRecuperoPasswordEffettuatoConSuccesso()
+
+    def controllaCampoNuovaPasswordNonVuoto(self):
         if self.NuovaPasswordInput.text() == "":
             nuovaPasswordVuoto = QMessageBox()
             nuovaPasswordVuoto.setWindowTitle("Errore!")
             nuovaPasswordVuoto.setText("Nessuna password inserita!")
             nuovaPasswordVuoto.exec_()
             return
+
+    def controllaCampoIdentifierNonVuoto(self):
         if self.IdentifierInput.text() == "":
             IdentifierVuoto = QMessageBox()
             IdentifierVuoto.setWindowTitle("Errore!")
@@ -73,9 +84,8 @@ class RecuperaPasswordView(object):
             IdentifierVuoto.exec_()
             return
 
-        self.controllerAutenticazione = ControllerAutenticazione()
-        recovered = self.controllerAutenticazione.recuperaPassword(int(self.IdentifierInput.text()), self.NuovaPasswordInput.text())
-        if recovered==True:
+    def controllaRecuperoPasswordEffettuatoConSuccesso(self):
+        if self.recovered==True:
             recuperoOK = QMessageBox()
             recuperoOK.setWindowTitle("OK")
             recuperoOK.setText("Recupero effettuato con successo!")

@@ -65,27 +65,41 @@ class RegistrazioneView(object):
         self.EmailInput.setPlaceholderText(_translate("MainWindow", "Email"))
 
     def actionRegistrazione(self):
+        self.controllaCampoEmailNonVuoto() 
+        self.controllaCampoUsernameNonVuoto()
+        self.controllaCampoPasswordNonVuoto()
+        
+        self.controllerAutenticazione = ControllerAutenticazione()
+        self.registered = self.controllerAutenticazione.registrazione(self.UsernameInput.text(), self.PasswordInput.text(), self.EmailInput.text())
+
+        self.controllaRegistrazioneEffettataConSuccesso()
+        
+    def controllaCampoUsernameNonVuoto(self):
         if self.UsernameInput.text() == "":
             usernameVuoto = QMessageBox()
             usernameVuoto.setWindowTitle("Errore!")
             usernameVuoto.setText("Nessun username inserito!")
             usernameVuoto.exec_()
             return
+        
+    def controllaCampoPasswordNonVuoto(self):
         if self.PasswordInput.text() == "":
             passwordVuoto = QMessageBox()
             passwordVuoto.setWindowTitle("Errore!")
             passwordVuoto.setText("Nessuna password inserita!")
             passwordVuoto.exec_()
-            return 
+            return
+
+    def controllaCampoEmailNonVuoto(self):
         if self.EmailInput.text() == "":
-            passwordVuoto = QMessageBox()
-            passwordVuoto.setWindowTitle("Errore!")
-            passwordVuoto.setText("Nessuna email inserita!")
-            passwordVuoto.exec_()
-            return 
-        self.controllerAutenticazione = ControllerAutenticazione()
-        registered = self.controllerAutenticazione.registrazione(self.UsernameInput.text(), self.PasswordInput.text(), self.EmailInput.text())
-        if registered==True:
+            emailVuoto = QMessageBox()
+            emailVuoto.setWindowTitle("Errore!")
+            emailVuoto.setText("Nessuna email inserita!")
+            emailVuoto.exec_()
+            return
+
+    def controllaRegistrazioneEffettataConSuccesso(self):
+        if self.registered==True:
             registrazioneOK = QMessageBox()
             registrazioneOK.setWindowTitle("OK")
             registrazioneOK.setText("Registrazione effettuata con successo!")

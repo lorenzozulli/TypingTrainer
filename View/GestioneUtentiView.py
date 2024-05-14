@@ -81,7 +81,7 @@ class GestioneUtentiView(object):
         self.searchBarInput.setPlaceholderText(_translate("MainWindow", "Inserisci ID oppure Nome"))
         self.profiloButton.setText(_translate("MainWindow", "Vai a profilo"))
 
-    def actionVisualizzaListaUtenti(self):
+    def methodVisualizzaListaUtenti(self):
         controllerPickle = ControllerPickle()
         controllerPickle.caricaListaUtilizzatori()
         listaUtilizzatori = controllerPickle.listaUtilizzatori
@@ -93,7 +93,7 @@ class GestioneUtentiView(object):
             identifierColumn.setFlags(identifierColumn.flags() ^ QtCore.Qt.ItemIsEditable)
             self.tableWidget.setItem(row, 0, identifierColumn)
 
-            usernameColumn = QtWidgets.QTableWidgetItem(i.getUsername()) 
+            usernameColumn = QtWidgets.QTableWidgetItem(str(i.username)) 
             usernameColumn.setFlags(usernameColumn.flags() ^ QtCore.Qt.ItemIsEditable)
             self.tableWidget.setItem(row, 1, usernameColumn)
             if i.identifier != 0:
@@ -142,4 +142,8 @@ class GestioneUtentiView(object):
             registrazioneNonOK.setText("Utente non eliminato!")
             registrazioneNonOK.exec_()
 
-
+    def actionVisualizzaListaUtenti(self):
+        try:
+            self.methodVisualizzaListaUtenti()
+        except Exception as e:
+            print(e)

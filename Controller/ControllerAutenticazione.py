@@ -39,7 +39,8 @@ class ControllerAutenticazione(object):
                 self.assegnaUsernameAppropriato(username)
                 self.assegnaPasswordAppropriata(password)
                 self.assegnaEmailAppropriata(email)
-            finally:
+            except Exception as error:
+                print(error)
                 return False
             
         self.nuovoUtente.setDataCreazione(date.today())

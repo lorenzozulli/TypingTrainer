@@ -72,7 +72,7 @@ class RegistrazioneView(object):
         self.controllerAutenticazione = ControllerAutenticazione()
         self.registered = self.controllerAutenticazione.registrazione(self.UsernameInput.text(), self.PasswordInput.text(), self.EmailInput.text())
 
-        self.controllaRegistrazioneEffettataConSuccesso()
+        self.controllaRegistrazioneEffettuataConSuccesso()
         
     def controllaCampoUsernameNonVuoto(self):
         if self.UsernameInput.text() == "":
@@ -98,7 +98,7 @@ class RegistrazioneView(object):
             emailVuoto.exec_()
             return
 
-    def controllaRegistrazioneEffettataConSuccesso(self):
+    def controllaRegistrazioneEffettuataConSuccesso(self):
         if self.registered==True:
             registrazioneOK = QMessageBox()
             registrazioneOK.setWindowTitle("OK")

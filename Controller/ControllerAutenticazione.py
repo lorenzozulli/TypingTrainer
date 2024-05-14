@@ -12,124 +12,119 @@ class ControllerAutenticazione(object):
 
     #--- metodo per effettuare il LogIn nel sistema ---
     def logIn(self, username, password):
-        try:
-            controllerPickle = ControllerPickle()
-            controllerPickle.caricaListaUtilizzatori()
+        controllerPickle = ControllerPickle()
+        controllerPickle.caricaListaUtilizzatori()
+        listaUtilizzatori = controllerPickle.listaUtilizzatori
 
-            listaUtilizzatori = controllerPickle.listaUtilizzatori
-
-            for i in listaUtilizzatori:
-                if username == i.username:
-                    if password == i.password:
-                        if i.isAdmin == False:
-                            return "Utente", i
-                        else:
-                            return "Admin", i
-                    else:
-                        return "PasswordErrata", "errore"
-            return "UsernameNonTrovato", "errore"
-        except Exception as error:
-            print(error)
+        for i in listaUtilizzatori:
+            if username == i.username and password == i.password and i.isAdmin == False:
+                        return "Utente", i
+            elif username == i.username and password == i.password and i.isAdmin == True:
+                        return "Admin", i
+            elif username == i.username:
+                    return "PasswordErrata", "errore"
+        return "UsernameNonTrovato", "errore"
     
     # --- metodo per effettuare la registrazione nel sistema ---
     def registrazione(self, username, password, email):
-        try:
-            controllerPickle = ControllerPickle() 
-            controllerPickle.caricaListaUtilizzatori()
+        controllerPickle = ControllerPickle() 
+        controllerPickle.caricaListaUtilizzatori()
+        listaUtilizzatori = controllerPickle.listaUtilizzatori
 
-            listaUtilizzatori = controllerPickle.listaUtilizzatori
-
-            nuovoUtente = Utente()
-            identifierCandidato = len(listaUtilizzatori)
-            for i in listaUtilizzatori:
-                if not (identifierCandidato == i.identifier): 
-                    nuovoUtente.setIdentifier(identifierCandidato)
-                else:
-                    nuovoUtente.setIdentifier(identifierCandidato+1)
-
-                if not (username == i.username):
-                    if len(username) >= 8:
-                        nuovoUtente.setUsername(username)
-                    else:
-                        registrazioneNonOK = QMessageBox()
-                        registrazioneNonOK.setWindowTitle("Errore!")
-                        registrazioneNonOK.setText("Lunghezza Username minore di 8 caratteri!")
-                        registrazioneNonOK.exec_()
-                        return False
-                else:
-                    registrazioneNonOK = QMessageBox()
-                    registrazioneNonOK.setWindowTitle("Errore!")
-                    registrazioneNonOK.setText("Username già esistente!")
-                    registrazioneNonOK.exec_()
-                    return False
+        self.nuovoUtente = Utente()
+        identifierCandidato = len(listaUtilizzatori)
+        for self.i in listaUtilizzatori:
+            try:
+                self.assegnaIdentificatoreUnivoco(identifierCandidato)
+                self.assegnaUsernameAppropriato(username)
+                self.assegnaPasswordAppropriata(password)
+                self.assegnaEmailAppropriata(email)
+            finally:
+                return False
             
-            pattern = r'\d'
+        self.nuovoUtente.setDataCreazione(date.today())
+        self.nuovoUtente.setStatistiche("")
+        self.nuovoUtente.setIsAdmin(False)
 
-            if re.search(pattern, password):
-                nuovoUtente.setPassword(password)
-            else:
-                registrazioneNonOK = QMessageBox()
-                registrazioneNonOK.setWindowTitle("Errore!")
-                registrazioneNonOK.setText("La password non contiene almeno un numero che va da 0 a 9!")
-                registrazioneNonOK.exec_()
-                return False
-
-            if email.__contains__('@'):
-                nuovoUtente.setEmail(email)
-            else:
-                registrazioneNonOK = QMessageBox()
-                registrazioneNonOK.setWindowTitle("Errore!")
-                registrazioneNonOK.setText("La email non contiene il carattere @!")
-                registrazioneNonOK.exec_()
-                return False
-
-            nuovoUtente.setDataCreazione(date.today())
-            nuovoUtente.setStatistiche("")
-            nuovoUtente.setIsAdmin(False)
-
-            listaUtilizzatori.append(nuovoUtente)
-
-            controllerPickle.salvaListaUtilizzatori()
-        except Exception as error:
-            print(error)
-            return False
+        listaUtilizzatori.append(self.nuovoUtente)
+        controllerPickle.salvaListaUtilizzatori()
         return True
+    # --- INIZIO METODI PER EFFETTUARE LA REGISTRAZIONE ---
+    def assegnaIdentificatoreUnivoco(self, identifierCandidato):
+        if not (identifierCandidato == self.i.identifier): 
+            self.nuovoUtente.setIdentifier(identifierCandidato)
+        else:
+            self.nuovoUtente.setIdentifier(identifierCandidato+1)
+    
+    def assegnaUsernameAppropriato(self, username):
+        if not (username == self.i.username):
+            if len(username) >= 8:
+                self.nuovoUtente.setUsername(username)
+            else:
+                registrazioneNonOK = QMessageBox()
+                registrazioneNonOK.setWindowTitle("Errore!")
+                registrazioneNonOK.setText("Lunghezza Username minore di 8 caratteri!")
+                registrazioneNonOK.exec_() 
+                return False
+        else:
+            registrazioneNonOK = QMessageBox()
+            registrazioneNonOK.setWindowTitle("Errore!")
+            registrazioneNonOK.setText("Username già esistente!")
+            registrazioneNonOK.exec_()
+            return False
+        
+    def assegnaPasswordAppropriata(self, password):
+        pattern = r'\d'
+
+        if re.search(pattern, password):
+            self.nuovoUtente.setPassword(password)
+        else:
+            registrazioneNonOK = QMessageBox()
+            registrazioneNonOK.setWindowTitle("Errore!")
+            registrazioneNonOK.setText("La password non contiene almeno un numero che va da 0 a 9!")
+            registrazioneNonOK.exec_()
+            return False
+        
+    def assegnaEmailAppropriata(self, email):
+        if email.__contains__('@'):
+            self.nuovoUtente.setEmail(email)
+        else:
+            registrazioneNonOK = QMessageBox()
+            registrazioneNonOK.setWindowTitle("Errore!")
+            registrazioneNonOK.setText("La email non contiene il carattere @!")
+            registrazioneNonOK.exec_()
+            return False
+    # --- --- --- --- --- --- --- --- --- --- --- ---
 
     # --- metodo per effettuare il recupero della password ---
     def recuperaPassword(self, identifier, nuovaPassword):
-        try:
-            controllerPickle = ControllerPickle()
-            controllerPickle.caricaListaUtilizzatori()
+        controllerPickle = ControllerPickle()
+        controllerPickle.caricaListaUtilizzatori()
+        listaUtilizzatori = controllerPickle.listaUtilizzatori
 
-            listaUtilizzatori = controllerPickle.listaUtilizzatori
-
-            for i in listaUtilizzatori:
-                if identifier == i.identifier:
-                    pattern = r'\d'
-                    if re.search(pattern, nuovaPassword):
-                        i.password = nuovaPassword
-                        break
-                    else:
-                        registrazioneNonOK = QMessageBox()
-                        registrazioneNonOK.setWindowTitle("Errore!")
-                        registrazioneNonOK.setText("La password non contiene almeno un numero che va da 0 a 9!")
-                        registrazioneNonOK.exec_()
+        for i in listaUtilizzatori:
+            if identifier == i.identifier:
+                pattern = r'\d'
+                if re.search(pattern, nuovaPassword):
+                    i.password = nuovaPassword
+                    break
                 else:
-                    continue
-                registrazioneNonOK = QMessageBox()
-                registrazioneNonOK.setWindowTitle("Errore!")
-                registrazioneNonOK.setText("Identificatore non trovato!")
-                registrazioneNonOK.exec_()
-            
-                return False
-
-            controllerPickle.salvaListaUtilizzatori()
-        except Exception as error:
-            print(error)
+                    registrazioneNonOK = QMessageBox()
+                    registrazioneNonOK.setWindowTitle("Errore!")
+                    registrazioneNonOK.setText("La password non contiene almeno un numero che va da 0 a 9!")
+                    registrazioneNonOK.exec_()
+            else:
+                continue
+            registrazioneNonOK = QMessageBox()
+            registrazioneNonOK.setWindowTitle("Errore!")
+            registrazioneNonOK.setText("Identificatore non trovato!")
+            registrazioneNonOK.exec_()
+        
             return False
+
+        controllerPickle.salvaListaUtilizzatori()
         return True
 
-        
     '''
      # --- metodo per uscire dal sistema ---
     def logOut():

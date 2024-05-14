@@ -93,7 +93,7 @@ class GestioneUtentiView(object):
             identifierColumn.setFlags(identifierColumn.flags() ^ QtCore.Qt.ItemIsEditable)
             self.tableWidget.setItem(row, 0, identifierColumn)
 
-            usernameColumn = QtWidgets.QTableWidgetItem(str(i.username)) 
+            usernameColumn = QtWidgets.QTableWidgetItem(i.getUsername()) 
             usernameColumn.setFlags(usernameColumn.flags() ^ QtCore.Qt.ItemIsEditable)
             self.tableWidget.setItem(row, 1, usernameColumn)
             if i.identifier != 0:

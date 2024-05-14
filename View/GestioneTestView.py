@@ -88,7 +88,7 @@ class GestioneTestView(object):
         self.searchBarInput.setPlaceholderText(_translate("MainWindow", "Inserisci ID oppure Nome"))
         self.profiloButton.setText(_translate("MainWindow", "Vai a profilo"))
 
-    def actionVisualizzaListaTest(self):
+    def methodVisualizzaListaTest(self):
         controllerPickle = ControllerPickle()
         controllerPickle.caricaListaTest()
         listaTest = controllerPickle.listaTest
@@ -96,7 +96,7 @@ class GestioneTestView(object):
         row = 0
         self.tableWidget.setRowCount(len(listaTest))
         for i in listaTest:
-            identifierColumn = QtWidgets.QTableWidgetItem(str(i.identifier)) 
+            identifierColumn = QtWidgets.QTableWidgetItem(str(i.getIdentifier())) 
             identifierColumn.setFlags(identifierColumn.flags() ^ QtCore.Qt.ItemIsEditable)
             self.tableWidget.setItem(row, 0, identifierColumn)
 
@@ -145,4 +145,10 @@ class GestioneTestView(object):
         self.ui = AggiungiTestView()
         self.ui.setupUi(self.aggiungiTest)
         self.aggiungiTest.show()
-        
+
+    def actionVisualizzaListaTest(self):
+        try:
+            self.methodVisualizzaListaTest()
+        except Exception as e:
+            print(e)
+     

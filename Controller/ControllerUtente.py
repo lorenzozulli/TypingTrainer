@@ -1,27 +1,37 @@
+'''
+ControllerUtente
+'''
+
 from Controller.ControllerPickle import ControllerPickle
-from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import *
 
 class ControllerUtente(object):
     def eliminaUtente(self, identifier):
-        controllerPickle = ControllerPickle()
-        controllerPickle.caricaListaUtilizzatori()
-        listaUtilizzatori = controllerPickle.listaUtilizzatori
+        try:
+            controllerPickle = ControllerPickle()
+            controllerPickle.caricaListaUtilizzatori()
+            listaUtilizzatori = controllerPickle.listaUtilizzatori
 
-        listaUtilizzatori.remove(listaUtilizzatori[identifier])
+            listaUtilizzatori.remove(listaUtilizzatori[identifier])
 
-        controllerPickle.salvaListaUtilizzatori()
+            controllerPickle.salvaListaUtilizzatori()
+            return True
+        except Exception:
+            return False
     
-    def modificaUtente(self, nuovoUsername, nuovaEmail):
-        controllerPickle = ControllerPickle()
-        controllerPickle.caricaListaUtilizzatori()
-        listaUtilizzatori = controllerPickle.listaUtilizzatori
+    def modificaUtente(self, identifier, nuovoUsername, nuovaEmail):
+        try:
+            controllerPickle = ControllerPickle()
+            controllerPickle.caricaListaUtilizzatori()
+            listaUtilizzatori = controllerPickle.listaUtilizzatori
 
-        self.utenteDaModificare.setUsername(nuovoUsername)
-        self.utenteDaModificare.setEmail(nuovaEmail)
+            listaUtilizzatori[identifier].setUsername(nuovoUsername)
+            listaUtilizzatori[identifier].setEmail(nuovaEmail)
 
-        controllerPickle.salvaListaUtilizzatori()
-
+            controllerPickle.salvaListaUtilizzatori()
+            return True
+        except Exception:
+            return False
 
     def modificaProfilo(self, identifier, nuovoUsername, nuovaEmail, nuovaPassword):
         try:
@@ -35,8 +45,7 @@ class ControllerUtente(object):
             
             controllerPickle.salvaListaUtilizzatori()
             return True
-        except Exception as error:
-            print(error)
+        except Exception:
             return False
 
         

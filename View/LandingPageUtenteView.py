@@ -23,7 +23,7 @@ class LandingPageUtenteView(object):
         self.IniziaTestButton = QtWidgets.QPushButton(self.centralwidget)
         self.IniziaTestButton.setGeometry(QtCore.QRect(320, 730, 150, 30))
         self.IniziaTestButton.setObjectName("IniziaTestButton")
-        self.IniziaTestButton.clicked.connect(self.goIniziaTest)
+        self.IniziaTestButton.clicked.connect(self.goToIniziaTest)
 
         self.label1 = QtWidgets.QLabel(self.centralwidget)
         self.label1.setGeometry(QtCore.QRect(0, 10, 351, 121))
@@ -61,7 +61,7 @@ class LandingPageUtenteView(object):
         self.profiloButton = QtWidgets.QToolButton(self.centralwidget)
         self.profiloButton.setGeometry(QtCore.QRect(650, 30, 101, 71))
         self.profiloButton.setObjectName("profiloButton")
-        self.profiloButton.clicked.connect(self.goVisualizzaProfilo)
+        self.profiloButton.clicked.connect(self.goToVisualizzaProfilo)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -93,16 +93,13 @@ class LandingPageUtenteView(object):
         self.searchBarInput.setPlaceholderText(_translate("MainWindow", "Inserisci ID oppure Nome"))
         self.profiloButton.setText(_translate("MainWindow", "Vai a profilo"))
     
-    def goVisualizzaProfilo(self):
-        try:
-            self.visualizzaProfilo = QtWidgets.QMainWindow()
-            self.ui = VisualizzaProfiloView()
-            self.ui.setupUi(self.visualizzaProfilo, self.currentUtilizzatore)
-            self.visualizzaProfilo.show()
-        except Exception as error:
-            print(error)
+    def goToVisualizzaProfilo(self):
+        self.visualizzaProfilo = QtWidgets.QMainWindow()
+        self.ui = VisualizzaProfiloView()
+        self.ui.setupUi(self.visualizzaProfilo, self.currentUtilizzatore)
+        self.visualizzaProfilo.show()
 
-    def goIniziaTest(self):
+    def goToIniziaTest(self):
         self.iniziaTest = QtWidgets.QMainWindow()
         self.ui = VisualizzaProfiloView()
         self.ui.setupUi(self.iniziaTest)

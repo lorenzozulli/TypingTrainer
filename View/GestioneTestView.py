@@ -88,10 +88,9 @@ class GestioneTestView(object):
         self.searchBarInput.setPlaceholderText(_translate("MainWindow", "Inserisci ID oppure Nome"))
         self.profiloButton.setText(_translate("MainWindow", "Vai a profilo"))
 
-    def visualizzaListaTest(self):
+    def actionVisualizzaListaTest(self):
         controllerPickle = ControllerPickle()
         controllerPickle.caricaListaTest()
-
         listaTest = controllerPickle.listaTest
 
         row = 0
@@ -126,8 +125,11 @@ class GestioneTestView(object):
     
     def actionEliminaTest(self, row):
         controllerTest = ControllerTest()
-        deleted = controllerTest.eliminaTest(row)
-        if deleted==True:
+        self.deleted = controllerTest.eliminaTest(row)
+        self.controllaTestEliminatoConSuccesso()
+        
+    def controllaTestEliminatoConSuccesso(self):
+        if self.deleted==True:
             registrazioneOK = QMessageBox()
             registrazioneOK.setWindowTitle("OK")
             registrazioneOK.setText("Test eliminato con successo!")

@@ -29,12 +29,12 @@ class VisualizzaProfiloView(object):
         self.modificaProfiloButton = QtWidgets.QPushButton(self.centralwidget)
         self.modificaProfiloButton.setGeometry(QtCore.QRect(440, 210, 150, 30))
         self.modificaProfiloButton.setObjectName("modificaProfiloButton")
-        self.modificaProfiloButton.clicked.connect(self.goModificaProfilo)
+        self.modificaProfiloButton.clicked.connect(self.goToModificaProfilo)
 
         self.logOutButton = QtWidgets.QPushButton(self.centralwidget)
         self.logOutButton.setGeometry(QtCore.QRect(440, 260, 150, 30))
         self.logOutButton.setObjectName("logOutButton")
-        self.logOutButton.clicked.connect(self.goLogOut)
+        self.logOutButton.clicked.connect(self.actionLogOut)
 
         self.joinedInLabel = QtWidgets.QLabel(self.centralwidget)
         self.joinedInLabel.setGeometry(QtCore.QRect(150, 270, 71, 21))
@@ -97,12 +97,12 @@ class VisualizzaProfiloView(object):
         self.label_3.setText(_translate("MainWindow", "Media WPM"))
         self.label_4.setText(_translate("MainWindow", "Media errori per test"))
 
-    def goModificaProfilo(self):
+    def goToModificaProfilo(self):
         self.modificaProfilo = QtWidgets.QMainWindow()
         self.ui = ModificaProfiloView()
         self.ui.setupUi(self.modificaProfilo)
         self.modificaProfilo.show()
     
-    def goLogOut(self):
+    def actionLogOut(self):
         self.controllerAutenticazione = ControllerAutenticazione()
         self.controllerAutenticazione.logOut()

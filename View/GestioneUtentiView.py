@@ -84,7 +84,6 @@ class GestioneUtentiView(object):
     def actionVisualizzaListaUtenti(self):
         controllerPickle = ControllerPickle()
         controllerPickle.caricaListaUtilizzatori()
-
         listaUtilizzatori = controllerPickle.listaUtilizzatori
 
         row = 0

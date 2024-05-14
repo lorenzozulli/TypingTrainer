@@ -55,21 +55,31 @@ class AggiungiTestView(object):
         self.plainTextEdit.setPlaceholderText(_translate("MainWindow", "Ricordati di separare ogni parola con il carattere ,"))
 
     def actionAggiungiTest(self):
+        self.controllaCampoNomeTestNonVuoto()
+        self.controllaCampoContenutoTestNonVuoto()
+        
+        self.controllerTest = ControllerTest()
+        self.added = self.controllerTest.aggiungiTest(self.NomeTestInput.text(), self.plainTextEdit.text())
+
+        self.controllaAggiuntaTestConSuccesso()
+        
+    def controllaCampoNomeTestNonVuoto(self):
         if self.NomeTestInput.text() == "":
             NomeTestVuoto = QMessageBox()
             NomeTestVuoto.setWindowTitle("Errore!")
             NomeTestVuoto.setText("Nessun nome inserito!")
             NomeTestVuoto.exec_()
             return
+    def controllaCampoContenutoTestNonVuoto(self):
         if self.plainTextEdit.text() == "":
             contenutoTestVuoto = QMessageBox()
             contenutoTestVuoto.setWindowTitle("Errore!")
             contenutoTestVuoto.setText("Nessun contenuto inserito!")
             contenutoTestVuoto.exec_()
             return
-        self.controllerTest = ControllerTest()
-        added = self.controllerTest.aggiungiTest(self.NomeTestInput.text(), self.plainTextEdit.text())
-        if added==True:
+        
+    def controllaAggiuntaTestConSuccesso(self):
+        if self.added==True:
             registrazioneOK = QMessageBox()
             registrazioneOK.setWindowTitle("OK")
             registrazioneOK.setText("Test aggiunto con successo!")
@@ -79,3 +89,4 @@ class AggiungiTestView(object):
             registrazioneNonOK.setWindowTitle("Errore!")
             registrazioneNonOK.setText("Test non aggiunto!")
             registrazioneNonOK.exec_()
+

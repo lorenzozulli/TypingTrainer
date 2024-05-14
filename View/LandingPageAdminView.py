@@ -34,7 +34,7 @@ class LandingPageAdminView(object):
         self.gestioneUtentiButton = QtWidgets.QPushButton(self.centralwidget)
         self.gestioneUtentiButton.setGeometry(QtCore.QRect(440, 210, 150, 30))
         self.gestioneUtentiButton.setObjectName("gestioneUtentiButton")
-        self.gestioneUtentiButton.clicked.connect(self.goGestioneUtentiView)
+        self.gestioneUtentiButton.clicked.connect(self.goToGestioneUtentiView)
 
         self.logOutButton = QtWidgets.QPushButton(self.centralwidget)
         self.logOutButton.setGeometry(QtCore.QRect(440, 260, 150, 30))
@@ -44,7 +44,7 @@ class LandingPageAdminView(object):
         self.gestioneTestButton = QtWidgets.QPushButton(self.centralwidget)
         self.gestioneTestButton.setGeometry(QtCore.QRect(440, 160, 150, 30))
         self.gestioneTestButton.setObjectName("gestioneTestButton")
-        self.gestioneTestButton.clicked.connect(self.goGestioneTestView)
+        self.gestioneTestButton.clicked.connect(self.goToGestioneTestView)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -66,21 +66,19 @@ class LandingPageAdminView(object):
         self.logOutButton.setText(_translate("MainWindow", "Log Out"))
         self.gestioneTestButton.setText(_translate("MainWindow", "Gestione Test"))
 
-    def goGestioneUtentiView(self):
-        try:
-            self.gestioneUtenti = QtWidgets.QMainWindow()
-            ui = GestioneUtentiView()
-            ui.setupUi(self.gestioneUtenti)
-            self.gestioneUtenti.show()
-            ui.actionVisualizzaListaUtenti()
-        except Exception as errore:
-            print(errore)
-    def goGestioneTestView(self):
-        print('clicked')
+    def goToGestioneUtentiView(self):
+        self.gestioneUtenti = QtWidgets.QMainWindow()
+        ui = GestioneUtentiView()
+        ui.setupUi(self.gestioneUtenti)
+        self.gestioneUtenti.show()
+        ui.actionVisualizzaListaUtenti()
+
+    def goToGestioneTestView(self):
         self.gestioneTest = QtWidgets.QMainWindow()
-        self.ui = GestioneTestView()
-        self.ui.setupUi(self.gestioneTest)
+        ui = GestioneTestView()
+        ui.setupUi(self.gestioneTest)
         self.gestioneTest.show()
+        ui.actionVisualizzaListaTest()
 
     def actionLogOut(self):
         self.controllerAutenticazione = ControllerAutenticazione()

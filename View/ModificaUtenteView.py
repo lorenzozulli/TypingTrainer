@@ -94,4 +94,3 @@ class ModificaUtenteView(object):
             modificaNonOK.setWindowTitle("Errore!")
             modificaNonOK.setText("Modifica non effettuata!")
             modificaNonOK.exec_() 
-

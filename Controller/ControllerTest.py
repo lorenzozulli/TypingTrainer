@@ -12,16 +12,21 @@ class ControllerTest(object):
 
         self.nuovoTest = Test()
         identifierCandidato = len(listaTest)
-        for self.i in listaTest: # TODO: sistemare in quanto cosa succede se è vuota la lista test?
-            try:
-                self.assegnaIdentificatoreUnivoco(identifierCandidato)
-                self.assegnaNomeAppropriato(nome)
-            except Exception as error:
-                print(error)
-                return False
-            
-            self.assegnaContenutoTest(contenuto) 
-            self.nuovoTest.setDataCreazione(date.today())
+        print(len(listaTest))
+        if len(listaTest) != 0:
+            for self.i in listaTest: # TODO: sistemare in quanto cosa succede se è vuota la lista test?
+                try:
+                    self.assegnaIdentificatoreUnivoco(identifierCandidato)
+                    self.assegnaNomeAppropriato(nome)
+                except Exception as error:
+                    print(error)
+                    return False
+        else:
+            self.nuovoTest.setIdentifier(0)
+            self.nuovoTest.setNome(nome)
+
+        self.assegnaContenutoTest(contenuto) 
+        self.nuovoTest.setDataCreazione(date.today())
             
         listaTest.append(self.nuovoTest)
         controllerPickle.salvaListaTest()

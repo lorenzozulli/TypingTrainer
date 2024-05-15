@@ -109,11 +109,11 @@ class GestioneTestView(object):
             self.tableWidget.setItem(row, 2, dataCreazioneColumn)
 
             bottoneModifica = QtWidgets.QPushButton("Modifica")
-            bottoneModifica.clicked.connect(self.goToModificaTestView(i))
+            bottoneModifica.clicked.connect(lambda: self.goToModificaTestView(i))
             self.tableWidget.setCellWidget(row, 3, bottoneModifica)
 
             bottoneElimina = QtWidgets.QPushButton("Elimina")
-            bottoneElimina.clicked.connect(self.actionEliminaTest(i.identifier))
+            bottoneElimina.clicked.connect(lambda: self.actionEliminaTest(i.identifier))
             self.tableWidget.setCellWidget(row, 4, bottoneElimina)
             row = row+1
 

@@ -102,11 +102,11 @@ class GestioneUtentiView(object):
                 self.tableWidget.setItem(row, 2, dataCreazioneColumn)
 
                 bottoneModifica = QtWidgets.QPushButton("Modifica")
-                bottoneModifica.clicked.connect(self.goToModificaUtenteView(i))
+                bottoneModifica.clicked.connect(lambda: self.goToModificaUtenteView(i))
                 self.tableWidget.setCellWidget(row, 3, bottoneModifica)
 
                 bottoneElimina = QtWidgets.QPushButton("Elimina")
-                bottoneElimina.clicked.connect(self.actionEliminaUtente(i.identifier))
+                bottoneElimina.clicked.connect(lambda: self.actionEliminaUtente(i.identifier))
                 self.tableWidget.setCellWidget(row, 4, bottoneElimina)
             else:
                 dataCreazioneColumn = QtWidgets.QTableWidgetItem(" ")
@@ -124,8 +124,8 @@ class GestioneUtentiView(object):
 
     def goToModificaUtenteView(self, utenteDaModificare):
             self.modificaUtenteView = QtWidgets.QMainWindow()
-            ui = ModificaUtenteView()
-            ui.setupUi(self.modificaUtenteView, utenteDaModificare)
+            self.ui = ModificaUtenteView()
+            self.ui.setupUi(self.modificaUtenteView, utenteDaModificare)
             self.modificaUtenteView.show()
 
     def actionEliminaUtente(self, identifier):

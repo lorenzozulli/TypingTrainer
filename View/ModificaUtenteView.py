@@ -22,15 +22,20 @@ class ModificaUtenteView(object):
         MainWindow.resize(800, 800)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+        
         self.ModificaButton = QtWidgets.QPushButton(self.centralwidget)
         self.ModificaButton.setGeometry(QtCore.QRect(320, 490, 150, 30))
         self.ModificaButton.setObjectName("ModificaButton")
+        self.ModificaButton.clicked.connect(self.actionModificaUtente)
+
         self.UsernameInput = QtWidgets.QLineEdit(self.centralwidget)
         self.UsernameInput.setGeometry(QtCore.QRect(150, 390, 491, 30))
         self.UsernameInput.setObjectName("UsernameInput")
-        self.emailInput = QtWidgets.QLineEdit(self.centralwidget)
-        self.emailInput.setGeometry(QtCore.QRect(150, 440, 491, 30))
-        self.emailInput.setObjectName("emailInput")
+
+        self.EmailInput = QtWidgets.QLineEdit(self.centralwidget)
+        self.EmailInput.setGeometry(QtCore.QRect(150, 440, 491, 30))
+        self.EmailInput.setObjectName("emailInput")
+
         self.label1 = QtWidgets.QLabel(self.centralwidget)
         self.label1.setGeometry(QtCore.QRect(150, 240, 631, 121))
         font = QtGui.QFont()
@@ -50,21 +55,18 @@ class ModificaUtenteView(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.ModificaButton.setText(_translate("MainWindow", "Modifica"))
-        self.UsernameInput.setPlaceholderText(_translate("MainWindow", self.utenteDaModificare.getUsername()))
-        self.UsernameInput.setText(_translate("MainWindow", " "))
-        self.emailInput.setPlaceholderText(_translate("MainWindow", self.utenteDaModificare.getEmail()))
-        self.emailInput.setText(_translate("MainWindow", " "))
+        self.UsernameInput.setText(_translate("MainWindow", self.utenteDaModificare.getUsername()))
+        self.EmailInput.setText(_translate("MainWindow", self.utenteDaModificare.getEmail()))
         self.label1.setText(_translate("MainWindow", "Modifica le credenziali!"))
 
     def actionModificaUtente(self):
         self.controllaCampoUsernameNonVuoto()
-        self.controllaCampoPasswordNonvuoto()
         self.controllaCampoEmailNonVuoto()
 
         self.controllerUtente = ControllerUtente()
-        self.modified = self.controllerUtente.modificaUtente(self.utenteDaModificare.getIdentifier(), self.NomeInput.text(), self.emailInput.text())
+        self.modified = self.controllerUtente.modificaUtente(self.utenteDaModificare.getIdentifier(), self.UsernameInput.text(), self.EmailInput.text())
 
-        self.controllaTestModificatoConSuccesso()
+        self.controllaUtenteModificatoConSuccesso()
     
     def controllaCampoUsernameNonVuoto(self):
         if self.UsernameInput.text() == "":
@@ -75,14 +77,14 @@ class ModificaUtenteView(object):
             return
 
     def controllaCampoEmailNonVuoto(self):
-        if self.emailInput.text() == "":
+        if self.EmailInput.text() == "":
             EmailVuoto = QMessageBox()
             EmailVuoto.setWindowTitle("Errore!")
-            EmailVuoto.setText("Nessuna email inserita!")
+            EmailVuoto.setText("Nessuna Email inserita!")
             EmailVuoto.exec_()
             return
 
-    def controllaTestModificatoConSuccesso(self):
+    def controllaUtenteModificatoConSuccesso(self):
         if self.modified==True:
             modificaOK = QMessageBox()
             modificaOK.setWindowTitle("OK")

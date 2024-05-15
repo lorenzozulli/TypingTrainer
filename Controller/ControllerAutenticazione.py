@@ -9,8 +9,6 @@ from Model.Utente import Utente
 from Controller.ControllerPickle import ControllerPickle
 
 class ControllerAutenticazione(object):
-
-    #--- metodo per effettuare il LogIn nel sistema ---
     def logIn(self, username, password):
         controllerPickle = ControllerPickle()
         controllerPickle.caricaListaUtilizzatori()
@@ -25,7 +23,6 @@ class ControllerAutenticazione(object):
                     return "PasswordErrata", "errore"
         return "UsernameNonTrovato", "errore"
     
-    # --- metodo per effettuare la registrazione nel sistema ---
     def registrazione(self, username, password, email):
         controllerPickle = ControllerPickle() 
         controllerPickle.caricaListaUtilizzatori()
@@ -50,7 +47,7 @@ class ControllerAutenticazione(object):
         listaUtilizzatori.append(self.nuovoUtente)
         controllerPickle.salvaListaUtilizzatori()
         return True
-    # --- INIZIO METODI PER EFFETTUARE LA REGISTRAZIONE ---
+
     def assegnaIdentificatoreUnivoco(self, identifierCandidato):
         if not (identifierCandidato == self.i.identifier): 
             self.nuovoUtente.setIdentifier(identifierCandidato)
@@ -95,9 +92,7 @@ class ControllerAutenticazione(object):
             registrazioneNonOK.setText("La email non contiene il carattere @!")
             registrazioneNonOK.exec_()
             return False
-    # --- --- --- --- --- --- --- --- --- --- --- ---
 
-    # --- metodo per effettuare il recupero della password ---
     def recuperaPassword(self, identifier, nuovaPassword):
         controllerPickle = ControllerPickle()
         controllerPickle.caricaListaUtilizzatori()

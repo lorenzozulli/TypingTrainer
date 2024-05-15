@@ -1,8 +1,5 @@
-'''
-ControllerUtente
-'''
-
 from Controller.ControllerPickle import ControllerPickle
+from Model.Utente import Utente
 from PyQt5.QtWidgets import *
 
 class ControllerUtente(object):
@@ -45,7 +42,8 @@ class ControllerUtente(object):
             
             controllerPickle.salvaListaUtilizzatori()
             return True
-        except Exception:
+        except Exception as error:
+            print(error)
             return False
 
         

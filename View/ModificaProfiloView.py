@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 from Controller.ControllerUtente import ControllerUtente
-
+from Model.Utente import Utente
 
 class ModificaProfiloView(object):
     def setupUi(self, MainWindow, utenteDaModificare):
@@ -21,15 +21,20 @@ class ModificaProfiloView(object):
         MainWindow.resize(800, 800)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.modificaButton = QtWidgets.QPushButton(self.centralwidget)
-        self.modificaButton.setGeometry(QtCore.QRect(320, 490, 150, 30))
-        self.modificaButton.setObjectName("modificaButton")
+
+        self.ModificaButton = QtWidgets.QPushButton(self.centralwidget)
+        self.ModificaButton.setGeometry(QtCore.QRect(320, 490, 150, 30))
+        self.ModificaButton.setObjectName("modificaButton")
+        self.ModificaButton.clicked.connect(self.actionModificaProfilo)
+
         self.UsernameInput = QtWidgets.QLineEdit(self.centralwidget)
         self.UsernameInput.setGeometry(QtCore.QRect(150, 390, 491, 30))
         self.UsernameInput.setObjectName("UsernameInput")
+
         self.PasswordInput = QtWidgets.QLineEdit(self.centralwidget)
         self.PasswordInput.setGeometry(QtCore.QRect(150, 440, 491, 30))
         self.PasswordInput.setObjectName("PasswordInput")
+
         self.label1 = QtWidgets.QLabel(self.centralwidget)
         self.label1.setGeometry(QtCore.QRect(110, 200, 631, 121))
         font = QtGui.QFont()
@@ -37,9 +42,11 @@ class ModificaProfiloView(object):
         self.label1.setFont(font)
         self.label1.setAcceptDrops(False)
         self.label1.setObjectName("label1")
+
         self.EmailInput = QtWidgets.QLineEdit(self.centralwidget)
         self.EmailInput.setGeometry(QtCore.QRect(150, 340, 491, 30))
         self.EmailInput.setObjectName("EmailInput")
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -51,45 +58,47 @@ class ModificaProfiloView(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.modificaButton.setText(_translate("MainWindow", "Modifica"))
+        self.ModificaButton.setText(_translate("MainWindow", "Modifica"))
         self.UsernameInput.setText(_translate("MainWindow", self.utenteDaModificare.getUsername()))
         self.PasswordInput.setText(_translate("MainWindow", self.utenteDaModificare.getPassword()))
         self.label1.setText(_translate("MainWindow", "Modifica le tue credenziali!"))
         self.EmailInput.setText(_translate("MainWindow", self.utenteDaModificare.getEmail()))
 
     def actionModificaProfilo(self):
-        self.controllaCampoUsernameNonVuoto()
-        self.controllaCampoPasswordNonvuoto()
-        self.controllaCampoEmailNonVuoto()
+        try:
+            self.controllaCampoUsernameNonVuoto()
+            self.controllaCampoPasswordNonVuoto()
+            self.controllaCampoEmailNonVuoto()
 
-        self.controllerUtente = ControllerUtente()
-        self.modified = self.controllerUtente.modificaProfilo(self.utenteDaModificare.getIdentifier(), self.NomeInput.text(), self.emailInput.text(), self.PasswordInput.text())
+            self.controllerUtente = ControllerUtente()
+            self.modified = self.controllerUtente.modificaProfilo(self.utenteDaModificare.getIdentifier(), self.UsernameInput.text(), self.EmailInput.text(), self.PasswordInput.text())
 
-        self.controllaUtenteModificatoConSuccesso()
+            self.controllaUtenteModificatoConSuccesso()
+        except Exception as error:
+            print(error)
 
-    # --- METODI DI SUPPORTO ---
     def controllaCampoUsernameNonVuoto(self):
         if self.UsernameInput.text() == "":
-            UsernameVuoto = QMessageBox()
-            UsernameVuoto.setWindowTitle("Errore!")
-            UsernameVuoto.setText("Nessun Username inserito!")
-            UsernameVuoto.exec_()
+            usernameVuoto = QMessageBox()
+            usernameVuoto.setWindowTitle("Errore!")
+            usernameVuoto.setText("Nessun Username inserito!")
+            usernameVuoto.exec_()
             return
 
     def controllaCampoEmailNonVuoto(self):
-        if self.emailInput.text() == "":
-            EmailVuoto = QMessageBox()
-            EmailVuoto.setWindowTitle("Errore!")
-            EmailVuoto.setText("Nessuna email inserita!")
-            EmailVuoto.exec_()
+        if self.EmailInput.text() == "":
+            emailVuoto = QMessageBox()
+            emailVuoto.setWindowTitle("Errore!")
+            emailVuoto.setText("Nessuna Email inserita!")
+            emailVuoto.exec_()
             return
         
     def controllaCampoPasswordNonVuoto(self):
         if self.PasswordInput.text() == "":
-            PasswordVuoto = QMessageBox()
-            PasswordVuoto.setWindowTitle("Errore!")
-            PasswordVuoto.setText("Nessuna password inserita!")
-            PasswordVuoto.exec_()
+            passwordVuoto = QMessageBox()
+            passwordVuoto.setWindowTitle("Errore!")
+            passwordVuoto.setText("Nessuna Password inserita!")
+            passwordVuoto.exec_()
             return
 
     def controllaUtenteModificatoConSuccesso(self):

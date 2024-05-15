@@ -68,17 +68,17 @@ class LandingPageAdminView(object):
 
     def goToGestioneUtentiView(self):
         self.gestioneUtenti = QtWidgets.QMainWindow()
-        ui = GestioneUtentiView()
-        ui.setupUi(self.gestioneUtenti)
+        self.ui = GestioneUtentiView()
+        self.ui.setupUi(self.gestioneUtenti)
         self.gestioneUtenti.show()
-        ui.actionVisualizzaListaUtenti()
+        self.ui.actionVisualizzaListaUtenti()
 
     def goToGestioneTestView(self):
         self.gestioneTest = QtWidgets.QMainWindow()
-        ui = GestioneTestView()
-        ui.setupUi(self.gestioneTest)
+        self.ui = GestioneTestView()
+        self.ui.setupUi(self.gestioneTest)
         self.gestioneTest.show()
-        ui.actionVisualizzaListaTest()
+        self.ui.actionVisualizzaListaTest()
 
     def actionLogOut(self):
         self.controllerAutenticazione = ControllerAutenticazione()

@@ -13,7 +13,6 @@ from PyQt5.QtWidgets import *
 
 from Controller.ControllerUtente import ControllerUtente
 
-
 class ModificaUtenteView(object):
     def setupUi(self, MainWindow, utenteDaModificare):
         self.utenteDaModificare = utenteDaModificare
@@ -67,7 +66,7 @@ class ModificaUtenteView(object):
         self.modified = self.controllerUtente.modificaUtente(self.utenteDaModificare.getIdentifier(), self.UsernameInput.text(), self.EmailInput.text())
 
         self.controllaUtenteModificatoConSuccesso()
-    
+
     def controllaCampoUsernameNonVuoto(self):
         if self.UsernameInput.text() == "":
             UsernameVuoto = QMessageBox()

@@ -48,6 +48,12 @@ class GestioneUtentiView(object):
         self.cercaButton = QtWidgets.QPushButton(self.centralwidget)
         self.cercaButton.setGeometry(QtCore.QRect(380, 170, 75, 30))
         self.cercaButton.setObjectName("cercaButton")
+
+        self.refreshButton = QtWidgets.QPushButton(self.centralwidget)
+        self.refreshButton.setGeometry(QtCore.QRect(650, 170, 75, 30))
+        self.refreshButton.setObjectName("refreshButton")
+        self.refreshButton.clicked.connect(self.aggiornaPagina)
+
         self.searchBarInput = QtWidgets.QLineEdit(self.centralwidget)
         self.searchBarInput.setGeometry(QtCore.QRect(20, 170, 350, 30))
         self.searchBarInput.setObjectName("searchBarInput")
@@ -80,6 +86,16 @@ class GestioneUtentiView(object):
         self.searchBarInput.setText(_translate("MainWindow", ""))
         self.searchBarInput.setPlaceholderText(_translate("MainWindow", "Inserisci ID oppure Nome"))
         self.profiloButton.setText(_translate("MainWindow", "Vai a profilo"))
+        self.refreshButton.setText(_translate("MainWindow", "aggiorna"))
+
+    def aggiornaPagina(self):
+        self.actionVisualizzaListaUtenti()
+
+    def actionVisualizzaListaUtenti(self):
+        try:
+            self.methodVisualizzaListaUtenti()
+        except Exception as e:
+            print(e)
 
     def methodVisualizzaListaUtenti(self):
         controllerPickle = ControllerPickle()
@@ -133,12 +149,6 @@ class GestioneUtentiView(object):
         self.deleted = controllerUtente.eliminaUtente(identifier)
 
         self.controllaUtenteEliminatoConSuccesso()
-        
-    def actionVisualizzaListaUtenti(self):
-        try:
-            self.methodVisualizzaListaUtenti()
-        except Exception as e:
-            print(e)
 
     def controllaUtenteEliminatoConSuccesso(self):
         if self.deleted==True:

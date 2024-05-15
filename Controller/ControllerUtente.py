@@ -42,8 +42,7 @@ class ControllerUtente(object):
             
             controllerPickle.salvaListaUtilizzatori()
             return True
-        except Exception as error:
-            print(error)
+        except Exception:
             return False
 
         

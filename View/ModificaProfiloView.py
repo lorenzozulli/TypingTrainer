@@ -65,17 +65,14 @@ class ModificaProfiloView(object):
         self.EmailInput.setText(_translate("MainWindow", self.utenteDaModificare.getEmail()))
 
     def actionModificaProfilo(self):
-        try:
-            self.controllaCampoUsernameNonVuoto()
-            self.controllaCampoPasswordNonVuoto()
-            self.controllaCampoEmailNonVuoto()
+        self.controllaCampoUsernameNonVuoto()
+        self.controllaCampoPasswordNonVuoto()
+        self.controllaCampoEmailNonVuoto()
 
-            self.controllerUtente = ControllerUtente()
-            self.modified = self.controllerUtente.modificaProfilo(self.utenteDaModificare.getIdentifier(), self.UsernameInput.text(), self.EmailInput.text(), self.PasswordInput.text())
+        self.controllerUtente = ControllerUtente()
+        self.modified = self.controllerUtente.modificaProfilo(self.utenteDaModificare.getIdentifier(), self.UsernameInput.text(), self.EmailInput.text(), self.PasswordInput.text())
 
-            self.controllaUtenteModificatoConSuccesso()
-        except Exception as error:
-            print(error)
+        self.controllaUtenteModificatoConSuccesso()
 
     def controllaCampoUsernameNonVuoto(self):
         if self.UsernameInput.text() == "":

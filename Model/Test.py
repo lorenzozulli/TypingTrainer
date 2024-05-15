@@ -12,7 +12,7 @@ class Test(object):
         return self.contenutoTest
     
     def getDataCreazione(self):
-        return self.dataOraCreazione
+        return self.dataCreazione
     
     def getIdentifier(self):
         return self.identifier

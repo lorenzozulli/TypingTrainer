@@ -12,7 +12,7 @@ class ControllerTest(object):
 
         self.nuovoTest = Test()
         identifierCandidato = len(listaTest)
-        for self.i in listaTest:
+        for self.i in listaTest: # TODO: sistemare in quanto cosa succede se è vuota la lista test?
             try:
                 self.assegnaIdentificatoreUnivoco(identifierCandidato)
                 self.assegnaNomeAppropriato(nome)

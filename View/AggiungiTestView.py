@@ -23,9 +23,11 @@ class AggiungiTestView(object):
         self.AggiungiTestButton.setGeometry(QtCore.QRect(310, 590, 150, 30))
         self.AggiungiTestButton.setObjectName("AggiungiTestButton")
         self.AggiungiTestButton.clicked.connect(self.actionAggiungiTest)
+
         self.NomeTestInput = QtWidgets.QLineEdit(self.centralwidget)
-        self.NomeTestInput.setGeometry(QtCore.QRect(150, 390, 491, 30))
+        self.NomeTestInput.setGeometry(QtCore.QRect(150, 350, 491, 30))
         self.NomeTestInput.setObjectName("UsernameInput")
+
         self.label1 = QtWidgets.QLabel(self.centralwidget)
         self.label1.setGeometry(QtCore.QRect(130, 230, 631, 121))
         font = QtGui.QFont()
@@ -33,9 +35,19 @@ class AggiungiTestView(object):
         self.label1.setFont(font)
         self.label1.setAcceptDrops(False)
         self.label1.setObjectName("label1")
+
+        self.label2 = QtWidgets.QLabel(self.centralwidget)
+        self.label2.setGeometry(QtCore.QRect(135, 365, 631, 121))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label2.setFont(font)
+        self.label2.setAcceptDrops(False)
+        self.label2.setObjectName("label2")
+
         self.plainTextEdit = QtWidgets.QPlainTextEdit(self.centralwidget)
         self.plainTextEdit.setGeometry(QtCore.QRect(150, 440, 491, 131))
         self.plainTextEdit.setObjectName("plainTextEdit")
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -51,8 +63,9 @@ class AggiungiTestView(object):
         self.NomeTestInput.setText(_translate("MainWindow", ""))
         self.NomeTestInput.setPlaceholderText(_translate("MainWindow", "Nome"))
         self.label1.setText(_translate("MainWindow", "Aggiungi il nuovo Test!"))
-        self.plainTextEdit.setPlainText(_translate("MainWindow", " "))
-        self.plainTextEdit.setPlaceholderText(_translate("MainWindow", "Ricordati di separare ogni parola con il carattere ,"))
+        self.plainTextEdit.setPlainText(_translate("MainWindow", ""))
+        self.label2.setText(_translate("MainWindow", "Ricordati di separare ogni parola con il carattere ,"))
+
 
     def actionAggiungiTest(self):
         self.controllaCampoNomeTestNonVuoto()

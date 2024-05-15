@@ -22,7 +22,7 @@ class GestioneTestView(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.aggiungiTestButton = QtWidgets.QPushButton(self.centralwidget)
-        self.aggiungiTestButton.setGeometry(QtCore.QRect(600, 170, 150, 30))
+        self.aggiungiTestButton.setGeometry(QtCore.QRect(600, 120, 150, 30))
         self.aggiungiTestButton.setObjectName("aggiungiTestButton")
         self.aggiungiTestButton.clicked.connect(self.goToAggiungiTestView)
 
@@ -50,6 +50,13 @@ class GestioneTestView(object):
         self.tableWidget.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(4, item)
+        self.tableWidget.setColumnWidth(1,300)
+
+
+        self.refreshButton = QtWidgets.QPushButton(self.centralwidget)
+        self.refreshButton.setGeometry(QtCore.QRect(650, 170, 75, 30))
+        self.refreshButton.setObjectName("refreshButton")
+        self.refreshButton.clicked.connect(self.aggiornaPagina)
     
         self.cercaButton = QtWidgets.QPushButton(self.centralwidget)
         self.cercaButton.setGeometry(QtCore.QRect(380, 170, 75, 30))
@@ -87,6 +94,16 @@ class GestioneTestView(object):
         self.searchBarInput.setText(_translate("MainWindow", ""))
         self.searchBarInput.setPlaceholderText(_translate("MainWindow", "Inserisci ID oppure Nome"))
         self.profiloButton.setText(_translate("MainWindow", "Vai a profilo"))
+        self.refreshButton.setText(_translate("MainWindow", "aggiorna"))
+    
+    def aggiornaPagina(self):
+        self.actionVisualizzaListaTest()
+
+    def actionVisualizzaListaTest(self):
+        try:
+            self.methodVisualizzaListaTest()
+        except Exception as e:
+            print(e)
 
     def methodVisualizzaListaTest(self):
         controllerPickle = ControllerPickle()
@@ -96,7 +113,7 @@ class GestioneTestView(object):
         row = 0
         self.tableWidget.setRowCount(len(listaTest))
         for i in listaTest:
-            identifierColumn = QtWidgets.QTableWidgetItem(str(i.getIdentifier())) 
+            identifierColumn = QtWidgets.QTableWidgetItem(i.getIdentifier()) 
             identifierColumn.setFlags(identifierColumn.flags() ^ QtCore.Qt.ItemIsEditable)
             self.tableWidget.setItem(row, 0, identifierColumn)
 
@@ -145,10 +162,3 @@ class GestioneTestView(object):
         self.ui = AggiungiTestView()
         self.ui.setupUi(self.aggiungiTest)
         self.aggiungiTest.show()
-
-    def actionVisualizzaListaTest(self):
-        try:
-            self.methodVisualizzaListaTest()
-        except Exception as e:
-            print(e)
-     

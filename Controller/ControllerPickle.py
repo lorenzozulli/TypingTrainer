@@ -18,6 +18,10 @@ class ControllerPickle(object):
             admin.loadAdmin()
         if not os.path.isfile(os.path.join('BaseDiDati', 'listaTest.pickle')): 
             test = Test()
+            test.setIdentifier(0)
+            test.setNome("Test1")
+            test.setContenutoTest([])
+            test.setDataCreazione(" ")
             test.loadTest()
         
     def caricaListaUtilizzatori(self):
@@ -29,7 +33,7 @@ class ControllerPickle(object):
             pickle.dump(self.listaUtilizzatori, f, pickle.HIGHEST_PROTOCOL)
 
     def caricaListaTest(self):
-        with open(os.path.join('BaseDiDati', 'listaTest.pickle'), 'rb') as f:
+        with open(os.path.join('BaseDiDati', 'listaTest.pickle'), "rb") as f:
             self.listaTest = pickle.load(f)
 
     def salvaListaTest(self):

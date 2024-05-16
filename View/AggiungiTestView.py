@@ -44,9 +44,9 @@ class AggiungiTestView(object):
         self.label2.setAcceptDrops(False)
         self.label2.setObjectName("label2")
 
-        self.plainTextEdit = QtWidgets.QPlainTextEdit(self.centralwidget)
-        self.plainTextEdit.setGeometry(QtCore.QRect(150, 440, 491, 131))
-        self.plainTextEdit.setObjectName("plainTextEdit")
+        self.contenutoTextInput = QtWidgets.QPlainTextEdit(self.centralwidget)
+        self.contenutoTextInput.setGeometry(QtCore.QRect(150, 440, 491, 131))
+        self.contenutoTextInput.setObjectName("contenutoTextInput")
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -63,7 +63,7 @@ class AggiungiTestView(object):
         self.NomeTestInput.setText(_translate("MainWindow", ""))
         self.NomeTestInput.setPlaceholderText(_translate("MainWindow", "Nome"))
         self.label1.setText(_translate("MainWindow", "Aggiungi il nuovo Test!"))
-        self.plainTextEdit.setPlainText(_translate("MainWindow", ""))
+        self.contenutoTextInput.setPlainText(_translate("MainWindow", ""))
         self.label2.setText(_translate("MainWindow", "Ricordati di separare ogni parola con il carattere ,"))
 
 
@@ -72,7 +72,7 @@ class AggiungiTestView(object):
         self.controllaCampoContenutoTestNonVuoto()
         
         self.controllerTest = ControllerTest()
-        self.added = self.controllerTest.aggiungiTest(self.NomeTestInput.text(), self.plainTextEdit.text())
+        self.added = self.controllerTest.aggiungiTest(self.NomeTestInput.text(), self.contenutoTextInput.text())
 
         self.controllaAggiuntaTestConSuccesso()
         
@@ -84,7 +84,7 @@ class AggiungiTestView(object):
             NomeTestVuoto.exec_()
 
     def controllaCampoContenutoTestNonVuoto(self):
-        if self.plainTextEdit.text() == "":
+        if self.contenutoTextInput.text() == "":
             contenutoTestVuoto = QMessageBox()
             contenutoTestVuoto.setWindowTitle("Errore!")
             contenutoTestVuoto.setText("Nessun contenuto inserito!")

@@ -1,7 +1,7 @@
 from datetime import date
 
-from Model import Test
-from Controller import ControllerPickle
+from Model.Test import Test
+from Controller.ControllerPickle import ControllerPickle
 from PyQt5.QtWidgets import *
 
 class ControllerTest(object):
@@ -12,9 +12,9 @@ class ControllerTest(object):
 
         self.nuovoTest = Test()
         identifierCandidato = len(listaTest)
-        print(len(listaTest))
+
         if len(listaTest) != 0:
-            for self.i in listaTest: # TODO: sistemare in quanto cosa succede se è vuota la lista test?
+            for self.i in listaTest:
                 try:
                     self.assegnaIdentificatoreUnivoco(identifierCandidato)
                     self.assegnaNomeAppropriato(nome)

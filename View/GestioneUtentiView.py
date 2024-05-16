@@ -49,11 +49,6 @@ class GestioneUtentiView(object):
         self.cercaButton.setGeometry(QtCore.QRect(380, 170, 75, 30))
         self.cercaButton.setObjectName("cercaButton")
 
-        self.refreshButton = QtWidgets.QPushButton(self.centralwidget)
-        self.refreshButton.setGeometry(QtCore.QRect(650, 170, 75, 30))
-        self.refreshButton.setObjectName("refreshButton")
-        self.refreshButton.clicked.connect(self.aggiornaPagina)
-
         self.searchBarInput = QtWidgets.QLineEdit(self.centralwidget)
         self.searchBarInput.setGeometry(QtCore.QRect(20, 170, 350, 30))
         self.searchBarInput.setObjectName("searchBarInput")
@@ -86,7 +81,6 @@ class GestioneUtentiView(object):
         self.searchBarInput.setText(_translate("MainWindow", ""))
         self.searchBarInput.setPlaceholderText(_translate("MainWindow", "Inserisci ID oppure Nome"))
         self.profiloButton.setText(_translate("MainWindow", "Vai a profilo"))
-        self.refreshButton.setText(_translate("MainWindow", "aggiorna"))
 
     def aggiornaPagina(self):
         self.actionVisualizzaListaUtenti()
@@ -117,38 +111,41 @@ class GestioneUtentiView(object):
                 dataCreazioneColumn.setFlags(dataCreazioneColumn.flags() ^ QtCore.Qt.ItemIsEditable)
                 self.tableWidget.setItem(row, 2, dataCreazioneColumn)
 
-                bottoneModifica = QtWidgets.QPushButton("Modifica")
-                bottoneModifica.clicked.connect(lambda: self.goToModificaUtenteView(i))
-                self.tableWidget.setCellWidget(row, 3, bottoneModifica)
+                self.bottoneModifica = QtWidgets.QPushButton("Modifica")
+                self.bottoneModifica.clicked.connect(lambda _, user=i: self.goToModificaUtenteView(user))
+                self.tableWidget.setCellWidget(row, 3, self.bottoneModifica)
 
-                bottoneElimina = QtWidgets.QPushButton("Elimina")
-                bottoneElimina.clicked.connect(lambda: self.actionEliminaUtente(i.identifier))
-                self.tableWidget.setCellWidget(row, 4, bottoneElimina)
+                self.bottoneElimina = QtWidgets.QPushButton("Elimina")
+                self.bottoneElimina.clicked.connect(lambda _, user=i: self.actionEliminaUtente(user.getIdentifier()))
+                self.tableWidget.setCellWidget(row, 4, self.bottoneElimina)
             else:
                 dataCreazioneColumn = QtWidgets.QTableWidgetItem(" ")
                 dataCreazioneColumn.setFlags(dataCreazioneColumn.flags() ^ QtCore.Qt.ItemIsEditable)
                 self.tableWidget.setItem(row, 2, dataCreazioneColumn)
 
-                bottoneModifica = QtWidgets.QTableWidgetItem(" ")
-                bottoneModifica.setFlags(bottoneModifica.flags() ^ QtCore.Qt.ItemIsEditable)
-                self.tableWidget.setItem(row, 3, bottoneModifica)
+                self.bottoneModifica = QtWidgets.QTableWidgetItem(" ")
+                self.bottoneModifica.setFlags(self.bottoneModifica.flags() ^ QtCore.Qt.ItemIsEditable)
+                self.tableWidget.setItem(row, 3, self.bottoneModifica)
 
-                bottoneElimina = QtWidgets.QTableWidgetItem(" ")
-                bottoneElimina.setFlags(bottoneElimina.flags() ^ QtCore.Qt.ItemIsEditable)
-                self.tableWidget.setItem(row, 4, bottoneElimina)
+                self.bottoneElimina = QtWidgets.QTableWidgetItem(" ")
+                self.bottoneElimina.setFlags(self.bottoneElimina.flags() ^ QtCore.Qt.ItemIsEditable)
+                self.tableWidget.setItem(row, 4, self.bottoneElimina)
             row = row+1
 
     def goToModificaUtenteView(self, utenteDaModificare):
-            self.modificaUtenteView = QtWidgets.QMainWindow()
-            self.ui = ModificaUtenteView()
-            self.ui.setupUi(self.modificaUtenteView, utenteDaModificare)
-            self.modificaUtenteView.show()
+        self.modificaUtenteView = QtWidgets.QMainWindow()
+        self.ui = ModificaUtenteView()
+        self.ui.setupUi(self.modificaUtenteView, utenteDaModificare)
+        self.modificaUtenteView.show()
+
+        self.ui.ModificaButton.clicked.connect(self.aggiornaPagina)
 
     def actionEliminaUtente(self, identifier):
         controllerUtente = ControllerUtente()
         self.deleted = controllerUtente.eliminaUtente(identifier)
-
         self.controllaUtenteEliminatoConSuccesso()
+
+        self.bottoneElimina.clicked.connect(self.aggiornaPagina)
 
     def controllaUtenteEliminatoConSuccesso(self):
         if self.deleted==True:
@@ -156,8 +153,11 @@ class GestioneUtentiView(object):
             registrazioneOK.setWindowTitle("OK")
             registrazioneOK.setText("Utente eliminato con successo!")
             registrazioneOK.exec_()
+            return
+
         else:
             registrazioneNonOK = QMessageBox()
             registrazioneNonOK.setWindowTitle("Errore!")
             registrazioneNonOK.setText("Utente non eliminato!")
             registrazioneNonOK.exec_()
+            return

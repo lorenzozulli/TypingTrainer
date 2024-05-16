@@ -147,6 +147,7 @@ class GestioneUtentiView(object):
 
         self.bottoneElimina.clicked.connect(self.aggiornaPagina)
 
+
     def controllaUtenteEliminatoConSuccesso(self):
         if self.deleted==True:
             registrazioneOK = QMessageBox()
@@ -154,7 +155,6 @@ class GestioneUtentiView(object):
             registrazioneOK.setText("Utente eliminato con successo!")
             registrazioneOK.exec_()
             return
-
         else:
             registrazioneNonOK = QMessageBox()
             registrazioneNonOK.setWindowTitle("Errore!")

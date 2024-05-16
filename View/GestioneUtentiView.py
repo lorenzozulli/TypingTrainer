@@ -145,7 +145,7 @@ class GestioneUtentiView(object):
         self.deleted = controllerUtente.eliminaUtente(identifier)
         self.controllaUtenteEliminatoConSuccesso()
 
-        self.bottoneElimina.clicked.connect(self.aggiornaPagina)
+        #self.bottoneElimina.clicked.connect(lambda: self.aggiornaPagina) #TODO: sistemare qui
 
 
     def controllaUtenteEliminatoConSuccesso(self):
@@ -154,10 +154,8 @@ class GestioneUtentiView(object):
             registrazioneOK.setWindowTitle("OK")
             registrazioneOK.setText("Utente eliminato con successo!")
             registrazioneOK.exec_()
-            return
         else:
             registrazioneNonOK = QMessageBox()
             registrazioneNonOK.setWindowTitle("Errore!")
             registrazioneNonOK.setText("Utente non eliminato!")
             registrazioneNonOK.exec_()
-            return

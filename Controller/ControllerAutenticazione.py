@@ -24,28 +24,31 @@ class ControllerAutenticazione(object):
         return "UsernameNonTrovato", "errore"
     
     def registrazione(self, username, password, email):
-        controllerPickle = ControllerPickle() 
-        controllerPickle.caricaListaUtilizzatori()
-        listaUtilizzatori = controllerPickle.listaUtilizzatori
+        try:
+            controllerPickle = ControllerPickle() 
+            controllerPickle.caricaListaUtilizzatori()
+            listaUtilizzatori = controllerPickle.listaUtilizzatori
 
-        self.nuovoUtente = Utente()
-        identifierCandidato = len(listaUtilizzatori)
-        for self.i in listaUtilizzatori:
-            try:
-                self.assegnaIdentificatoreUnivoco(identifierCandidato)
-                self.assegnaUsernameAppropriato(username)
-                self.assegnaPasswordAppropriata(password)
-                self.assegnaEmailAppropriata(email)
-            except Exception as error:
-                print(error)
-                return False
-            
-        self.nuovoUtente.setDataCreazione(date.today())
-        self.nuovoUtente.setStatistiche("")
-        self.nuovoUtente.setIsAdmin(False)
+            self.nuovoUtente = Utente()
+            identifierCandidato = len(listaUtilizzatori)
 
-        listaUtilizzatori.append(self.nuovoUtente)
-        controllerPickle.salvaListaUtilizzatori()
+            for self.i in listaUtilizzatori:
+                done = True
+                if done==True:
+                    done = self.assegnaIdentificatoreUnivoco(identifierCandidato)
+                    done = self.assegnaUsernameAppropriato(username)
+                    done = self.assegnaPasswordAppropriata(password)
+                    done = self.assegnaEmailAppropriata(email)
+                else: return False
+
+            self.nuovoUtente.setDataCreazione(date.today())
+            self.nuovoUtente.setStatistiche("")
+            self.nuovoUtente.setIsAdmin(False)
+
+            self.listaUtilizzatori.append(self.nuovoUtente)
+            controllerPickle.salvaListaUtilizzatori()
+        except Exception:
+            return False
         return True
 
     def assegnaIdentificatoreUnivoco(self, identifierCandidato):
@@ -55,19 +58,12 @@ class ControllerAutenticazione(object):
             self.nuovoUtente.setIdentifier(identifierCandidato+1)
     
     def assegnaUsernameAppropriato(self, username):
-        if not (username == self.i.username):
-            if len(username) >= 8:
-                self.nuovoUtente.setUsername(username)
-            else:
-                registrazioneNonOK = QMessageBox()
-                registrazioneNonOK.setWindowTitle("Errore!")
-                registrazioneNonOK.setText("Lunghezza Username minore di 8 caratteri!")
-                registrazioneNonOK.exec_() 
-                return False
+        if not (username == self.i.getUsername()) and len(username) >= 8:
+            self.nuovoUtente.setUsername(username)
         else:
             registrazioneNonOK = QMessageBox()
             registrazioneNonOK.setWindowTitle("Errore!")
-            registrazioneNonOK.setText("Username già esistente!")
+            registrazioneNonOK.setText("Lunghezza Username minore di 8 caratteri \n oppure Username già esistente!")
             registrazioneNonOK.exec_()
             return False
         
@@ -122,7 +118,6 @@ class ControllerAutenticazione(object):
         return True
 
     '''
-     # --- metodo per uscire dal sistema ---
     def logOut():
         #TODO: fare questa funzione
     '''

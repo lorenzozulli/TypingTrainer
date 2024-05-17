@@ -8,7 +8,9 @@ class ControllerUtente(object):
             controllerPickle.caricaListaUtilizzatori()
             listaUtilizzatori = controllerPickle.listaUtilizzatori
 
-            listaUtilizzatori.remove(listaUtilizzatori[identifier])
+            for i in listaUtilizzatori:
+                if identifier == i.getIdentifier():
+                    listaUtilizzatori.remove(i)
 
             controllerPickle.salvaListaUtilizzatori()
             return True
@@ -21,12 +23,16 @@ class ControllerUtente(object):
             controllerPickle.caricaListaUtilizzatori()
             listaUtilizzatori = controllerPickle.listaUtilizzatori
 
-            listaUtilizzatori[identifier].setUsername(nuovoUsername)
-            listaUtilizzatori[identifier].setEmail(nuovaEmail)
+            for i in listaUtilizzatori:
+                if identifier == i.getIdentifier():
+                    i.setUsername(nuovoUsername)
+                    i.setEmail(nuovaEmail)
+
 
             controllerPickle.salvaListaUtilizzatori()
             return True
-        except Exception:
+        except Exception as e:
+            print(e)
             return False
 
     def modificaProfilo(self, identifier, nuovoUsername, nuovaEmail, nuovaPassword):

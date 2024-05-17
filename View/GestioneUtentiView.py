@@ -45,8 +45,8 @@ class GestioneUtentiView(object):
         self.tableWidget.setHorizontalHeaderItem(4, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(5, item)
-        self.tableWidget.setColumnWidth(1, 155)
-        self.tableWidget.setColumnWidth(2, 155)
+        self.tableWidget.setColumnWidth(1, 145)
+        self.tableWidget.setColumnWidth(2, 145)
 
 
         self.cercaButton = QtWidgets.QPushButton(self.centralwidget)
@@ -159,17 +159,16 @@ class GestioneUtentiView(object):
         self.deleted = controllerUtente.eliminaUtente(identifier)
         self.controllaUtenteEliminatoConSuccesso()
 
-        #self.bottoneElimina.clicked.connect(lambda: self.aggiornaPagina) #TODO: sistemare qui
-
-
     def controllaUtenteEliminatoConSuccesso(self):
         if self.deleted==True:
             registrazioneOK = QMessageBox()
             registrazioneOK.setWindowTitle("OK")
             registrazioneOK.setText("Utente eliminato con successo!")
             registrazioneOK.exec_()
+            self.aggiornaPagina()
         else:
             registrazioneNonOK = QMessageBox()
             registrazioneNonOK.setWindowTitle("Errore!")
             registrazioneNonOK.setText("Utente non eliminato!")
             registrazioneNonOK.exec_()
+            self.aggiornaPagina()

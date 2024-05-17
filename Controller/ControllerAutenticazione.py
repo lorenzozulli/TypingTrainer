@@ -33,19 +33,16 @@ class ControllerAutenticazione(object):
             identifierCandidato = len(listaUtilizzatori)
 
             for self.i in listaUtilizzatori:
-                done = True
-                if done==True:
-                    done = self.assegnaIdentificatoreUnivoco(identifierCandidato)
-                    done = self.assegnaUsernameAppropriato(username)
-                    done = self.assegnaPasswordAppropriata(password)
-                    done = self.assegnaEmailAppropriata(email)
-                else: return False
+                self.assegnaIdentificatoreUnivoco(identifierCandidato)
+                self.assegnaUsernameAppropriato(username)
+                self.assegnaPasswordAppropriata(password)
+                self.assegnaEmailAppropriata(email)
 
             self.nuovoUtente.setDataCreazione(date.today())
             self.nuovoUtente.setStatistiche("")
             self.nuovoUtente.setIsAdmin(False)
 
-            self.listaUtilizzatori.append(self.nuovoUtente)
+            listaUtilizzatori.append(self.nuovoUtente)
             controllerPickle.salvaListaUtilizzatori()
         except Exception:
             return False
@@ -65,7 +62,7 @@ class ControllerAutenticazione(object):
             registrazioneNonOK.setWindowTitle("Errore!")
             registrazioneNonOK.setText("Lunghezza Username minore di 8 caratteri \n oppure Username già esistente!")
             registrazioneNonOK.exec_()
-            return False
+            raise Exception
         
     def assegnaPasswordAppropriata(self, password):
         pattern = r'\d'
@@ -77,7 +74,7 @@ class ControllerAutenticazione(object):
             registrazioneNonOK.setWindowTitle("Errore!")
             registrazioneNonOK.setText("La password non contiene almeno un numero che va da 0 a 9!")
             registrazioneNonOK.exec_()
-            return False
+            raise Exception
         
     def assegnaEmailAppropriata(self, email):
         if email.__contains__('@'):
@@ -87,7 +84,7 @@ class ControllerAutenticazione(object):
             registrazioneNonOK.setWindowTitle("Errore!")
             registrazioneNonOK.setText("La email non contiene il carattere @!")
             registrazioneNonOK.exec_()
-            return False
+            raise Exception
 
     def recuperaPassword(self, identifier, nuovaPassword):
         controllerPickle = ControllerPickle()

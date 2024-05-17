@@ -118,13 +118,13 @@ class GestioneTestView(object):
             dataCreazioneColumn.setFlags(dataCreazioneColumn.flags() ^ QtCore.Qt.ItemIsEditable)
             self.tableWidget.setItem(row, 2, dataCreazioneColumn)
 
-            bottoneModifica = QtWidgets.QPushButton("Modifica")
-            bottoneModifica.clicked.connect(lambda _, test=i: self.goToModificaTestView(test))
-            self.tableWidget.setCellWidget(row, 3, bottoneModifica)
+            self.bottoneModifica = QtWidgets.QPushButton("Modifica")
+            self.bottoneModifica.clicked.connect(lambda _, test=i: self.goToModificaTestView(test))
+            self.tableWidget.setCellWidget(row, 3, self.bottoneModifica)
 
-            bottoneElimina = QtWidgets.QPushButton("Elimina")
-            bottoneElimina.clicked.connect(lambda _, test=i: self.actionEliminaTest(test.getIdentifier()))
-            self.tableWidget.setCellWidget(row, 4, bottoneElimina)
+            self.bottoneElimina = QtWidgets.QPushButton("Elimina")
+            self.bottoneElimina.clicked.connect(lambda _, test=i: self.actionEliminaTest(test.getIdentifier()))
+            self.tableWidget.setCellWidget(row, 4, self.bottoneElimina)
             row = row+1
 
     def goToModificaTestView(self, testDaModificare):

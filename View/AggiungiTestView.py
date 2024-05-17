@@ -70,7 +70,7 @@ class AggiungiTestView(object):
     def actionAggiungiTest(self):
         self.controllaCampoNomeTestNonVuoto()
         self.controllaCampoContenutoTestNonVuoto()
-        
+
         self.controllerTest = ControllerTest()
         self.added = self.controllerTest.aggiungiTest(self.NomeTestInput.text(), self.contenutoTextInput.toPlainText())
 
@@ -85,7 +85,7 @@ class AggiungiTestView(object):
             return
 
     def controllaCampoContenutoTestNonVuoto(self):
-        if self.contenutoTextInput.text() == "":
+        if self.contenutoTextInput.toPlainText() == "":
             contenutoTestVuoto = QMessageBox()
             contenutoTestVuoto.setWindowTitle("Errore!")
             contenutoTestVuoto.setText("Nessun contenuto inserito!")

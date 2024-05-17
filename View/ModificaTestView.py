@@ -21,12 +21,15 @@ class ModificaTestView(object):
         MainWindow.resize(800, 800)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+
         self.ModificaButton = QtWidgets.QPushButton(self.centralwidget)
         self.ModificaButton.setGeometry(QtCore.QRect(310, 590, 150, 30))
         self.ModificaButton.setObjectName("ModificaButton")
+
         self.NomeInput = QtWidgets.QLineEdit(self.centralwidget)
         self.NomeInput.setGeometry(QtCore.QRect(150, 390, 491, 30))
         self.NomeInput.setObjectName("NomeInput")
+
         self.label1 = QtWidgets.QLabel(self.centralwidget)
         self.label1.setGeometry(QtCore.QRect(130, 230, 631, 121))
         font = QtGui.QFont()
@@ -34,9 +37,11 @@ class ModificaTestView(object):
         self.label1.setFont(font)
         self.label1.setAcceptDrops(False)
         self.label1.setObjectName("label1")
-        self.plainTextEdit = QtWidgets.QPlainTextEdit(self.centralwidget)
-        self.plainTextEdit.setGeometry(QtCore.QRect(150, 440, 491, 131))
-        self.plainTextEdit.setObjectName("plainTextEdit")
+
+        self.contenutoTextEdit = QtWidgets.QPlainTextEdit(self.centralwidget)
+        self.contenutoTextEdit.setGeometry(QtCore.QRect(150, 440, 491, 131))
+        self.contenutoTextEdit.setObjectName("contenutoTextEdit")
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -51,14 +56,14 @@ class ModificaTestView(object):
         self.ModificaButton.setText(_translate("MainWindow", "Modifica"))
         self.NomeInput.setText(_translate("MainWindow", self.testDaModificare.getNome()))
         self.label1.setText(_translate("MainWindow", "Modifica il test!"))
-        self.plainTextEdit.setText(_translate("MainWindow", self.testDaModificare.getContenutoTest()))
+        self.contenutoTextEdit.setPlainText(_translate("MainWindow", self.testDaModificare.getContenutoTest()))
 
     def actionModificaTest(self):
         self.controllaCampoNomeNonVuoto()
         self.controllaCampoContenutoNonvuoto()
 
         self.controllerTest = ControllerTest()
-        self.modified = self.controllerTest.modificaTest(self.testDaModificare.getidentifier(), self.NomeInput.text(), self.plainTextEdit.text())
+        self.modified = self.controllerTest.modificaTest(self.testDaModificare.getidentifier(), self.NomeInput.text(), self.contenutoTextEdit.toPlainText())
 
         self.controllaTestModificatoConSuccesso()
     
@@ -66,15 +71,15 @@ class ModificaTestView(object):
         if self.NomeInput.text() == "":
             NomeVuoto = QMessageBox()
             NomeVuoto.setWindowTitle("Errore!")
-            NomeVuoto.setText("Nessun Id inserito!")
+            NomeVuoto.setText("Nessun Nome inserito!")
             NomeVuoto.exec_()
             return
 
     def controllaCampoContenutoNonVuoto(self):
-        if self.plainTextEdit.text() == "":
+        if self.contenutoTextEdit.toPlaintext() == "":
             ContenutoVuoto = QMessageBox()
             ContenutoVuoto.setWindowTitle("Errore!")
-            ContenutoVuoto.setText("Nessun contenuto inserito!")
+            ContenutoVuoto.setText("Nessun Contenuto inserito!")
             ContenutoVuoto.exec_()
             return
     

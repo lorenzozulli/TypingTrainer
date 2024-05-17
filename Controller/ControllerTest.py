@@ -23,10 +23,10 @@ class ControllerTest(object):
 
             listaTest.append(self.nuovoTest)
             controllerPickle.salvaListaTest()
+            return True
         except Exception as e:
             print(e)
             return False
-        return True
     
     def assegnaIdentificatoreUnivoco(self, identifierCandidato):
         if not(identifierCandidato == self.i.getIdentifier()):
@@ -46,10 +46,7 @@ class ControllerTest(object):
 
     def assegnaContenutoTest(self, contenuto):
             words = contenuto.split(",")
-            print(type(words))
-            print(words)
-            for i in words:
-                self.nuovoTest.setElemento(words[i], i)
+            self.nuovoTest.setContenutoTest(words)
 
     def eliminaTest(self, identifier):
         try:

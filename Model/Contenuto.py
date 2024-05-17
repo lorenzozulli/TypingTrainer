@@ -1,14 +1,11 @@
-import os
-import pickle
-
 from Model.Test import Test
 
 class Contenuto(Test):
     def __init__(self):
-        self.elemento 
+        self.elementi
 
     def getElemento(self, i):
-        return self.elemento[i]
+        return self.elementi[i]
     
-    def setElemento(self, elemento, i):
-        self.elemento[i] = elemento[i]
+    def setElemento(self, elementi, i):
+        self.elementi[i] = elementi[i]

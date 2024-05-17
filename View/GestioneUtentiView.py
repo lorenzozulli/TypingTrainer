@@ -31,7 +31,7 @@ class GestioneUtentiView(object):
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
         self.tableWidget.setGeometry(QtCore.QRect(20, 210, 731, 561))
         self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(5)
+        self.tableWidget.setColumnCount(6)
         self.tableWidget.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, item)
@@ -43,7 +43,11 @@ class GestioneUtentiView(object):
         self.tableWidget.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(4, item)
-        self.tableWidget.setColumnWidth(1,300)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(5, item)
+        self.tableWidget.setColumnWidth(1, 155)
+        self.tableWidget.setColumnWidth(2, 155)
+
 
         self.cercaButton = QtWidgets.QPushButton(self.centralwidget)
         self.cercaButton.setGeometry(QtCore.QRect(380, 170, 75, 30))
@@ -72,10 +76,12 @@ class GestioneUtentiView(object):
         item = self.tableWidget.horizontalHeaderItem(1)
         item.setText(_translate("MainWindow", "Nome"))
         item = self.tableWidget.horizontalHeaderItem(2)
-        item.setText(_translate("MainWindow", "Data Creazione"))
+        item.setText(_translate("MainWindow", "Email"))
         item = self.tableWidget.horizontalHeaderItem(3)
-        item.setText(_translate("MainWindow", "Modifica"))
+        item.setText(_translate("MainWindow", "Data Creazione"))
         item = self.tableWidget.horizontalHeaderItem(4)
+        item.setText(_translate("MainWindow", "Modifica"))
+        item = self.tableWidget.horizontalHeaderItem(5)
         item.setText(_translate("MainWindow", "Elimina"))
         self.cercaButton.setText(_translate("MainWindow", "Cerca"))
         self.searchBarInput.setText(_translate("MainWindow", ""))
@@ -107,29 +113,37 @@ class GestioneUtentiView(object):
             usernameColumn.setFlags(usernameColumn.flags() ^ QtCore.Qt.ItemIsEditable)
             self.tableWidget.setItem(row, 1, usernameColumn)
             if i.identifier != 0:
+                emailColumn = QtWidgets.QTableWidgetItem(i.getEmail())
+                emailColumn.setFlags(emailColumn.flags() ^ QtCore.Qt.ItemIsEditable)
+                self.tableWidget.setItem(row, 2, emailColumn)
+
                 dataCreazioneColumn = QtWidgets.QTableWidgetItem(str(i.getDataCreazione())) 
                 dataCreazioneColumn.setFlags(dataCreazioneColumn.flags() ^ QtCore.Qt.ItemIsEditable)
-                self.tableWidget.setItem(row, 2, dataCreazioneColumn)
+                self.tableWidget.setItem(row, 3, dataCreazioneColumn)
 
                 self.bottoneModifica = QtWidgets.QPushButton("Modifica")
                 self.bottoneModifica.clicked.connect(lambda _, user=i: self.goToModificaUtenteView(user))
-                self.tableWidget.setCellWidget(row, 3, self.bottoneModifica)
+                self.tableWidget.setCellWidget(row, 4, self.bottoneModifica)
 
                 self.bottoneElimina = QtWidgets.QPushButton("Elimina")
                 self.bottoneElimina.clicked.connect(lambda _, user=i: self.actionEliminaUtente(user.getIdentifier()))
-                self.tableWidget.setCellWidget(row, 4, self.bottoneElimina)
+                self.tableWidget.setCellWidget(row, 5, self.bottoneElimina)
             else:
+                emailColumn = QtWidgets.QTableWidgetItem(" ")
+                emailColumn.setFlags(emailColumn.flags() ^ QtCore.Qt.ItemIsEditable)
+                self.tableWidget.setItem(row, 2, emailColumn)
+
                 dataCreazioneColumn = QtWidgets.QTableWidgetItem(" ")
                 dataCreazioneColumn.setFlags(dataCreazioneColumn.flags() ^ QtCore.Qt.ItemIsEditable)
-                self.tableWidget.setItem(row, 2, dataCreazioneColumn)
+                self.tableWidget.setItem(row, 3, dataCreazioneColumn)
 
                 self.bottoneModifica = QtWidgets.QTableWidgetItem(" ")
                 self.bottoneModifica.setFlags(self.bottoneModifica.flags() ^ QtCore.Qt.ItemIsEditable)
-                self.tableWidget.setItem(row, 3, self.bottoneModifica)
+                self.tableWidget.setItem(row, 4, self.bottoneModifica)
 
                 self.bottoneElimina = QtWidgets.QTableWidgetItem(" ")
                 self.bottoneElimina.setFlags(self.bottoneElimina.flags() ^ QtCore.Qt.ItemIsEditable)
-                self.tableWidget.setItem(row, 4, self.bottoneElimina)
+                self.tableWidget.setItem(row, 5, self.bottoneElimina)
             row = row+1
 
     def goToModificaUtenteView(self, utenteDaModificare):

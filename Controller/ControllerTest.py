@@ -6,72 +6,84 @@ from PyQt5.QtWidgets import *
 
 class ControllerTest(object):
     def aggiungiTest(self, nome, contenuto):
-        controllerPickle = ControllerPickle()
-        controllerPickle.caricaListaTest()
-        listaTest = controllerPickle.listaTest
+        try:
+            controllerPickle = ControllerPickle()
+            controllerPickle.caricaListaTest()
+            listaTest = controllerPickle.listaTest
 
-        self.nuovoTest = Test()
-        identifierCandidato = len(listaTest)
+            self.nuovoTest = Test()
+            identifierCandidato = len(listaTest)
 
-        if len(listaTest) != 0:
             for self.i in listaTest:
-                try:
-                    self.assegnaIdentificatoreUnivoco(identifierCandidato)
-                    self.assegnaNomeAppropriato(nome)
-                except Exception as error:
-                    print(error)
-                    return False
-        else:
-            self.nuovoTest.setIdentifier(0)
-            self.nuovoTest.setNome(nome)
+                self.assegnaIdentificatoreUnivoco(identifierCandidato)
+                self.assegnaNomeAppropriato(nome)
 
-        self.assegnaContenutoTest(contenuto) 
-        self.nuovoTest.setDataCreazione(date.today())
-            
-        listaTest.append(self.nuovoTest)
-        controllerPickle.salvaListaTest()
+            self.assegnaContenutoTest(contenuto) 
+            self.nuovoTest.setDataCreazione(date.today())
+
+            listaTest.append(self.nuovoTest)
+            controllerPickle.salvaListaTest()
+        except Exception as e:
+            print(e)
+            return False
+        return True
     
     def assegnaIdentificatoreUnivoco(self, identifierCandidato):
-        if not(identifierCandidato == self.i.identifier):
+        if not(identifierCandidato == self.i.getIdentifier()):
             self.nuovoTest.setIdentifier(identifierCandidato)
         else:
             self.nuovoTest.setIdentifier(identifierCandidato+1)
     
     def assegnaNomeAppropriato(self, nome):
-        if not (nome == self.i.nome):
+        if not (nome == self.i.getNome()):
             self.nuovoTest.setNome(nome)
         else:
             registrazioneNonOK = QMessageBox()
             registrazioneNonOK.setWindowTitle("Errore!")
             registrazioneNonOK.setText("Nome già esistente!")
             registrazioneNonOK.exec_()
-            return False
-    
-    def assegnaContenutoTest(self, contenuto):
-            self.nuovoTest.setContenutoTest([])
+            raise Exception
 
-            text = contenuto.toPlainText()
-            words = text.split(",")
+    def assegnaContenutoTest(self, contenuto):
+            words = contenuto.split(",")
+            print(type(words))
+            print(words)
             for i in words:
                 self.nuovoTest.setElemento(words[i], i)
 
     def eliminaTest(self, identifier):
-        controllerPickle = ControllerPickle()
-        controllerPickle.caricaListaTest()
+        try:
+            controllerPickle = ControllerPickle()
+            controllerPickle.caricaListaTest()
+            listaTest = controllerPickle.listaTest
 
-        listaTest = controllerPickle.listaTest
-        listaTest.remove(listaTest[identifier])
+            for  i in listaTest:
+                if identifier == i.getIdentifier():
+                    listaTest.remove(i)
 
-        controllerPickle.salvaListaTest()
+            controllerPickle.salvaListaTest()
+            return True
+        except Exception:
+            return False
     
-    def modificaTest(self, nuovoNome, nuovoContenuto):
-        controllerPickle = ControllerPickle()
-        controllerPickle.caricaListaTest()
+    def modificaTest(self, identifier, nuovoNome, nuovoContenuto):
+        try:
+            controllerPickle = ControllerPickle()
+            controllerPickle.caricaListaTest()
 
-        listaTest = controllerPickle.listaTest
+            listaTest = controllerPickle.listaTest
+
+            for i in listaTest:
+                if identifier == i.getIdentifier():
+                    i.setNome(nuovoNome)
+                    i.setContenuto(nuovoContenuto)
+            
+            controllerPickle.salvaListaTest()
+            return True
+        except Exception as e:
+            print(e)
+            return False
         
-        self.testDaModificare.setNome(nuovoNome)
-        self.testDaModificare.setContenuto(nuovoContenuto)
 '''
     def iniziaTest(self):
         #TODO: fare questa funzione

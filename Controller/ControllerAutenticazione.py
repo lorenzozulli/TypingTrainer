@@ -49,7 +49,7 @@ class ControllerAutenticazione(object):
         return True
 
     def assegnaIdentificatoreUnivoco(self, identifierCandidato):
-        if not (identifierCandidato == self.i.identifier): 
+        if not (identifierCandidato == self.i.getIdentifier()): 
             self.nuovoUtente.setIdentifier(identifierCandidato)
         else:
             self.nuovoUtente.setIdentifier(identifierCandidato+1)

@@ -72,7 +72,7 @@ class AggiungiTestView(object):
         self.controllaCampoContenutoTestNonVuoto()
         
         self.controllerTest = ControllerTest()
-        self.added = self.controllerTest.aggiungiTest(self.NomeTestInput.text(), self.contenutoTextInput.text())
+        self.added = self.controllerTest.aggiungiTest(self.NomeTestInput.text(), self.contenutoTextInput.toPlainText())
 
         self.controllaAggiuntaTestConSuccesso()
         
@@ -82,6 +82,7 @@ class AggiungiTestView(object):
             NomeTestVuoto.setWindowTitle("Errore!")
             NomeTestVuoto.setText("Nessun nome inserito!")
             NomeTestVuoto.exec_()
+            return
 
     def controllaCampoContenutoTestNonVuoto(self):
         if self.contenutoTextInput.text() == "":
@@ -89,6 +90,7 @@ class AggiungiTestView(object):
             contenutoTestVuoto.setWindowTitle("Errore!")
             contenutoTestVuoto.setText("Nessun contenuto inserito!")
             contenutoTestVuoto.exec_()
+            return
         
     def controllaAggiuntaTestConSuccesso(self):
         if self.added==True:

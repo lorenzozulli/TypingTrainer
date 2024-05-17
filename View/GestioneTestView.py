@@ -128,10 +128,10 @@ class GestioneTestView(object):
             row = row+1
 
     def goToModificaTestView(self, testDaModificare):
-        self.modificaTest = QtWidgets.QMainWindow()
+        self.modificaTestView = QtWidgets.QMainWindow()
         self.ui = ModificaTestView()
-        self.ui.setupUi(self.modificaTest, testDaModificare)
-        self.modificaTest.show()
+        self.ui.setupUi(self.modificaTestView, testDaModificare)
+        self.modificaTestView.show()
 
         self.ui.ModificaButton.clicked.connect(self.aggiornaPagina)
     
@@ -139,8 +139,6 @@ class GestioneTestView(object):
         controllerTest = ControllerTest()
         self.deleted = controllerTest.eliminaTest(identifier)
         self.controllaTestEliminatoConSuccesso()
-
-        self.bottoneElimina.clicked.connect(self.aggiornaPagina)
         
     def controllaTestEliminatoConSuccesso(self):
         if self.deleted==True:
@@ -148,16 +146,18 @@ class GestioneTestView(object):
             registrazioneOK.setWindowTitle("OK")
             registrazioneOK.setText("Test eliminato con successo!")
             registrazioneOK.exec_()
+            self.aggiornaPagina()
         else:
             registrazioneNonOK = QMessageBox()
             registrazioneNonOK.setWindowTitle("Errore!")
             registrazioneNonOK.setText("Test non eliminato!")
             registrazioneNonOK.exec_()
+            self.aggiornaPagina()
 
     def goToAggiungiTestView(self):
-        self.aggiungiTest = QtWidgets.QMainWindow()
+        self.aggiungiTestView = QtWidgets.QMainWindow()
         self.ui = AggiungiTestView()
-        self.ui.setupUi(self.aggiungiTest)
-        self.aggiungiTest.show()
+        self.ui.setupUi(self.aggiungiTestView)
+        self.aggiungiTestView.show()
 
         self.ui.AggiungiTestButton.clicked.connect(self.aggiornaPagina)

@@ -128,12 +128,15 @@ class GestioneTestView(object):
             row = row+1
 
     def goToModificaTestView(self, testDaModificare):
-        self.modificaTestView = QtWidgets.QMainWindow()
-        self.ui = ModificaTestView()
-        self.ui.setupUi(self.modificaTestView, testDaModificare)
-        self.modificaTestView.show()
+        try:
+            self.modificaTestView = QtWidgets.QMainWindow()
+            self.ui = ModificaTestView()
+            self.ui.setupUi(self.modificaTestView, testDaModificare)
+            self.modificaTestView.show()
 
-        self.ui.ModificaButton.clicked.connect(self.aggiornaPagina)
+            self.ui.ModificaButton.clicked.connect(self.aggiornaPagina)
+        except Exception as e:
+            print(e)
     
     def actionEliminaTest(self, identifier):
         controllerTest = ControllerTest()
@@ -161,3 +164,4 @@ class GestioneTestView(object):
         self.aggiungiTestView.show()
 
         self.ui.AggiungiTestButton.clicked.connect(self.aggiornaPagina)
+

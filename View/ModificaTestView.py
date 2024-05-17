@@ -57,7 +57,7 @@ class ModificaTestView(object):
         self.ModificaButton.setText(_translate("MainWindow", "Modifica"))
         self.NomeInput.setText(_translate("MainWindow", self.testDaModificare.getNome()))
         self.label1.setText(_translate("MainWindow", "Modifica il test!"))
-        self.contenutoTextEdit.setPlainText(_translate("MainWindow", self.testDaModificare.getContenutoTest().toPlainText())) # TODO: come gli passo correttamente una lista?
+        self.contenutoTextEdit.setPlainText(_translate("MainWindow", self.testDaModificare.getContenutoTest()))
 
     def actionModificaTest(self):
         self.controllaCampoNomeNonVuoto()

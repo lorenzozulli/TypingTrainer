@@ -25,6 +25,7 @@ class ModificaTestView(object):
         self.ModificaButton = QtWidgets.QPushButton(self.centralwidget)
         self.ModificaButton.setGeometry(QtCore.QRect(310, 590, 150, 30))
         self.ModificaButton.setObjectName("ModificaButton")
+        self.ModificaButton.clicked.connect(self.actionModificaTest)
 
         self.NomeInput = QtWidgets.QLineEdit(self.centralwidget)
         self.NomeInput.setGeometry(QtCore.QRect(150, 390, 491, 30))
@@ -56,14 +57,14 @@ class ModificaTestView(object):
         self.ModificaButton.setText(_translate("MainWindow", "Modifica"))
         self.NomeInput.setText(_translate("MainWindow", self.testDaModificare.getNome()))
         self.label1.setText(_translate("MainWindow", "Modifica il test!"))
-        self.contenutoTextEdit.setPlainText(_translate("MainWindow", self.testDaModificare.getContenutoTest()))
+        self.contenutoTextEdit.setPlainText(_translate("MainWindow", self.testDaModificare.getContenutoTest().toPlainText())) # TODO: come gli passo correttamente una lista?
 
     def actionModificaTest(self):
         self.controllaCampoNomeNonVuoto()
         self.controllaCampoContenutoNonvuoto()
 
         self.controllerTest = ControllerTest()
-        self.modified = self.controllerTest.modificaTest(self.testDaModificare.getidentifier(), self.NomeInput.text(), self.contenutoTextEdit.toPlainText())
+        self.modified = self.controllerTest.modificaTest(self.testDaModificare.getIdentifier(), self.NomeInput.text(), self.contenutoTextEdit.toPlainText())
 
         self.controllaTestModificatoConSuccesso()
     
@@ -76,7 +77,7 @@ class ModificaTestView(object):
             return
 
     def controllaCampoContenutoNonVuoto(self):
-        if self.contenutoTextEdit.toPlaintext() == "":
+        if self.contenutoTextEdit.toPlainText() == "":
             ContenutoVuoto = QMessageBox()
             ContenutoVuoto.setWindowTitle("Errore!")
             ContenutoVuoto.setText("Nessun Contenuto inserito!")

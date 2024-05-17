@@ -72,8 +72,8 @@ class ControllerTest(object):
 
             for i in listaTest:
                 if identifier == i.getIdentifier():
-                    i.setNome(nuovoNome)
-                    i.setContenuto(nuovoContenuto)
+                    i.assegnaNomeAppropriato(nuovoNome)
+                    i.assegnaContenutoTest(nuovoContenuto)
             
             controllerPickle.salvaListaTest()
             return True

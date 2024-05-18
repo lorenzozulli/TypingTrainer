@@ -1,10 +1,14 @@
+import re
+
+from PyQt5.QtWidgets import *
+
 class Utilizzatore(object):
     def __init__(self):
         self.identifier = ""
         self.password = ""
         self.username = ""
         self.isAdmin: bool
-
+    
     def getIdentifier(self):
         return self.identifier
 
@@ -19,7 +23,7 @@ class Utilizzatore(object):
 
     def setIdentifier(self, identifier):
         self.identifier = identifier
-
+          
     def setPassword(self, password):
         self.password = password
 

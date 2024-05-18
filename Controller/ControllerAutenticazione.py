@@ -55,12 +55,12 @@ class ControllerAutenticazione(object):
             self.nuovoUtente.setIdentifier(identifierCandidato+1)
     
     def assegnaUsernameAppropriato(self, username):
-        if not (username == self.i.getUsername()) and len(username) >= 8:
+        if not (username == self.i.getUsername()) and len(username) >= 8 and len(username) <= 25:
             self.nuovoUtente.setUsername(username)
         else:
             registrazioneNonOK = QMessageBox()
             registrazioneNonOK.setWindowTitle("Errore!")
-            registrazioneNonOK.setText("Lunghezza Username minore di 8 caratteri \n oppure Username già esistente!")
+            registrazioneNonOK.setText("Lunghezza Username minore di 8 caratteri\n oppure maggiore di 25 caratteri \n oppure Username già esistente!")
             registrazioneNonOK.exec_()
             raise Exception
         

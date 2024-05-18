@@ -67,13 +67,12 @@ class ControllerTest(object):
         try:
             controllerPickle = ControllerPickle()
             controllerPickle.caricaListaTest()
-
             listaTest = controllerPickle.listaTest
 
-            for i in listaTest:
-                if identifier == i.getIdentifier():
-                    i.assegnaNomeAppropriato(nuovoNome)
-                    i.assegnaContenutoTest(nuovoContenuto)
+            for self.i in listaTest:
+                if identifier == self.i.getIdentifier():
+                    self.i.assegnaNomeAppropriato(nuovoNome)
+                    self.i.assegnaContenutoTest(nuovoContenuto)
             
             controllerPickle.salvaListaTest()
             return True

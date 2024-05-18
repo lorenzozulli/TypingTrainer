@@ -1,4 +1,5 @@
 from Controller.ControllerPickle import ControllerPickle
+from Controller.ControllerAutenticazione import ControllerAutenticazione
 from PyQt5.QtWidgets import *
 
 class ControllerUtente(object):
@@ -23,10 +24,12 @@ class ControllerUtente(object):
             controllerPickle.caricaListaUtilizzatori()
             listaUtilizzatori = controllerPickle.listaUtilizzatori
 
+            self.controllerAutenticazione = ControllerAutenticazione()
+
             for i in listaUtilizzatori:
                 if identifier == i.getIdentifier():
-                    i.setUsername(nuovoUsername)
-                    i.setEmail(nuovaEmail)
+                    i.username = self.controllerAutenticazione.assegnaUsernameAppropriato(nuovoUsername)
+                    i.email = self.controllerAutenticazione.assegnaEmailAppropriata(nuovaEmail)
 
             controllerPickle.salvaListaUtilizzatori()
             return True

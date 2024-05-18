@@ -28,7 +28,6 @@ class ControllerUtente(object):
                     i.setUsername(nuovoUsername)
                     i.setEmail(nuovaEmail)
 
-
             controllerPickle.salvaListaUtilizzatori()
             return True
         except Exception as e:
@@ -41,9 +40,11 @@ class ControllerUtente(object):
             controllerPickle.caricaListaUtilizzatori()
             listaUtilizzatori = controllerPickle.listaUtilizzatori
 
-            listaUtilizzatori[identifier].setUsername(nuovoUsername)
-            listaUtilizzatori[identifier].setEmail(nuovaEmail)
-            listaUtilizzatori[identifier].setPassword(nuovaPassword)
+            for i in listaUtilizzatori:
+                if identifier == i.getIdentifier():
+                    i.setUsername(nuovoUsername)
+                    i.setEmail(nuovaEmail)
+                    i.setPassword(nuovaPassword)
             
             controllerPickle.salvaListaUtilizzatori()
             return True

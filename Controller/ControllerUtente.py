@@ -23,13 +23,12 @@ class ControllerUtente(object):
             controllerPickle = ControllerPickle()
             controllerPickle.caricaListaUtilizzatori()
             listaUtilizzatori = controllerPickle.listaUtilizzatori
-
-            self.controllerAutenticazione = ControllerAutenticazione()
+            controllerAutenticazione = ControllerAutenticazione()
 
             for i in listaUtilizzatori:
                 if identifier == i.getIdentifier():
-                    i.username = self.controllerAutenticazione.assegnaUsernameAppropriato(nuovoUsername)
-                    i.email = self.controllerAutenticazione.assegnaEmailAppropriata(nuovaEmail)
+                    i.setUsername(controllerAutenticazione.assegnaUsernameAppropriato(nuovoUsername))
+                    i.setEmail(controllerAutenticazione.assegnaEmailAppropriata(nuovaEmail))
 
             controllerPickle.salvaListaUtilizzatori()
             return True
@@ -42,16 +41,18 @@ class ControllerUtente(object):
             controllerPickle = ControllerPickle()
             controllerPickle.caricaListaUtilizzatori()
             listaUtilizzatori = controllerPickle.listaUtilizzatori
+            controllerAutenticazione = ControllerAutenticazione()
 
-            for i in listaUtilizzatori:
-                if identifier == i.getIdentifier():
-                    i.setUsername(nuovoUsername)
-                    i.setEmail(nuovaEmail)
-                    i.setPassword(nuovaPassword)
+            for self.i in listaUtilizzatori:
+                if identifier == self.i.getIdentifier():
+                    self.utenteDaModificare.setUsername(controllerAutenticazione.assegnaUsernameAppropriato(nuovoUsername))
+                    self.utenteDaModificare.setEmail(controllerAutenticazione.assegnaEmailAppropriata(nuovaEmail))
+                    self.utenteDaModificare.setPassword(controllerAutenticazione.assegnaPasswordAppropriata(nuovaPassword))
             
             controllerPickle.salvaListaUtilizzatori()
             return True
-        except Exception:
+        except Exception as e:
+            print(e)
             return False
 
         

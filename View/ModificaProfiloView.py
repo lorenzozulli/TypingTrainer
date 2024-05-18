@@ -11,7 +11,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 from Controller.ControllerUtente import ControllerUtente
-from Model.Utente import Utente
 
 class ModificaProfiloView(object):
     def setupUi(self, MainWindow, utenteDaModificare):

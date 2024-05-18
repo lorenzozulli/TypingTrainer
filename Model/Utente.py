@@ -21,3 +21,6 @@ class Utente(Utilizzatore):
     
     def setEmail(self, email):
         self.email = email
+    
+    def setStatistiche(self, statistiche):
+        self.statistiche = statistiche

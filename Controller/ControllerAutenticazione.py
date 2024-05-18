@@ -29,20 +29,20 @@ class ControllerAutenticazione(object):
             controllerPickle.caricaListaUtilizzatori()
             listaUtilizzatori = controllerPickle.listaUtilizzatori
 
-            self.nuovoUtente = Utente()
+            nuovoUtente = Utente()
             identifierCandidato = len(listaUtilizzatori)
 
             for self.i in listaUtilizzatori:
-                self.assegnaIdentificatoreUnivoco(identifierCandidato)
-                self.assegnaUsernameAppropriato(username)
-                self.assegnaPasswordAppropriata(password)
-                self.assegnaEmailAppropriata(email)
+                nuovoUtente.setIdentifier(self.assegnaIdentificatoreUnivoco(identifierCandidato))
+                nuovoUtente.setUsername(self.assegnaUsernameAppropriato(username))
+                nuovoUtente.setPassword(self.assegnaPasswordAppropriata(password))
+                nuovoUtente.setEmail(self.assegnaEmailAppropriata(email))
 
-            self.nuovoUtente.setDataCreazione(date.today())
-            self.nuovoUtente.setStatistiche("")
-            self.nuovoUtente.setIsAdmin(False)
+            nuovoUtente.setDataCreazione(date.today())
+            nuovoUtente.setStatistiche("")
+            nuovoUtente.setIsAdmin(False)
 
-            listaUtilizzatori.append(self.nuovoUtente)
+            listaUtilizzatori.append(nuovoUtente)
             controllerPickle.salvaListaUtilizzatori()
         except Exception:
             return False
@@ -50,13 +50,13 @@ class ControllerAutenticazione(object):
 
     def assegnaIdentificatoreUnivoco(self, identifierCandidato):
         if not (identifierCandidato == self.i.getIdentifier()): 
-            self.nuovoUtente.setIdentifier(identifierCandidato)
+            return identifierCandidato
         else:
-            self.nuovoUtente.setIdentifier(identifierCandidato+1)
+            return identifierCandidato+1
     
     def assegnaUsernameAppropriato(self, username):
         if not (username == self.i.getUsername()) and len(username) >= 8 and len(username) <= 25:
-            self.nuovoUtente.setUsername(username)
+            return username
         else:
             registrazioneNonOK = QMessageBox()
             registrazioneNonOK.setWindowTitle("Errore!")
@@ -68,7 +68,7 @@ class ControllerAutenticazione(object):
         pattern = r'\d'
 
         if re.search(pattern, password):
-            self.nuovoUtente.setPassword(password)
+            return password
         else:
             registrazioneNonOK = QMessageBox()
             registrazioneNonOK.setWindowTitle("Errore!")
@@ -78,7 +78,7 @@ class ControllerAutenticazione(object):
         
     def assegnaEmailAppropriata(self, email):
         if email.__contains__('@'):
-            self.nuovoUtente.setEmail(email)
+            return email
         else:
             registrazioneNonOK = QMessageBox()
             registrazioneNonOK.setWindowTitle("Errore!")

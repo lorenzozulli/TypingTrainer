@@ -71,9 +71,7 @@ class ControllerTest(object):
 
             for self.i in listaTest:
                 if identifier == self.i.getIdentifier():
-                    if not (nuovoNome == self.i.getUsername()):
-                        self.i.setNome(nuovoNome)
-
+                    self.i.setNome(self.assegnaNomeAppropriato(nuovoNome))
                     self.i.setContenutoTest(self.assegnaContenutoTest(nuovoContenuto))
             
             controllerPickle.salvaListaTest()

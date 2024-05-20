@@ -27,9 +27,7 @@ class ControllerUtente(object):
 
             for controllerAutenticazione.i in listaUtilizzatori:
                 if identifier == controllerAutenticazione.i.getIdentifier():
-                    if not (nuovoUsername == controllerAutenticazione.i.getUsername()):
-                        controllerAutenticazione.i.setUsername(controllerAutenticazione.assegnaUsernameAppropriato(nuovoUsername))
-
+                    controllerAutenticazione.i.setUsername(controllerAutenticazione.assegnaUsernameAppropriato(nuovoUsername))
                     controllerAutenticazione.i.setEmail(controllerAutenticazione.assegnaEmailAppropriata(nuovaEmail))
 
             controllerPickle.salvaListaUtilizzatori()

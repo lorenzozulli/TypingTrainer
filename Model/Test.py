@@ -8,7 +8,7 @@ class Test(object):
         self.identifier = ""
         self.nome = ""
     
-    def getContenutoTest(self): #TODO: come faccio a passargli tutti i campi del contenuto del test?
+    def getContenutoTest(self): 
         stringheConvertite = [str(i) for i in self.contenutoTest]
         return ','.join(stringheConvertite)
     

@@ -112,8 +112,11 @@ class VisualizzaProfiloView(object):
         self.ui.setupUi(self.modificaProfilo, self.currentUtilizzatore)
         self.modificaProfilo.show()
         
-        self.ui.ModificaButton.clicked.connect(self.usernameLabel.setText(str(self.currentUtilizzatore.getUsername())))
-
+        self.ui.ModificaButton.clicked.connect(self.aggiornaPagina)
+        
     def actionLogOut(self):
         self.controllerAutenticazione = ControllerAutenticazione()
         self.controllerAutenticazione.logOut()
+
+    def aggiornaPagina(self):
+        self.usernameLabel.setText(str(self.currentUtilizzatore.getUsername()))

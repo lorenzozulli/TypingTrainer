@@ -11,17 +11,17 @@ class ControllerTest(object):
             controllerPickle.caricaListaTest()
             listaTest = controllerPickle.listaTest
 
-            self.nuovoTest = Test()
+            nuovoTest = Test()
             identifierCandidato = len(listaTest)
 
             for self.i in listaTest:
-                self.assegnaIdentificatoreUnivoco(identifierCandidato)
-                self.assegnaNomeAppropriato(nome)
+                nuovoTest.setIdentifier(self.assegnaIdentificatoreUnivoco(identifierCandidato))
+                nuovoTest.setNome(self.assegnaNomeAppropriato(nome))
 
-            self.assegnaContenutoTest(contenuto) 
-            self.nuovoTest.setDataCreazione(date.today())
+            nuovoTest.setContenutoTest(self.assegnaContenutoTest(contenuto))
+            nuovoTest.setDataCreazione(date.today())
 
-            listaTest.append(self.nuovoTest)
+            listaTest.append(nuovoTest)
             controllerPickle.salvaListaTest()
             return True
         except Exception as e:
@@ -30,13 +30,13 @@ class ControllerTest(object):
     
     def assegnaIdentificatoreUnivoco(self, identifierCandidato):
         if not(identifierCandidato == self.i.getIdentifier()):
-            self.nuovoTest.setIdentifier(identifierCandidato)
+            return identifierCandidato
         else:
-            self.nuovoTest.setIdentifier(identifierCandidato+1)
+            return identifierCandidato+1
     
     def assegnaNomeAppropriato(self, nome):
         if not (nome == self.i.getNome()):
-            self.nuovoTest.setNome(nome)
+            return nome
         else:
             registrazioneNonOK = QMessageBox()
             registrazioneNonOK.setWindowTitle("Errore!")
@@ -46,7 +46,7 @@ class ControllerTest(object):
 
     def assegnaContenutoTest(self, contenuto):
             words = contenuto.split(",")
-            self.nuovoTest.setContenutoTest(words)
+            return words
 
     def eliminaTest(self, identifier):
         try:
@@ -71,8 +71,10 @@ class ControllerTest(object):
 
             for self.i in listaTest:
                 if identifier == self.i.getIdentifier():
-                    self.i.assegnaNomeAppropriato(nuovoNome)
-                    self.i.assegnaContenutoTest(nuovoContenuto)
+                    if not (nuovoNome == self.i.getUsername()):
+                        self.i.setNome(nuovoNome)
+
+                    self.i.setContenutoTest(self.assegnaContenutoTest(nuovoContenuto))
             
             controllerPickle.salvaListaTest()
             return True

@@ -25,10 +25,12 @@ class ControllerUtente(object):
             listaUtilizzatori = controllerPickle.listaUtilizzatori
             controllerAutenticazione = ControllerAutenticazione()
 
-            for i in listaUtilizzatori:
-                if identifier == i.getIdentifier():
-                    i.setUsername(controllerAutenticazione.assegnaUsernameAppropriato(nuovoUsername))
-                    i.setEmail(controllerAutenticazione.assegnaEmailAppropriata(nuovaEmail))
+            for controllerAutenticazione.i in listaUtilizzatori:
+                if identifier == controllerAutenticazione.i.getIdentifier():
+                    if not (nuovoUsername == controllerAutenticazione.i.getUsername()):
+                        controllerAutenticazione.i.setUsername(controllerAutenticazione.assegnaUsernameAppropriato(nuovoUsername))
+
+                    controllerAutenticazione.i.setEmail(controllerAutenticazione.assegnaEmailAppropriata(nuovaEmail))
 
             controllerPickle.salvaListaUtilizzatori()
             return True
@@ -43,11 +45,13 @@ class ControllerUtente(object):
             listaUtilizzatori = controllerPickle.listaUtilizzatori
             controllerAutenticazione = ControllerAutenticazione()
 
-            for self.i in listaUtilizzatori:
-                if identifier == self.i.getIdentifier():
-                    self.utenteDaModificare.setUsername(controllerAutenticazione.assegnaUsernameAppropriato(nuovoUsername))
-                    self.utenteDaModificare.setEmail(controllerAutenticazione.assegnaEmailAppropriata(nuovaEmail))
-                    self.utenteDaModificare.setPassword(controllerAutenticazione.assegnaPasswordAppropriata(nuovaPassword))
+            for controllerAutenticazione.i in listaUtilizzatori:
+                if identifier == controllerAutenticazione.i.getIdentifier():
+                    if not (nuovoUsername == controllerAutenticazione.i.getUsername()):
+                        controllerAutenticazione.i.setUsername(controllerAutenticazione.assegnaUsernameAppropriato(nuovoUsername))
+
+                    controllerAutenticazione.i.setEmail(controllerAutenticazione.assegnaEmailAppropriata(nuovaEmail))
+                    controllerAutenticazione.i.setPassword(controllerAutenticazione.assegnaPasswordAppropriata(nuovaPassword))
             
             controllerPickle.salvaListaUtilizzatori()
             return True

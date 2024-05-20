@@ -53,7 +53,7 @@ class ControllerAutenticazione(object):
             return identifierCandidato
         else:
             return identifierCandidato+1
-    
+        
     def assegnaUsernameAppropriato(self, username):
         if not (username == self.i.getUsername()) and len(username) >= 8 and len(username) <= 25:
             return username

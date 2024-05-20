@@ -27,6 +27,7 @@ class VisualizzaProfiloView(object):
         font.setPointSize(24)
         self.usernameLabel.setFont(font)
         self.usernameLabel.setObjectName("usernameLabel")
+
         self.modificaProfiloButton = QtWidgets.QPushButton(self.centralwidget)
         self.modificaProfiloButton.setGeometry(QtCore.QRect(440, 210, 150, 30))
         self.modificaProfiloButton.setObjectName("modificaProfiloButton")
@@ -103,7 +104,7 @@ class VisualizzaProfiloView(object):
         self.ui = ModificaProfiloView()
         self.ui.setupUi(self.modificaProfilo, self.currentUtilizzatore)
         self.modificaProfilo.show()
-    
+
     def actionLogOut(self):
         self.controllerAutenticazione = ControllerAutenticazione()
         self.controllerAutenticazione.logOut()

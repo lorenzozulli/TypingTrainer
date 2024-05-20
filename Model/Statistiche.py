@@ -1,7 +1,5 @@
-from Model.Utente import Utente
 
-
-class Statistiche(Utente):
+class Statistiche(object):
     def __init__(self):
         self.mediaErroriPerTest = ""
         self.mediaNumeroParolePerMinuto = ""

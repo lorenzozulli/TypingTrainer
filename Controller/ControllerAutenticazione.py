@@ -39,7 +39,12 @@ class ControllerAutenticazione(object):
                 nuovoUtente.setEmail(self.assegnaEmailAppropriata(email))
 
             nuovoUtente.setDataCreazione(date.today())
-            nuovoUtente.setStatistiche("")
+
+            nuovoUtente.setMediaErroriPerTest(0)
+            nuovoUtente.setMediaNumeroParolePerMinuto(0)
+            nuovoUtente.setMediaPrecisionePercentuale(0)
+            nuovoUtente.setTotaleTestEseguiti(0)
+
             nuovoUtente.setIsAdmin(False)
 
             listaUtilizzatori.append(nuovoUtente)

@@ -1,7 +1,8 @@
 from Model.Utilizzatore import Utilizzatore
+from Model.Statistiche import Statistiche
 from PyQt5.QtWidgets import *
 
-class Utente(Utilizzatore):
+class Utente(Utilizzatore, Statistiche):
     def __init__(self):
         self.dataCreazione = ""
         self.email = ""

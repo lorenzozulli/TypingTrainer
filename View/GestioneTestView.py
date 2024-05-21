@@ -106,7 +106,7 @@ class GestioneTestView(object):
         row = 0
         self.tableWidget.setRowCount(len(listaTest))
         for i in listaTest:
-            identifierColumn = QtWidgets.QTableWidgetItem(i.getIdentifier()) 
+            identifierColumn = QtWidgets.QTableWidgetItem(str(i.getIdentifier()))
             identifierColumn.setFlags(identifierColumn.flags() ^ QtCore.Qt.ItemIsEditable)
             self.tableWidget.setItem(row, 0, identifierColumn)
 

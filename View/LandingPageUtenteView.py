@@ -9,8 +9,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from View.VisualizzaProfiloView import VisualizzaProfiloView
-from Model import Utente
-
+from Controller.ControllerPickle import ControllerPickle
 
 class LandingPageUtenteView(object):
     def setupUi(self, MainWindow, currentUtilizzatore):
@@ -98,6 +97,46 @@ class LandingPageUtenteView(object):
         self.ui = VisualizzaProfiloView()
         self.ui.setupUi(self.visualizzaProfilo, self.currentUtilizzatore)
         self.visualizzaProfilo.show()
+
+    def actionVisualizzaListaTest(self):
+        try:
+            self.loadListaTest()
+        except Exception as e:
+            print(e)
+
+    def loadListaTest(self):
+        controllerPickle = ControllerPickle()
+        controllerPickle.caricaListaTest()
+        listaTest = controllerPickle.listaTest
+
+        row = 0
+        self.tableWidget.setRowCount(len(listaTest))
+        for i in listaTest:
+            identifierColumn = QtWidgets.QTableWidgetItem(str(i.getIdentifier()))
+            identifierColumn.setFlags(identifierColumn.flags() ^ QtCore.Qt.ItemIsEditable)
+            self.tableWidget.setItem(row, 0, identifierColumn)
+
+            nomeColumn = QtWidgets.QTableWidgetItem(i.getNome()) 
+            nomeColumn.setFlags(nomeColumn.flags() ^ QtCore.Qt.ItemIsEditable)
+            self.tableWidget.setItem(row, 1, nomeColumn)
+
+            dataCreazioneColumn = QtWidgets.QTableWidgetItem(str(i.getDataCreazione())) 
+            dataCreazioneColumn.setFlags(dataCreazioneColumn.flags() ^ QtCore.Qt.ItemIsEditable)
+            self.tableWidget.setItem(row, 2, dataCreazioneColumn)
+            
+            selezionaColumn = QtWidgets.QCheckBox()
+            selezionaColumn.setFlags(dataCreazioneColumn.flags() ^ QtCore.Qt.ItemIsEditable)
+            self.tableWidget.setItem(row, 3, selezionaColumn)
+
+            numeriColumn = QtWidgets.QCheckBox()
+            numeriColumn.setFlags(dataCreazioneColumn.flags() ^ QtCore.Qt.ItemIsEditable)
+            self.tableWidget.setItem(row, 4, numeriColumn)
+
+            punteggiaturaColumn = QtWidgets.QCheckBox()
+            punteggiaturaColumn.setFlags(dataCreazioneColumn.flags() ^ QtCore.Qt.ItemIsEditable)
+            self.tableWidget.setItem(row, 5, punteggiaturaColumn)
+
+            row = row+1
 
     def goToIniziaTest(self):
         self.iniziaTest = QtWidgets.QMainWindow()

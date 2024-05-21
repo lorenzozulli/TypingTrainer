@@ -119,6 +119,8 @@ class LoginView(object):
                 self.ui = LandingPageUtenteView()
                 self.ui.setupUi(self.authorizedUtente, self.loginResult[1])
                 self.authorizedUtente.show()
+
+                self.LogInButton.clicked.connect(self.ui.actionVisualizzaListaTest)
             case "PasswordErrata":
                 popup = QMessageBox()
                 popup.setText("Password errata")

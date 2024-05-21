@@ -18,19 +18,25 @@ class ControllerUtente(object):
         except Exception:
             return False
     
-    def modificaUtente(self, identifier, nuovoUsername, nuovaEmail):
+    def modificaUtente(self, utenteDaModificare, nuovoUsername, nuovaEmail):
         try:
             controllerPickle = ControllerPickle()
             controllerPickle.caricaListaUtilizzatori()
             listaUtilizzatori = controllerPickle.listaUtilizzatori
             controllerAutenticazione = ControllerAutenticazione()
 
-            for controllerAutenticazione.i in listaUtilizzatori:
-                if identifier == controllerAutenticazione.i.getIdentifier():
-                    if not (nuovoUsername  == controllerAutenticazione.i.getUsername()):
-                        controllerAutenticazione.i.setUsername(controllerAutenticazione.assegnaUsernameAppropriato(nuovoUsername))
+            if any(utente.getUsername() == nuovoUsername for utente in listaUtilizzatori if utente.getUsername() != utenteDaModificare.getUsername()):
+                registrazioneNonOK = QMessageBox()
+                registrazioneNonOK.setWindowTitle("Errore!")
+                registrazioneNonOK.setText("Nome già esistente!")
+                registrazioneNonOK.exec_()
+                raise Exception
 
-                    controllerAutenticazione.i.setEmail(controllerAutenticazione.assegnaEmailAppropriata(nuovaEmail))
+
+            for utente in listaUtilizzatori:
+                if utenteDaModificare.getIdentifier() == utente.getIdentifier():
+                    utente.setUsername(nuovoUsername)
+                    utente.setEmail(controllerAutenticazione.assegnaEmailAppropriata(nuovaEmail))
 
             controllerPickle.salvaListaUtilizzatori()
             return True
@@ -38,21 +44,27 @@ class ControllerUtente(object):
             print(e)
             return False
 
-    def modificaProfilo(self, identifier, nuovoUsername, nuovaEmail, nuovaPassword):
+    def modificaProfilo(self, utenteDaModificare, nuovoUsername, nuovaEmail, nuovaPassword):
         try:
             controllerPickle = ControllerPickle()
             controllerPickle.caricaListaUtilizzatori()
             listaUtilizzatori = controllerPickle.listaUtilizzatori
             controllerAutenticazione = ControllerAutenticazione()
 
-            for controllerAutenticazione.i in listaUtilizzatori:
-                if identifier == controllerAutenticazione.i.getIdentifier():
-                    if not (nuovoUsername == controllerAutenticazione.i.getUsername()):
-                        controllerAutenticazione.i.setUsername(controllerAutenticazione.assegnaUsernameAppropriato(nuovoUsername))
+            if any(utente.getUsername() == nuovoUsername for utente in listaUtilizzatori if utente.getUsername() != utenteDaModificare.getUsername()):
+                registrazioneNonOK = QMessageBox()
+                registrazioneNonOK.setWindowTitle("Errore!")
+                registrazioneNonOK.setText("Nome già esistente!")
+                registrazioneNonOK.exec_()
+                raise Exception
 
-                    controllerAutenticazione.i.setEmail(controllerAutenticazione.assegnaEmailAppropriata(nuovaEmail))
-                    controllerAutenticazione.i.setPassword(controllerAutenticazione.assegnaPasswordAppropriata(nuovaPassword))
-            
+
+            for utente in listaUtilizzatori:
+                if utenteDaModificare.getIdentifier() == utente.getIdentifier():
+                    utente.setUsername(nuovoUsername)
+                    utente.setEmail(controllerAutenticazione.assegnaEmailAppropriata(nuovaEmail))
+                    utente.setPassword(controllerAutenticazione.assegnaPasswordAppropriata(nuovaPassword))
+
             controllerPickle.salvaListaUtilizzatori()
             return True
         except Exception as e:

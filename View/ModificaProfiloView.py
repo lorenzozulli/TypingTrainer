@@ -69,7 +69,7 @@ class ModificaProfiloView(object):
         self.controllaCampoEmailNonVuoto()
 
         self.controllerUtente = ControllerUtente()
-        self.modified = self.controllerUtente.modificaProfilo(self.utenteDaModificare.getIdentifier(), self.UsernameInput.text(), self.EmailInput.text(), self.PasswordInput.text())
+        self.modified = self.controllerUtente.modificaProfilo(self.utenteDaModificare, self.UsernameInput.text(), self.EmailInput.text(), self.PasswordInput.text())
 
         self.controllaUtenteModificatoConSuccesso()
 

@@ -54,7 +54,7 @@ class ControllerTest(object):
             controllerPickle.caricaListaTest()
             listaTest = controllerPickle.listaTest
 
-            for  i in listaTest:
+            for i in listaTest:
                 if identifier == i.getIdentifier():
                     listaTest.remove(i)
 
@@ -63,17 +63,25 @@ class ControllerTest(object):
         except Exception:
             return False
     
-    def modificaTest(self, identifier, nuovoNome, nuovoContenuto):
+    def modificaTest(self, testDaModificare, nuovoNome, nuovoContenuto):
         try:
             controllerPickle = ControllerPickle()
             controllerPickle.caricaListaTest()
             listaTest = controllerPickle.listaTest
 
-            for self.i in listaTest:
-                if identifier == self.i.getIdentifier():
-                    self.i.setNome(self.assegnaNomeAppropriato(nuovoNome))
-                    self.i.setContenutoTest(self.assegnaContenutoTest(nuovoContenuto))
+            if any(test.getNome() == nuovoNome for test in listaTest if test.getNome() != testDaModificare.getNome()):
+                registrazioneNonOK = QMessageBox()
+                registrazioneNonOK.setWindowTitle("Errore!")
+                registrazioneNonOK.setText("Nome già esistente!")
+                registrazioneNonOK.exec_()
+                raise Exception
             
+            for test in listaTest:
+                if testDaModificare.getIdentifier() == test.getIdentifier():
+                    test.setNome(nuovoNome)
+            test.setContenutoTest(self.assegnaContenutoTest(nuovoContenuto))
+
+
             controllerPickle.salvaListaTest()
             return True
         except Exception as e:

@@ -64,7 +64,7 @@ class ModificaTestView(object):
         self.controllaCampoContenutoNonVuoto()
 
         self.controllerTest = ControllerTest()
-        self.modified = self.controllerTest.modificaTest(self.testDaModificare.getIdentifier(), self.NomeInput.text(), self.contenutoTextEdit.toPlainText())
+        self.modified = self.controllerTest.modificaTest(self.testDaModificare, self.NomeInput.text(), self.contenutoTextEdit.toPlainText())
 
         self.controllaTestModificatoConSuccesso()
     

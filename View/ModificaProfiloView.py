@@ -103,6 +103,7 @@ class ModificaProfiloView(object):
             modificaOK.setWindowTitle("OK")
             modificaOK.setText("Modifica effettuata con successo!")
             modificaOK.exec_()
+            
         else:
             modificaNonOK = QMessageBox()
             modificaNonOK.setWindowTitle("Errore!")

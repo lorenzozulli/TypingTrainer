@@ -10,7 +10,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-from Controller import ControllerAutenticazione, ControllerUtente
+from Controller.ControllerAutenticazione import ControllerAutenticazione
+from Controller.ControllerPickle import ControllerPickle
 from View.ModificaProfiloView import ModificaProfiloView
 
 class VisualizzaProfiloView(object):
@@ -117,6 +118,6 @@ class VisualizzaProfiloView(object):
     def actionLogOut(self):
         self.controllerAutenticazione = ControllerAutenticazione()
         self.controllerAutenticazione.logOut()
-
+    
     def aggiornaPagina(self):
-        self.usernameLabel.setText(str(self.currentUtilizzatore.getUsername()))
+        self.usernameLabel.setText(self.currentUtilizzatore.getUsername())

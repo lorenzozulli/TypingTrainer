@@ -61,6 +61,10 @@ class ControllerUtente(object):
 
             for utente in listaUtilizzatori:
                 if utenteDaModificare.getIdentifier() == utente.getIdentifier():
+                    utenteDaModificare.setUsername(nuovoUsername)
+                    utenteDaModificare.setEmail(controllerAutenticazione.assegnaEmailAppropriata(nuovaEmail))
+                    utenteDaModificare.setPassword(controllerAutenticazione.assegnaPasswordAppropriata(nuovaPassword))
+
                     utente.setUsername(nuovoUsername)
                     utente.setEmail(controllerAutenticazione.assegnaEmailAppropriata(nuovaEmail))
                     utente.setPassword(controllerAutenticazione.assegnaPasswordAppropriata(nuovaPassword))

@@ -10,6 +10,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from View.VisualizzaProfiloView import VisualizzaProfiloView
 from Controller.ControllerPickle import ControllerPickle
+from PyQt5.QtCore import *
+
 
 class LandingPageUtenteView(object):
     def setupUi(self, MainWindow, currentUtilizzatore):
@@ -50,12 +52,15 @@ class LandingPageUtenteView(object):
         self.tableWidget.setHorizontalHeaderItem(4, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(5, item)
+
         self.cercaButton = QtWidgets.QPushButton(self.centralwidget)
         self.cercaButton.setGeometry(QtCore.QRect(380, 170, 75, 30))
         self.cercaButton.setObjectName("cercaButton")
+
         self.searchBarInput = QtWidgets.QLineEdit(self.centralwidget)
         self.searchBarInput.setGeometry(QtCore.QRect(20, 170, 350, 30))
         self.searchBarInput.setObjectName("searchBarInput")
+        self.searchBarInput.textChanged.connect(self.searchUtente)
 
         self.profiloButton = QtWidgets.QToolButton(self.centralwidget)
         self.profiloButton.setGeometry(QtCore.QRect(650, 30, 101, 71))
@@ -139,7 +144,11 @@ class LandingPageUtenteView(object):
             row = row+1
 
     def goToIniziaTest(self):
-        self.iniziaTest = QtWidgets.QMainWindow()
-        self.ui = VisualizzaProfiloView()
-        self.ui.setupUi(self.iniziaTest)
-        self.iniziaTest.show()
+        print('clik')
+
+    def searchUtente(self, query):
+        items = self.tableWidget.findItems(query, Qt.MatchContains)
+        if items:
+            item = items[0]
+            self.tableWidget.setCurrentItem(item)
+    

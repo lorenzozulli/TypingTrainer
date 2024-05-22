@@ -9,7 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import * 
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
 from View.AggiungiTestView import AggiungiTestView
 from View.ModificaTestView import ModificaTestView
 from Controller.ControllerPickle import ControllerPickle
@@ -55,12 +56,17 @@ class GestioneTestView(object):
         self.cercaButton = QtWidgets.QPushButton(self.centralwidget)
         self.cercaButton.setGeometry(QtCore.QRect(380, 170, 75, 30))
         self.cercaButton.setObjectName("cercaButton")
+
         self.searchBarInput = QtWidgets.QLineEdit(self.centralwidget)
         self.searchBarInput.setGeometry(QtCore.QRect(20, 170, 350, 30))
         self.searchBarInput.setObjectName("searchBarInput")
+        self.searchBarInput.textChanged.connect(self.searchTest)
+
+
         self.profiloButton = QtWidgets.QToolButton(self.centralwidget)
         self.profiloButton.setGeometry(QtCore.QRect(650, 30, 101, 71))
         self.profiloButton.setObjectName("profiloButton")
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -164,4 +170,12 @@ class GestioneTestView(object):
         self.aggiungiTestView.show()
 
         self.ui.AggiungiTestButton.clicked.connect(self.aggiornaPagina)
+
+    def searchTest(self, query):
+        items = self.tableWidget.findItems(query, Qt.MatchContains)
+        if items:
+            item = items[0]
+            self.tableWidget.setCurrentItem(item)
+
+    
 

@@ -13,6 +13,7 @@ from Controller.ControllerUtente import ControllerUtente
 from Controller.ControllerPickle import ControllerPickle
 from View.ModificaUtenteView import ModificaUtenteView
 from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
 
 class GestioneUtentiView(object):
     def setupUi(self, MainWindow):
@@ -56,9 +57,13 @@ class GestioneUtentiView(object):
         self.searchBarInput = QtWidgets.QLineEdit(self.centralwidget)
         self.searchBarInput.setGeometry(QtCore.QRect(20, 170, 350, 30))
         self.searchBarInput.setObjectName("searchBarInput")
+        self.searchBarInput.textChanged.connect(self.searchUtente)
+
+
         self.profiloButton = QtWidgets.QToolButton(self.centralwidget)
         self.profiloButton.setGeometry(QtCore.QRect(650, 30, 101, 71))
         self.profiloButton.setObjectName("profiloButton")
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -83,9 +88,12 @@ class GestioneUtentiView(object):
         item.setText(_translate("MainWindow", "Modifica"))
         item = self.tableWidget.horizontalHeaderItem(5)
         item.setText(_translate("MainWindow", "Elimina"))
+
         self.cercaButton.setText(_translate("MainWindow", "Cerca"))
+
         self.searchBarInput.setText(_translate("MainWindow", ""))
         self.searchBarInput.setPlaceholderText(_translate("MainWindow", "Inserisci ID oppure Nome"))
+
         self.profiloButton.setText(_translate("MainWindow", "Vai a profilo"))
 
     def aggiornaPagina(self):
@@ -172,3 +180,9 @@ class GestioneUtentiView(object):
             registrazioneNonOK.setText("Utente non eliminato!")
             registrazioneNonOK.exec_()
             self.aggiornaPagina()
+    
+    def searchUtente(self, query):
+        items = self.tableWidget.findItems(query, Qt.MatchContains)
+        if items:
+            item = items[0]
+            self.tableWidget.setCurrentItem(item)

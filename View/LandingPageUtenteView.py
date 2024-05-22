@@ -129,16 +129,13 @@ class LandingPageUtenteView(object):
             dataCreazioneColumn.setFlags(dataCreazioneColumn.flags() ^ QtCore.Qt.ItemIsEditable)
             self.tableWidget.setItem(row, 2, dataCreazioneColumn)
             
-            selezionaColumn = QtWidgets.QCheckBox()
-            selezionaColumn.setFlags(dataCreazioneColumn.flags() ^ QtCore.Qt.ItemIsEditable)
+            selezionaColumn = QtWidgets.QCheckBox("")
             self.tableWidget.setItem(row, 3, selezionaColumn)
 
-            numeriColumn = QtWidgets.QCheckBox()
-            numeriColumn.setFlags(dataCreazioneColumn.flags() ^ QtCore.Qt.ItemIsEditable)
+            numeriColumn = QtWidgets.QCheckBox("")
             self.tableWidget.setItem(row, 4, numeriColumn)
 
-            punteggiaturaColumn = QtWidgets.QCheckBox()
-            punteggiaturaColumn.setFlags(dataCreazioneColumn.flags() ^ QtCore.Qt.ItemIsEditable)
+            punteggiaturaColumn = QtWidgets.QCheckBox("")
             self.tableWidget.setItem(row, 5, punteggiaturaColumn)
 
             row = row+1

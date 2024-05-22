@@ -5,6 +5,8 @@ import pickle
 from Model.Admin import Admin
 from Model.Test import Test
 
+from datetime import date
+
 class ControllerPickle(object):
     # Serve questo costruttore in quanto, se non esistono i file di listaUtilizzatori e/o listaTest,
     # vengono creati automaticamente dal sistema
@@ -12,16 +14,16 @@ class ControllerPickle(object):
         if not os.path.isfile(os.path.join('BaseDiDati', 'listaUtilizzatori.pickle')): 
             admin = Admin()
             admin.setIdentifier(0)
-            admin.setUsername("Admin")
-            admin.setPassword("Admin")
+            admin.setUsername("Administrator")
+            admin.setPassword("Administrator00")
             admin.setIsAdmin(True)
             admin.loadAdmin()
         if not os.path.isfile(os.path.join('BaseDiDati', 'listaTest.pickle')): 
             test = Test()
             test.setIdentifier(0)
             test.setNome("Test1")
-            test.setContenutoTest([])
-            test.setDataCreazione(" ")
+            test.setContenutoTest([test])
+            test.setDataCreazione(date.today())
             test.loadTest()
         
     def caricaListaUtilizzatori(self):

@@ -33,10 +33,11 @@ class ControllerAutenticazione(object):
             identifierCandidato = len(listaUtilizzatori)
 
             for self.i in listaUtilizzatori:
-                nuovoUtente.setIdentifier(self.assegnaIdentificatoreUnivoco(identifierCandidato))
-                nuovoUtente.setUsername(self.assegnaUsernameAppropriato(username))
-                nuovoUtente.setPassword(self.assegnaPasswordAppropriata(password))
-                nuovoUtente.setEmail(self.assegnaEmailAppropriata(email))
+                nuovoUtente.setIdentifier(self.controllaIdentificatoreUnivoco(identifierCandidato))
+                if self.controllaUsernameUnivoco(username) == True:
+                    nuovoUtente.setUsername(username)
+                nuovoUtente.setPassword(password)
+                nuovoUtente.setEmail(email)
 
             nuovoUtente.setDataCreazione(date.today())
 
@@ -53,60 +54,30 @@ class ControllerAutenticazione(object):
             return False
         return True
 
-    def assegnaIdentificatoreUnivoco(self, identifierCandidato):
+    def controllaIdentificatoreUnivoco(self, identifierCandidato):
         if not (identifierCandidato == self.i.getIdentifier()): 
             return identifierCandidato
         else:
             return identifierCandidato+1
         
-    def assegnaUsernameAppropriato(self, username):
-        if not (username == self.i.getUsername()) and len(username) >= 8 and len(username) <= 25:
-            return username
+    def controllaUsernameUnivoco(self, username):
+        if not (username == self.i.getUsername()):
+            return True
         else:
             registrazioneNonOK = QMessageBox()
             registrazioneNonOK.setWindowTitle("Errore!")
-            registrazioneNonOK.setText("Lunghezza Username minore di 8 caratteri\n oppure maggiore di 25 caratteri \n oppure Username già esistente!")
+            registrazioneNonOK.setText("Username già esistente!")
             registrazioneNonOK.exec_()
             raise Exception
         
-    def assegnaPasswordAppropriata(self, password):
-        pattern = r'\d'
-
-        if re.search(pattern, password):
-            return password
-        else:
-            registrazioneNonOK = QMessageBox()
-            registrazioneNonOK.setWindowTitle("Errore!")
-            registrazioneNonOK.setText("La password non contiene almeno un numero che va da 0 a 9!")
-            registrazioneNonOK.exec_()
-            raise Exception
-        
-    def assegnaEmailAppropriata(self, email):
-        if email.__contains__('@'):
-            return email
-        else:
-            registrazioneNonOK = QMessageBox()
-            registrazioneNonOK.setWindowTitle("Errore!")
-            registrazioneNonOK.setText("La email non contiene il carattere @!")
-            registrazioneNonOK.exec_()
-            raise Exception
-
     def recuperaPassword(self, identifier, nuovaPassword):
         controllerPickle = ControllerPickle()
         controllerPickle.caricaListaUtilizzatori()
         listaUtilizzatori = controllerPickle.listaUtilizzatori
 
         for i in listaUtilizzatori:
-            if identifier == i.identifier:
-                pattern = r'\d'
-                if re.search(pattern, nuovaPassword):
-                    i.password = nuovaPassword
-                    break
-                else:
-                    registrazioneNonOK = QMessageBox()
-                    registrazioneNonOK.setWindowTitle("Errore!")
-                    registrazioneNonOK.setText("La password non contiene almeno un numero che va da 0 a 9!")
-                    registrazioneNonOK.exec_()
+            if identifier == i.getIdentifier():
+                i.setPassword(nuovaPassword)
             else:
                 continue
             registrazioneNonOK = QMessageBox()

@@ -23,25 +23,17 @@ class ControllerUtente(object):
             controllerPickle = ControllerPickle()
             controllerPickle.caricaListaUtilizzatori()
             listaUtilizzatori = controllerPickle.listaUtilizzatori
-            controllerAutenticazione = ControllerAutenticazione()
 
-            if any(utente.getUsername() == nuovoUsername for utente in listaUtilizzatori if utente.getUsername() != utenteDaModificare.getUsername()):
-                registrazioneNonOK = QMessageBox()
-                registrazioneNonOK.setWindowTitle("Errore!")
-                registrazioneNonOK.setText("Nome già esistente!")
-                registrazioneNonOK.exec_()
-                raise Exception
-
+            self.controllaUsernameModificabile(nuovoUsername, listaUtilizzatori, utenteDaModificare)
 
             for utente in listaUtilizzatori:
                 if utenteDaModificare.getIdentifier() == utente.getIdentifier():
                     utente.setUsername(nuovoUsername)
-                    utente.setEmail(controllerAutenticazione.assegnaEmailAppropriata(nuovaEmail))
+                    utente.setEmail(nuovaEmail)
 
             controllerPickle.salvaListaUtilizzatori()
             return True
-        except Exception as e:
-            print(e)
+        except Exception:
             return False
 
     def modificaProfilo(self, utenteDaModificare, nuovoUsername, nuovaEmail, nuovaPassword):
@@ -49,30 +41,31 @@ class ControllerUtente(object):
             controllerPickle = ControllerPickle()
             controllerPickle.caricaListaUtilizzatori()
             listaUtilizzatori = controllerPickle.listaUtilizzatori
-            controllerAutenticazione = ControllerAutenticazione()
 
-            if any(utente.getUsername() == nuovoUsername for utente in listaUtilizzatori if utente.getUsername() != utenteDaModificare.getUsername()):
-                registrazioneNonOK = QMessageBox()
-                registrazioneNonOK.setWindowTitle("Errore!")
-                registrazioneNonOK.setText("Nome già esistente!")
-                registrazioneNonOK.exec_()
-                raise Exception
-
+            self.controllaUsernameModificabile(nuovoUsername, listaUtilizzatori, utenteDaModificare)
 
             for utente in listaUtilizzatori:
                 if utenteDaModificare.getIdentifier() == utente.getIdentifier():
-                    utenteDaModificare.setUsername(nuovoUsername)
-                    utenteDaModificare.setEmail(controllerAutenticazione.assegnaEmailAppropriata(nuovaEmail))
-                    utenteDaModificare.setPassword(controllerAutenticazione.assegnaPasswordAppropriata(nuovaPassword))
-
                     utente.setUsername(nuovoUsername)
-                    utente.setEmail(controllerAutenticazione.assegnaEmailAppropriata(nuovaEmail))
-                    utente.setPassword(controllerAutenticazione.assegnaPasswordAppropriata(nuovaPassword))
+                    utente.setEmail(nuovaEmail)
+                    utente.setPassword(nuovaPassword)
+
+                    utenteDaModificare.setUsername(nuovoUsername)
+                    utenteDaModificare.setEmail(nuovaEmail)
+                    utenteDaModificare.setPassword(nuovaPassword)
+
 
             controllerPickle.salvaListaUtilizzatori()
             return True
-        except Exception as e:
-            print(e)
+        except Exception:
             return False
+        
+    def controllaUsernameModificabile(self, nuovoUsername, listaUtilizzatori, utenteDaModificare):
+        if any(utente.getUsername() == nuovoUsername for utente in listaUtilizzatori if utente.getUsername() != utenteDaModificare.getUsername()):
+            registrazioneNonOK = QMessageBox()
+            registrazioneNonOK.setWindowTitle("Errore!")
+            registrazioneNonOK.setText("Nome già esistente!")
+            registrazioneNonOK.exec_()
+            raise Exception
 
         

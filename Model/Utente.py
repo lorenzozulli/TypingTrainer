@@ -21,7 +21,14 @@ class Utente(Utilizzatore, Statistiche):
         self.dataCreazione = dataCreazione
     
     def setEmail(self, email):
-        self.email = email
+        if email.__contains__('@'):
+            self.email = email
+        else:
+            registrazioneNonOK = QMessageBox()
+            registrazioneNonOK.setWindowTitle("Errore!")
+            registrazioneNonOK.setText("La email non contiene il carattere @!")
+            registrazioneNonOK.exec_()
+            raise Exception
     
     def setStatistiche(self, statistiche):
         self.statistiche = statistiche

@@ -15,8 +15,8 @@ class ControllerTest(object):
             identifierCandidato = len(listaTest)
 
             for self.i in listaTest:
-                nuovoTest.setIdentifier(self.assegnaIdentificatoreUnivoco(identifierCandidato))
-                nuovoTest.setNome(self.assegnaNomeAppropriato(nome))
+                nuovoTest.setIdentifier(self.controllaIdentificatoreUnivoco(identifierCandidato))
+                nuovoTest.setNome(self.controllaNomeUnivoco(nome))
 
             nuovoTest.setContenutoTest(self.assegnaContenutoTest(contenuto))
             nuovoTest.setDataCreazione(date.today())
@@ -28,13 +28,13 @@ class ControllerTest(object):
             print(e)
             return False
     
-    def assegnaIdentificatoreUnivoco(self, identifierCandidato):
+    def controllaIdentificatoreUnivoco(self, identifierCandidato):
         if not(identifierCandidato == self.i.getIdentifier()):
             return identifierCandidato
         else:
             return identifierCandidato+1
     
-    def assegnaNomeAppropriato(self, nome):
+    def controllaNomeUnivoco(self, nome):
         if not (nome == self.i.getNome()):
             return nome
         else:
@@ -69,24 +69,27 @@ class ControllerTest(object):
             controllerPickle.caricaListaTest()
             listaTest = controllerPickle.listaTest
 
-            if any(test.getNome() == nuovoNome for test in listaTest if test.getNome() != testDaModificare.getNome()):
-                registrazioneNonOK = QMessageBox()
-                registrazioneNonOK.setWindowTitle("Errore!")
-                registrazioneNonOK.setText("Nome già esistente!")
-                registrazioneNonOK.exec_()
-                raise Exception
+            self.controllaNomeTestModificabile(nuovoNome, listaTest, testDaModificare)
             
             for test in listaTest:
                 if testDaModificare.getIdentifier() == test.getIdentifier():
                     test.setNome(nuovoNome)
             test.setContenutoTest(self.assegnaContenutoTest(nuovoContenuto))
 
-
             controllerPickle.salvaListaTest()
             return True
         except Exception as e:
             print(e)
             return False
+        
+    def controllaNomeTestModificabile(self, nuovoNome, listaTest, testDaModificare):
+        if any(test.getNome() == nuovoNome for test in listaTest if test.getNome() != testDaModificare.getNome()):
+            registrazioneNonOK = QMessageBox()
+            registrazioneNonOK.setWindowTitle("Errore!")
+            registrazioneNonOK.setText("Nome già esistente!")
+            registrazioneNonOK.exec_()
+            raise Exception
+
         
 '''
     def iniziaTest(self):

@@ -11,7 +11,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 from Controller.ControllerAutenticazione import ControllerAutenticazione
-from Controller.ControllerPickle import ControllerPickle
 from View.ModificaProfiloView import ModificaProfiloView
 
 class VisualizzaProfiloView(object):

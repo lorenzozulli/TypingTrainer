@@ -90,11 +90,15 @@ class ControllerTest(object):
             registrazioneNonOK.exec_()
             raise Exception
 
-        
-'''
     def iniziaTest(self):
-        #TODO: fare questa funzione
-    
+        print('ciao')
+
+    def renderTest(self, testSelezionato):
+        print('ciao')
+
+
+
+    '''
     def interrompiTest(self):
         #TODO: fare questa funzione
     '''

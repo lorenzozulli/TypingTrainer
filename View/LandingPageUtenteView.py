@@ -9,6 +9,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from View.VisualizzaProfiloView import VisualizzaProfiloView
+from View.IniziaTestView import IniziaTestView
 from Controller.ControllerPickle import ControllerPickle
 from PyQt5.QtCore import *
 
@@ -24,7 +25,7 @@ class LandingPageUtenteView(object):
         self.IniziaTestButton = QtWidgets.QPushButton(self.centralwidget)
         self.IniziaTestButton.setGeometry(QtCore.QRect(320, 730, 150, 30))
         self.IniziaTestButton.setObjectName("IniziaTestButton")
-        self.IniziaTestButton.clicked.connect(self.goToIniziaTest)
+        self.IniziaTestButton.clicked.connect(self.goToIniziaTestView)
 
         self.label1 = QtWidgets.QLabel(self.centralwidget)
         self.label1.setGeometry(QtCore.QRect(0, 10, 351, 121))
@@ -60,7 +61,7 @@ class LandingPageUtenteView(object):
         self.searchBarInput = QtWidgets.QLineEdit(self.centralwidget)
         self.searchBarInput.setGeometry(QtCore.QRect(20, 170, 350, 30))
         self.searchBarInput.setObjectName("searchBarInput")
-        self.searchBarInput.textChanged.connect(self.searchUtente)
+        self.searchBarInput.textChanged.connect(self.searchTest)
 
         self.profiloButton = QtWidgets.QToolButton(self.centralwidget)
         self.profiloButton.setGeometry(QtCore.QRect(650, 30, 101, 71))
@@ -129,23 +130,45 @@ class LandingPageUtenteView(object):
             dataCreazioneColumn.setFlags(dataCreazioneColumn.flags() ^ QtCore.Qt.ItemIsEditable)
             self.tableWidget.setItem(row, 2, dataCreazioneColumn)
             
-            selezionaColumn = QtWidgets.QCheckBox("")
+            selezionaColumn = QtWidgets.QTableWidgetItem()
+            selezionaColumn.setFlags(Qt.ItemFlag.ItemIsUserCheckable | Qt.ItemFlag.ItemIsEnabled)
+            selezionaColumn.setCheckState(Qt.CheckState.Unchecked)
             self.tableWidget.setItem(row, 3, selezionaColumn)
 
-            numeriColumn = QtWidgets.QCheckBox("")
+            numeriColumn = QtWidgets.QTableWidgetItem()
+            numeriColumn.setFlags(Qt.ItemFlag.ItemIsUserCheckable | Qt.ItemFlag.ItemIsEnabled)
+            numeriColumn.setCheckState(Qt.CheckState.Unchecked)
             self.tableWidget.setItem(row, 4, numeriColumn)
 
-            punteggiaturaColumn = QtWidgets.QCheckBox("")
+            punteggiaturaColumn = QtWidgets.QTableWidgetItem()
+            punteggiaturaColumn.setFlags(Qt.ItemFlag.ItemIsUserCheckable | Qt.ItemFlag.ItemIsEnabled)
+            punteggiaturaColumn.setCheckState(Qt.CheckState.Unchecked)
             self.tableWidget.setItem(row, 5, punteggiaturaColumn)
 
             row = row+1
 
-    def goToIniziaTest(self):
-        print('clik')
+    def goToIniziaTestView(self):
+        self.iniziaTestView = QtWidgets.QMainWindow()
+        self.ui = IniziaTestView()
+        self.retreiveCheckBoxValues()
+        self.ui.setupUi(self.iniziaTestView, self.currentUtilizzatore, self.testSelezionato)
+        self.iniziaTestView.show()
 
-    def searchUtente(self, query):
+        self.ui.actionRenderizzaTest()
+
+
+    def searchTest(self, query):
         items = self.tableWidget.findItems(query, Qt.MatchContains)
         if items:
             item = items[0]
-            self.tableWidget.setCurrentItem(item)
+            self.tableWidget.setCurrentItem(item)  
     
+    def retreiveCheckBoxValues(self):
+        controllerPickle = ControllerPickle()
+        controllerPickle.caricaListaTest()
+        listaTest = controllerPickle.listaTest
+
+        for row in range(self.tableWidget.rowCount()):
+            if self.tableWidget.item(row, 3).checkState == Qt.CheckState.Checked:
+                self.testSelezionato = listaTest[row]
+        

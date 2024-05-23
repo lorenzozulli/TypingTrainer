@@ -9,10 +9,14 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import Qt
 
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
+class IniziaTestView(object):
+    def setupUi(self, MainWindow, currentUtilizzatore, testSelezionato):
+        self.currentUtilizzatore = currentUtilizzatore
+        self.testSelezionato = testSelezionato
+
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 800)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -23,27 +27,32 @@ class Ui_MainWindow(object):
         font.setPointSize(55)
         self.TimerLabel.setFont(font)
         self.TimerLabel.setObjectName("TimerLabel")
+
         self.TestDisplayLabel = QtWidgets.QLabel(self.centralwidget)
         self.TestDisplayLabel.setGeometry(QtCore.QRect(90, 260, 600, 180))
         font = QtGui.QFont()
         font.setPointSize(16)
         self.TestDisplayLabel.setFont(font)
         self.TestDisplayLabel.setObjectName("TestDisplayLabel")
+
         self.WordInputLineEdit = QtWidgets.QLineEdit(self.centralwidget)
         self.WordInputLineEdit.setGeometry(QtCore.QRect(90, 500, 600, 40))
         font = QtGui.QFont()
         font.setPointSize(16)
         self.WordInputLineEdit.setFont(font)
-        self.WordInputLineEdit.setText("")
         self.WordInputLineEdit.setObjectName("WordInputLineEdit")
+        self.WordInputLineEdit.setFocusPolicy(Qt.StrongFocus)
+
         self.PauseButton = QtWidgets.QPushButton(self.centralwidget)
         self.PauseButton.setGeometry(QtCore.QRect(310, 560, 150, 30))
         self.PauseButton.setObjectName("PauseButton")
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
+
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
@@ -55,15 +64,10 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.TimerLabel.setText(_translate("MainWindow", "Timer"))
-        self.TestDisplayLabel.setText(_translate("MainWindow", "Test"))
+        self.TestDisplayLabel.setText(_translate("MainWindow", str(self.testSelezionato)))
         self.PauseButton.setText(_translate("MainWindow", "Pausa/Riprendi"))
+        self.WordInputLineEdit.setPlaceholderText(_translate("MainWindow", "Inizia a scrivere per avviare il test!"))
 
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
+    def actionRenderizzaTest(self):
+        controllerTest = controllerTest()
+        controllerTest.renderTest(self.testSelezionato)

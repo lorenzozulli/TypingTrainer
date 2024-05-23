@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'VisualizzaStatisticheView.ui'
+# Form implementation generated from reading ui file '.\visualizzaStatistiche.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -17,30 +17,42 @@ class VisualizzaStatisticheView(object):
         MainWindow.resize(800, 800)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.modificaProfiloButton = QtWidgets.QPushButton(self.centralwidget)
-        self.modificaProfiloButton.setGeometry(QtCore.QRect(200, 580, 150, 30))
-        self.modificaProfiloButton.setObjectName("modificaProfiloButton")
-        self.logOutButton = QtWidgets.QPushButton(self.centralwidget)
-        self.logOutButton.setGeometry(QtCore.QRect(420, 580, 150, 30))
-        self.logOutButton.setObjectName("logOutButton")
-        self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(40, 280, 350, 62))
+        self.averageWordsPerMinuteLabel = QtWidgets.QLabel(self.centralwidget)
+        self.averageWordsPerMinuteLabel.setGeometry(QtCore.QRect(40, 220, 600, 70))
         font = QtGui.QFont()
-        font.setPointSize(24)
-        self.label_2.setFont(font)
-        self.label_2.setObjectName("label_2")
-        self.label_3 = QtWidgets.QLabel(self.centralwidget)
-        self.label_3.setGeometry(QtCore.QRect(40, 150, 350, 62))
+        font.setPointSize(20)
+
+        self.averageWordsPerMinuteLabel.setFont(font)
+        self.averageWordsPerMinuteLabel.setObjectName("averageWordsPerMinuteLabel")
+        self.PrecisioneMediaLabel = QtWidgets.QLabel(self.centralwidget)
+        self.PrecisioneMediaLabel.setGeometry(QtCore.QRect(40, 310, 600, 70))
         font = QtGui.QFont()
-        font.setPointSize(24)
-        self.label_3.setFont(font)
-        self.label_3.setObjectName("label_3")
-        self.label_4 = QtWidgets.QLabel(self.centralwidget)
-        self.label_4.setGeometry(QtCore.QRect(40, 420, 350, 62))
+        font.setPointSize(20)
+        self.PrecisioneMediaLabel.setFont(font)
+        self.PrecisioneMediaLabel.setObjectName("PrecisioneMediaLabel")
+
+        self.NumeroErroriLabel = QtWidgets.QLabel(self.centralwidget)
+        self.NumeroErroriLabel.setGeometry(QtCore.QRect(40, 410, 600, 70))
         font = QtGui.QFont()
-        font.setPointSize(24)
-        self.label_4.setFont(font)
-        self.label_4.setObjectName("label_4")
+        font.setPointSize(20)
+        self.NumeroErroriLabel.setFont(font)
+        self.NumeroErroriLabel.setObjectName("NumeroErroriLabel")
+
+        self.Titolo = QtWidgets.QLabel(self.centralwidget)
+        self.Titolo.setGeometry(QtCore.QRect(190, 80, 431, 101))
+        font = QtGui.QFont()
+        font.setPointSize(20)
+        self.Titolo.setFont(font)
+        self.Titolo.setObjectName("Titolo")
+
+        self.RiprovaButton = QtWidgets.QPushButton(self.centralwidget)
+        self.RiprovaButton.setGeometry(QtCore.QRect(130, 520, 150, 30))
+        self.RiprovaButton.setObjectName("RiprovaButton")
+
+        self.TornaAllaHomeButton = QtWidgets.QPushButton(self.centralwidget)
+        self.TornaAllaHomeButton.setGeometry(QtCore.QRect(480, 520, 150, 30))
+        self.TornaAllaHomeButton.setObjectName("TornaAllaHomeButton")
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
@@ -56,8 +68,9 @@ class VisualizzaStatisticheView(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.modificaProfiloButton.setText(_translate("MainWindow", "Riprova"))
-        self.logOutButton.setText(_translate("MainWindow", "Torna alla Home"))
-        self.label_2.setText(_translate("MainWindow", "Precisione Media (%)"))
-        self.label_3.setText(_translate("MainWindow", "Media WPM"))
-        self.label_4.setText(_translate("MainWindow", "N° Errori"))
+        self.averageWordsPerMinuteLabel.setText(_translate("MainWindow", "Parole digitate al minuto (media): "))
+        self.PrecisioneMediaLabel.setText(_translate("MainWindow", "Precisione media: "))
+        self.NumeroErroriLabel.setText(_translate("MainWindow", "Numero errori eseguiti:"))
+        self.Titolo.setText(_translate("MainWindow", "Test completato, congratulazioni!"))
+        self.RiprovaButton.setText(_translate("MainWindow", "Riprova"))
+        self.TornaAllaHomeButton.setText(_translate("MainWindow", "Torna alla home"))

@@ -128,16 +128,12 @@ class LandingPageUtenteView(object):
             row = row+1
 
     def goToIniziaTestView(self, testSelezionato):
-        try:
-            self.iniziaTestView = QtWidgets.QMainWindow()
-            self.ui = IniziaTestView()
-            self.ui.setupUi(self.iniziaTestView, self.currentUtilizzatore, testSelezionato)
-            self.iniziaTestView.show()
+        self.iniziaTestView = QtWidgets.QMainWindow()
+        self.ui = IniziaTestView()
+        self.ui.setupUi(self.iniziaTestView, self.currentUtilizzatore, testSelezionato)
+        self.iniziaTestView.show()
 
-            self.ui.actionRenderizzaTest()
-        except Exception as e:
-            print(e)
-
+        self.ui.actionRenderizzaTest()
 
     def searchTest(self, query):
         items = self.tableWidget.findItems(query, Qt.MatchContains)

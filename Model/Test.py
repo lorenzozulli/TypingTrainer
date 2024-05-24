@@ -1,5 +1,6 @@
 import os
 import pickle
+import random
 
 class Test(object):
     def __init__(self):
@@ -37,4 +38,13 @@ class Test(object):
         listaTest = [self]
         with open(os.path.join('BaseDiDati', 'listaTest.pickle'), 'wb') as f:
             pickle.dump(listaTest, f)
+
+    def shuffleTest(self):
+        contenutoTestRandomizzato = self.contenutoTest
+        random.shuffle(contenutoTestRandomizzato)
+        stringheConvertite = [str(i) for i in contenutoTestRandomizzato]
+        return ' '.join(stringheConvertite)
+
+        
+
     

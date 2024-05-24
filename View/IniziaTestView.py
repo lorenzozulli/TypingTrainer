@@ -71,9 +71,4 @@ class IniziaTestView(object):
         self.WordInputLineEdit.setPlaceholderText(_translate("MainWindow", "Inizia a scrivere per avviare il test!"))
 
     def actionRenderizzaTest(self):
-        contenutoTestRandomizzato = self.testSelezionato.contenutoTest
-        random.shuffle(contenutoTestRandomizzato)
-
-        stringheConvertite = [str(i) for i in contenutoTestRandomizzato]
-        
-        self.TestDisplayLabel.setText(' '.join(stringheConvertite))
+        self.TestDisplayLabel.setText(self.testSelezionato.shuffleTest())

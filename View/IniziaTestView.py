@@ -11,6 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt
 
+import random
 
 class IniziaTestView(object):
     def setupUi(self, MainWindow, currentUtilizzatore, testSelezionato):
@@ -34,6 +35,7 @@ class IniziaTestView(object):
         font.setPointSize(16)
         self.TestDisplayLabel.setFont(font)
         self.TestDisplayLabel.setObjectName("TestDisplayLabel")
+        self.TestDisplayLabel.setWordWrap(True)
 
         self.WordInputLineEdit = QtWidgets.QLineEdit(self.centralwidget)
         self.WordInputLineEdit.setGeometry(QtCore.QRect(90, 500, 600, 40))
@@ -64,10 +66,14 @@ class IniziaTestView(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.TimerLabel.setText(_translate("MainWindow", "Timer"))
-        self.TestDisplayLabel.setText(_translate("MainWindow", str(self.testSelezionato)))
+        self.TestDisplayLabel.setText(_translate("MainWindow", ''))
         self.PauseButton.setText(_translate("MainWindow", "Pausa/Riprendi"))
         self.WordInputLineEdit.setPlaceholderText(_translate("MainWindow", "Inizia a scrivere per avviare il test!"))
 
     def actionRenderizzaTest(self):
-        controllerTest = controllerTest()
-        controllerTest.renderTest(self.testSelezionato)
+        contenutoTestRandomizzato = self.testSelezionato.contenutoTest
+        random.shuffle(contenutoTestRandomizzato)
+
+        stringheConvertite = [str(i) for i in contenutoTestRandomizzato]
+        
+        self.TestDisplayLabel.setText(' '.join(stringheConvertite))

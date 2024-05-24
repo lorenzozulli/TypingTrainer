@@ -89,16 +89,3 @@ class ControllerTest(object):
             registrazioneNonOK.setText("Nome già esistente!")
             registrazioneNonOK.exec_()
             raise Exception
-
-    def iniziaTest(self):
-        print('ciao')
-
-    def renderTest(self, testSelezionato):
-        print('ciao')
-
-
-
-    '''
-    def interrompiTest(self):
-        #TODO: fare questa funzione
-    '''

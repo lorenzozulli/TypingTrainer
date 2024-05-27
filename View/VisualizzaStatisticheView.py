@@ -12,7 +12,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class VisualizzaStatisticheView(object):
-    def setupUi(self, MainWindow):
+    def setupUi(self, MainWindow,errorCounter):
+        self.errorCounter = errorCounter
+
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 800)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -70,7 +72,7 @@ class VisualizzaStatisticheView(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.averageWordsPerMinuteLabel.setText(_translate("MainWindow", "Parole digitate al minuto (media): "))
         self.PrecisioneMediaLabel.setText(_translate("MainWindow", "Precisione media: "))
-        self.NumeroErroriLabel.setText(_translate("MainWindow", "Numero errori eseguiti:"))
+        self.NumeroErroriLabel.setText(_translate("MainWindow", f"Numero errori eseguiti: {self.errorCounter}"))
         self.Titolo.setText(_translate("MainWindow", "Test completato, congratulazioni!"))
         self.RiprovaButton.setText(_translate("MainWindow", "Riprova"))
         self.TornaAllaHomeButton.setText(_translate("MainWindow", "Torna alla home"))

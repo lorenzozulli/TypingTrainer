@@ -10,17 +10,19 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt
-from Controller.ControllerTestGame import ControllerTestGame
+from View.VisualizzaStatisticheView import VisualizzaStatisticheView
 
-import random
+import time
+import threading
 
 class IniziaTestView(object):
 
     def setupUi(self, MainWindow, currentUtilizzatore, testSelezionato):
         self.currentUtilizzatore = currentUtilizzatore
         self.testSelezionato = testSelezionato
-
-        controllerTestGame = ControllerTestGame()
+        self.timeCounter = 0
+        self.running = False
+        self.errorCounter = 0
 
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 800)
@@ -48,12 +50,12 @@ class IniziaTestView(object):
         self.WordInputLineEdit.setFont(font)
         self.WordInputLineEdit.setObjectName("WordInputLineEdit")
         self.WordInputLineEdit.setFocusPolicy(Qt.StrongFocus)
-        self.WordInputLineEdit.textChanged.connect(controllerTestGame.start('<KeyPress>'))
+        self.WordInputLineEdit.textChanged.connect(self.start)
 
         self.PauseButton = QtWidgets.QPushButton(self.centralwidget)
         self.PauseButton.setGeometry(QtCore.QRect(310, 560, 150, 30))
         self.PauseButton.setObjectName("PauseButton")
-        self.PauseButton.clicked.connect(controllerTestGame.reset)
+        self.PauseButton.clicked.connect(self.reset)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -71,10 +73,50 @@ class IniziaTestView(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.TimerLabel.setText(_translate("MainWindow", ''))
+        self.TimerLabel.setText(_translate("MainWindow", '0'))
         self.TestDisplayLabel.setText(_translate("MainWindow", ''))
-        self.PauseButton.setText(_translate("MainWindow", "Pausa/Riprendi"))
+        self.PauseButton.setText(_translate("MainWindow", "Reset"))
         self.WordInputLineEdit.setPlaceholderText(_translate("MainWindow", "Inizia a scrivere per avviare il test!"))
 
     def actionRenderizzaTest(self):
         self.TestDisplayLabel.setText(self.testSelezionato.shuffleTest())
+    
+    def start(self):
+        if not self.running:
+            self.running = True
+            time = threading.Thread(target=self.timeThread)
+            time.start()
+        
+        if not self.TestDisplayLabel.text().startswith(self.WordInputLineEdit.text()):
+            self.WordInputLineEdit.setStyleSheet('color: red;')
+            self.errorCounter = self.errorCounter + 1
+        else:
+            self.WordInputLineEdit.setStyleSheet('color: black;')
+        
+        if self.WordInputLineEdit.text() == self.TestDisplayLabel.text():
+            self.running = False
+            self.TestDisplayLabel.setStyleSheet('color: green;')
+            self.WordInputLineEdit.setStyleSheet('color: green;')
+            self.goToVisualizzaStatisticheView()
+
+    def timeThread(self):
+        while self.running:
+            time.sleep(0.1)
+            self.timeCounter = self.timeCounter + 0.1
+            self.TimerLabel.setText(str(self.timeCounter))
+            #CaratteriAlSecondo = len(self.testSelezionato) / self.counter
+            #CaratteriAlMinuto = CaratteriAlSecondo * 60
+
+    def reset(self):
+        self.running = False
+        self.timeCounter = 0
+        self.TimerLabel.setText('0')
+        self.WordInputLineEdit.clear()
+
+    def goToVisualizzaStatisticheView(self):
+        self.visualizzaStatisticheView = QtWidgets.QMainWindow()
+        self.ui = VisualizzaStatisticheView()
+        self.ui.setupUi(self.visualizzaStatisticheView, self.errorCounter)
+        self.visualizzaStatisticheView.show()
+
+

@@ -102,7 +102,7 @@ class VisualizzaProfiloView(object):
         self.joinedInLabel.setText(_translate("MainWindow", "Joined in,"))
         self.dateLabel.setText(_translate("MainWindow", str(self.currentUtilizzatore.getDataCreazione())))
         self.labelTotaleTestEseguiti.setText(_translate("MainWindow", f"Totale Test Eseguiti: {str(self.currentUtilizzatore.getTotaleTestEseguiti())}"))
-        self.labelPrecisioneMedia.setText(_translate("MainWindow", f"Precisione Media (%): {str(self.currentUtilizzatore.getMediaPrecisionePercentuale())}"))
+        self.labelPrecisioneMedia.setText(_translate("MainWindow", f"Precisione Media: {str(self.currentUtilizzatore.getMediaPrecisionePercentuale())} %"))
         self.labelMediaWPM.setText(_translate("MainWindow", f"Media WPM: {str(self.currentUtilizzatore.getMediaNumeroParolePerMinuto())}"))
         self.labelMediaErroriPerTest.setText(_translate("MainWindow", f"Media errori per test: {str(self.currentUtilizzatore.getMediaErroriPerTest())}"))
 

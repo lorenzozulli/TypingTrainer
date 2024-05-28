@@ -9,11 +9,16 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from Controller.ControllerStatistiche import ControllerStatistiche
 
 
 class VisualizzaStatisticheView(object):
-    def setupUi(self, MainWindow,errorCounter):
+    def setupUi(self, MainWindow, currentUtilizzatore, errorCounter, testEseguito, tempoDiEsecuzione, caratteriCorretti):
+        self.currentUtilizzatore = currentUtilizzatore
         self.errorCounter = errorCounter
+        self.testEseguito = testEseguito
+        self.tempoDiEsecuzione = tempoDiEsecuzione
+        self.caratteriCorretti = caratteriCorretti
 
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 800)
@@ -76,3 +81,20 @@ class VisualizzaStatisticheView(object):
         self.Titolo.setText(_translate("MainWindow", "Test completato, congratulazioni!"))
         self.RiprovaButton.setText(_translate("MainWindow", "Riprova"))
         self.TornaAllaHomeButton.setText(_translate("MainWindow", "Torna alla home"))
+    
+    def actionCalcolaAndAggiornaMediaNumeroParolePerMinuto(self):
+        controllerStatistiche = ControllerStatistiche()
+        self.media = controllerStatistiche.calcolaNumeroParolePerMinutoTest(len(self.testEseguito.contenutoTest), self.tempoDiEsecuzione)
+        self.averageWordsPerMinuteLabel.setText(f"Parole digitate al minuto (media): {self.media}")
+        controllerStatistiche.aggiornaMediaNumeroParolePerMinuto(self.currentUtilizzatore)
+
+    def actionCacolaAndAggiornaPrecisioneMedia(self):
+        controllerStatistiche = ControllerStatistiche()
+        self.precisione = controllerStatistiche.calcolaPrecisionePercentualeTest(self.caratteriCorretti, self.errorCounter)
+        self.PrecisioneMediaLabel.setText(f"Precisione media: {self.precisione}%")
+        controllerStatistiche.aggiornaMediaPrecisionePercentuale(self.currentUtilizzatore)
+    
+    def actionCalcolaAndAggiornaTotaleTestEseguiti(self):
+        controllerStatistiche = ControllerStatistiche()
+        controllerStatistiche.calcolaTotaleTestEseguiti(self.currentUtilizzatore)
+

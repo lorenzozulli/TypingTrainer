@@ -23,6 +23,7 @@ class IniziaTestView(object):
         self.timeCounter = 0
         self.running = False
         self.errorCounter = 0
+        self.correctCharacter = 0
 
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 800)
@@ -92,6 +93,7 @@ class IniziaTestView(object):
             self.errorCounter = self.errorCounter + 1
         else:
             self.WordInputLineEdit.setStyleSheet('color: black;')
+            self.correctCharacter = self.correctCharacter + 1
         
         if self.WordInputLineEdit.text() == self.TestDisplayLabel.text():
             self.running = False
@@ -104,8 +106,6 @@ class IniziaTestView(object):
             time.sleep(0.1)
             self.timeCounter = self.timeCounter + 0.1
             self.TimerLabel.setText(str(self.timeCounter))
-            #CaratteriAlSecondo = len(self.testSelezionato) / self.counter
-            #CaratteriAlMinuto = CaratteriAlSecondo * 60
 
     def reset(self):
         self.running = False
@@ -114,9 +114,15 @@ class IniziaTestView(object):
         self.WordInputLineEdit.clear()
 
     def goToVisualizzaStatisticheView(self):
-        self.visualizzaStatisticheView = QtWidgets.QMainWindow()
-        self.ui = VisualizzaStatisticheView()
-        self.ui.setupUi(self.visualizzaStatisticheView, self.errorCounter)
-        self.visualizzaStatisticheView.show()
+        try:
+            self.visualizzaStatisticheView = QtWidgets.QMainWindow()
+            self.ui = VisualizzaStatisticheView()
+            self.ui.setupUi(self.visualizzaStatisticheView, self.currentUtilizzatore, self.errorCounter, self.testSelezionato, self.timeCounter, self.correctCharacter)
+            self.ui.actionCalcolaAndAggiornaMediaNumeroParolePerMinuto()
+            self.ui.actionCacolaAndAggiornaPrecisioneMedia()
+            self.ui.actionCalcolaAndAggiornaTotaleTestEseguiti()
+            self.visualizzaStatisticheView.show()
+        except Exception as e:
+            print(e)
 
 

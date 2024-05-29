@@ -2,7 +2,7 @@ from Model.Utente import Utente
 from Controller.ControllerPickle import ControllerPickle
 
 class ControllerStatistiche(object):
-    def aggiornaMediaErroriPerTest(self, utilizzatoreDaAggiornare):
+    def aggiornaMediaErroriPerTest(self, utilizzatoreDaAggiornare, valore):
         controllerPickle = ControllerPickle()
         controllerPickle.caricaListaUtilizzatori()
         listaUtilizzatori = controllerPickle.listaUtilizzatori
@@ -10,7 +10,11 @@ class ControllerStatistiche(object):
         for utente in listaUtilizzatori:
             if utilizzatoreDaAggiornare.getIdentifier() == utente.getIdentifier():
                 vecchiaMedia = utente.getMediaErroriPerTest()
-                nuovaMedia = (vecchiaMedia * utente.getTotaleTestEseguiti())/(utente.getTotaleTestEseguiti()+1)
+                totaleTest = utente.getTotaleTestEseguiti()
+                print(vecchiaMedia)
+                print(totaleTest)
+
+                nuovaMedia = round(((((totaleTest-1) * vecchiaMedia)+valore)/totaleTest),2)
                 utilizzatoreDaAggiornare.setMediaErroriPerTest(nuovaMedia)
                 utente.setMediaErroriPerTest(nuovaMedia)
 
@@ -24,9 +28,14 @@ class ControllerStatistiche(object):
         for utente in listaUtilizzatori:
             if utilizzatoreDaAggiornare.getIdentifier() == utente.getIdentifier():
                 vecchiaMedia = utente.getMediaPrecisionePercentuale()
-                nuovaMedia = round(((vecchiaMedia * utente.getTotaleTestEseguiti())+valore)/(utente.getTotaleTestEseguiti()+1), 2)
+                totaleTest = utente.getTotaleTestEseguiti()
+                print(vecchiaMedia)
+                print(totaleTest)
+
+                nuovaMedia = round(((((totaleTest-1) * vecchiaMedia)+valore)/totaleTest),2)
                 utilizzatoreDaAggiornare.setMediaPrecisionePercentuale(nuovaMedia)
                 utente.setMediaPrecisionePercentuale(nuovaMedia)
+
 
         controllerPickle.salvaListaUtilizzatori()
 
@@ -38,13 +47,18 @@ class ControllerStatistiche(object):
         for utente in listaUtilizzatori:
             if utilizzatoreDaAggiornare.getIdentifier() == utente.getIdentifier():
                 vecchiaMedia = utente.getMediaNumeroParolePerMinuto()
-                nuovaMedia = round(((vecchiaMedia * utente.getTotaleTestEseguiti())+valore)/(utente.getTotaleTestEseguiti()+1), 2)
+                totaleTest = utente.getTotaleTestEseguiti()
+                print(vecchiaMedia)
+                print(totaleTest)
+
+                nuovaMedia = round(((((totaleTest-1) * vecchiaMedia)+valore)/totaleTest),2)
+
                 utilizzatoreDaAggiornare.setMediaNumeroParolePerMinuto(nuovaMedia)
                 utente.setMediaNumeroParolePerMinuto(nuovaMedia)
 
         controllerPickle.salvaListaUtilizzatori()
 
-    def calcolaNumeroErrori():
+    def calcolaMediaErroriPerTest():
         pass
         
     def calcolaNumeroParolePerMinutoTest(self, numeroParole, tempoDiEsecuzione):

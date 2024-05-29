@@ -75,8 +75,8 @@ class VisualizzaStatisticheView(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.averageWordsPerMinuteLabel.setText(_translate("MainWindow", "Parole digitate al minuto (media): "))
-        self.PrecisioneMediaLabel.setText(_translate("MainWindow", "Precisione media: "))
+        self.averageWordsPerMinuteLabel.setText(_translate("MainWindow", ""))
+        self.PrecisioneMediaLabel.setText(_translate("MainWindow", ""))
         self.NumeroErroriLabel.setText(_translate("MainWindow", f"Numero errori eseguiti: {self.errorCounter}"))
         self.Titolo.setText(_translate("MainWindow", "Test completato, congratulazioni!"))
         self.RiprovaButton.setText(_translate("MainWindow", "Riprova"))
@@ -97,4 +97,8 @@ class VisualizzaStatisticheView(object):
     def actionCalcolaAndAggiornaTotaleTestEseguiti(self):
         controllerStatistiche = ControllerStatistiche()
         controllerStatistiche.calcolaTotaleTestEseguiti(self.currentUtilizzatore)
+
+    def actionCalcolaAndAggiornaMediaErroriPerTest(self):
+        controllerStatistiche = ControllerStatistiche()
+        controllerStatistiche.aggiornaMediaErroriPerTest(self.currentUtilizzatore, self.errorCounter)
 

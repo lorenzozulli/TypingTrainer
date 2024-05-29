@@ -11,6 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt
 from View.VisualizzaStatisticheView import VisualizzaStatisticheView
+from View.VisualizzaProfiloView import VisualizzaProfiloView
 
 import time
 import threading

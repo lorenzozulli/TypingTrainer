@@ -75,21 +75,23 @@ class ControllerAutenticazione(object):
         controllerPickle.caricaListaUtilizzatori()
         listaUtilizzatori = controllerPickle.listaUtilizzatori
 
+        identificatore_trovato = False  # Aggiungi un flag per tenere traccia se l'identificatore è stato trovato
+
         for i in listaUtilizzatori:
             if identifier == i.getIdentifier():
                 i.setPassword(nuovaPassword)
-            else:
-                continue
+                identificatore_trovato = True
+                break  # Uscire dal ciclo una volta trovato l'identificatore
+
+        if not identificatore_trovato:
             registrazioneNonOK = QMessageBox()
             registrazioneNonOK.setWindowTitle("Errore!")
             registrazioneNonOK.setText("Identificatore non trovato!")
             registrazioneNonOK.exec_()
-        
             return False
 
         controllerPickle.salvaListaUtilizzatori()
         return True
-
     '''
     def logOut():
         #TODO: fare questa funzione

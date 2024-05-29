@@ -16,7 +16,7 @@ class ControllerStatistiche(object):
 
         controllerPickle.salvaListaUtilizzatori()
 
-    def aggiornaMediaPrecisionePercentuale(self, utilizzatoreDaAggiornare):
+    def aggiornaMediaPrecisionePercentuale(self, utilizzatoreDaAggiornare, valore):
         controllerPickle = ControllerPickle()
         controllerPickle.caricaListaUtilizzatori()
         listaUtilizzatori = controllerPickle.listaUtilizzatori
@@ -24,13 +24,13 @@ class ControllerStatistiche(object):
         for utente in listaUtilizzatori:
             if utilizzatoreDaAggiornare.getIdentifier() == utente.getIdentifier():
                 vecchiaMedia = utente.getMediaPrecisionePercentuale()
-                nuovaMedia = (vecchiaMedia * utente.getTotaleTestEseguiti())/(utente.getTotaleTestEseguiti()+1)
+                nuovaMedia = round(((vecchiaMedia * utente.getTotaleTestEseguiti())+valore)/(utente.getTotaleTestEseguiti()+1), 2)
                 utilizzatoreDaAggiornare.setMediaPrecisionePercentuale(nuovaMedia)
                 utente.setMediaPrecisionePercentuale(nuovaMedia)
 
         controllerPickle.salvaListaUtilizzatori()
 
-    def aggiornaMediaNumeroParolePerMinuto(self, utilizzatoreDaAggiornare):
+    def aggiornaMediaNumeroParolePerMinuto(self, utilizzatoreDaAggiornare, valore):
         controllerPickle = ControllerPickle()
         controllerPickle.caricaListaUtilizzatori()
         listaUtilizzatori = controllerPickle.listaUtilizzatori
@@ -38,7 +38,7 @@ class ControllerStatistiche(object):
         for utente in listaUtilizzatori:
             if utilizzatoreDaAggiornare.getIdentifier() == utente.getIdentifier():
                 vecchiaMedia = utente.getMediaNumeroParolePerMinuto()
-                nuovaMedia = (vecchiaMedia * utente.getTotaleTestEseguiti())/(utente.getTotaleTestEseguiti()+1)
+                nuovaMedia = round(((vecchiaMedia * utente.getTotaleTestEseguiti())+valore)/(utente.getTotaleTestEseguiti()+1), 2)
                 utilizzatoreDaAggiornare.setMediaNumeroParolePerMinuto(nuovaMedia)
                 utente.setMediaNumeroParolePerMinuto(nuovaMedia)
 

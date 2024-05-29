@@ -118,9 +118,9 @@ class IniziaTestView(object):
             self.visualizzaStatisticheView = QtWidgets.QMainWindow()
             self.ui = VisualizzaStatisticheView()
             self.ui.setupUi(self.visualizzaStatisticheView, self.currentUtilizzatore, self.errorCounter, self.testSelezionato, self.timeCounter, self.correctCharacter)
+            self.ui.actionCalcolaAndAggiornaTotaleTestEseguiti()
             self.ui.actionCalcolaAndAggiornaMediaNumeroParolePerMinuto()
             self.ui.actionCacolaAndAggiornaPrecisioneMedia()
-            self.ui.actionCalcolaAndAggiornaTotaleTestEseguiti()
             self.visualizzaStatisticheView.show()
         except Exception as e:
             print(e)

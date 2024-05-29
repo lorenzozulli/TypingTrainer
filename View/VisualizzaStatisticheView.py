@@ -86,13 +86,13 @@ class VisualizzaStatisticheView(object):
         controllerStatistiche = ControllerStatistiche()
         self.media = controllerStatistiche.calcolaNumeroParolePerMinutoTest(len(self.testEseguito.contenutoTest), self.tempoDiEsecuzione)
         self.averageWordsPerMinuteLabel.setText(f"Parole digitate al minuto (media): {self.media}")
-        controllerStatistiche.aggiornaMediaNumeroParolePerMinuto(self.currentUtilizzatore)
+        controllerStatistiche.aggiornaMediaNumeroParolePerMinuto(self.currentUtilizzatore, self.media)
 
     def actionCacolaAndAggiornaPrecisioneMedia(self):
         controllerStatistiche = ControllerStatistiche()
         self.precisione = controllerStatistiche.calcolaPrecisionePercentualeTest(self.caratteriCorretti, self.errorCounter)
         self.PrecisioneMediaLabel.setText(f"Precisione media: {self.precisione}%")
-        controllerStatistiche.aggiornaMediaPrecisionePercentuale(self.currentUtilizzatore)
+        controllerStatistiche.aggiornaMediaPrecisionePercentuale(self.currentUtilizzatore, self.precisione)
     
     def actionCalcolaAndAggiornaTotaleTestEseguiti(self):
         controllerStatistiche = ControllerStatistiche()

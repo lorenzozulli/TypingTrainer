@@ -60,7 +60,7 @@ class VisualizzaProfiloView(object):
         self.labelTotaleTestEseguiti.setObjectName("labelTotaleTestEseguiti")
 
         self.labelPrecisioneMedia = QtWidgets.QLabel(self.centralwidget)
-        self.labelPrecisioneMedia.setGeometry(QtCore.QRect(20, 415, 350, 62))
+        self.labelPrecisioneMedia.setGeometry(QtCore.QRect(20, 415, 400, 62))
         font = QtGui.QFont()
         font.setPointSize(24)
         self.labelPrecisioneMedia.setFont(font)

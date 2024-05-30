@@ -81,6 +81,6 @@ class LandingPageAdminView(object):
         self.ui.actionVisualizzaListaTest()
 
     def actionLogOut(self):
-        self.controllerAutenticazione = ControllerAutenticazione()
-        self.controllerAutenticazione.logOut()
+        controllerAutenticazione = ControllerAutenticazione()
+        controllerAutenticazione.logOut()
 

@@ -65,10 +65,9 @@ class ControllerStatistiche(object):
         wpm = round(numeroParole/(tempoDiEsecuzione/60), 2)
         return wpm
         
-    def calcolaPrecisionePercentualeTest(self, lunghezzaTesto, numeroErrori):
-        accuracy = round(((lunghezzaTesto - numeroErrori)/lunghezzaTesto)*100, 2)
-        return accuracy
-        
+    def calcolaPrecisionePercentualeTest(self, numeroErrori, lunghezzaTesto):
+        accuracy = abs(round(((lunghezzaTesto - numeroErrori)/lunghezzaTesto)*100, 2))
+        return accuracy 
     def calcolaTotaleTestEseguiti(self, utilizzatoreDaAggiornare):
         controllerPickle = ControllerPickle()
         controllerPickle.caricaListaUtilizzatori()

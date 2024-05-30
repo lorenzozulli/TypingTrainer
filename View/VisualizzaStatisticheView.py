@@ -52,13 +52,12 @@ class VisualizzaStatisticheView(object):
         self.Titolo.setFont(font)
         self.Titolo.setObjectName("Titolo")
 
-        self.RiprovaButton = QtWidgets.QPushButton(self.centralwidget)
-        self.RiprovaButton.setGeometry(QtCore.QRect(130, 520, 150, 30))
-        self.RiprovaButton.setObjectName("RiprovaButton")
-
-        self.TornaAllaHomeButton = QtWidgets.QPushButton(self.centralwidget)
-        self.TornaAllaHomeButton.setGeometry(QtCore.QRect(480, 520, 150, 30))
-        self.TornaAllaHomeButton.setObjectName("TornaAllaHomeButton")
+        self.Titolo2 = QtWidgets.QLabel(self.centralwidget)
+        self.Titolo2.setGeometry(QtCore.QRect(190, 600, 431, 101))
+        font = QtGui.QFont()
+        font.setPointSize(20)
+        self.Titolo2.setFont(font)
+        self.Titolo2.setObjectName("Titolo2")
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -79,8 +78,7 @@ class VisualizzaStatisticheView(object):
         self.PrecisioneMediaLabel.setText(_translate("MainWindow", ""))
         self.NumeroErroriLabel.setText(_translate("MainWindow", f"Numero errori eseguiti: {self.errorCounter}"))
         self.Titolo.setText(_translate("MainWindow", "Test completato, congratulazioni!"))
-        self.RiprovaButton.setText(_translate("MainWindow", "Riprova"))
-        self.TornaAllaHomeButton.setText(_translate("MainWindow", "Torna alla home"))
+        self.Titolo2.setText(_translate("MainWindow", "Puoi chiudere questa schermata"))
     
     def actionCalcolaAndAggiornaMediaNumeroParolePerMinuto(self):
         controllerStatistiche = ControllerStatistiche()
@@ -90,7 +88,8 @@ class VisualizzaStatisticheView(object):
 
     def actionCacolaAndAggiornaPrecisioneMedia(self):
         controllerStatistiche = ControllerStatistiche()
-        self.precisione = controllerStatistiche.calcolaPrecisionePercentualeTest(self.caratteriCorretti, self.errorCounter)
+        lunghezzaTotale = sum(len(s) for s in self.testEseguito.contenutoTest)
+        self.precisione = controllerStatistiche.calcolaPrecisionePercentualeTest(self.errorCounter, lunghezzaTotale)
         self.PrecisioneMediaLabel.setText(f"Precisione media: {self.precisione}%")
         controllerStatistiche.aggiornaMediaPrecisionePercentuale(self.currentUtilizzatore, self.precisione)
     

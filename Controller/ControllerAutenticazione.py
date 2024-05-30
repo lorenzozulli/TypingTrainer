@@ -92,7 +92,6 @@ class ControllerAutenticazione(object):
 
         controllerPickle.salvaListaUtilizzatori()
         return True
-    '''
-    def logOut():
-        #TODO: fare questa funzione
-    '''
+    
+    def logOut(self):
+        pass

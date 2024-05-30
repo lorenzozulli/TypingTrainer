@@ -11,7 +11,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt
 from View.VisualizzaStatisticheView import VisualizzaStatisticheView
-from View.VisualizzaProfiloView import VisualizzaProfiloView
 
 import time
 import threading
@@ -81,6 +80,7 @@ class IniziaTestView(object):
         self.WordInputLineEdit.setPlaceholderText(_translate("MainWindow", "Inizia a scrivere per avviare il test!"))
 
     def actionRenderizzaTest(self):
+        self.testRandomizzato = self.testSelezionato.shuffleTest()
         self.TestDisplayLabel.setText(self.testSelezionato.shuffleTest())
     
     def start(self):
@@ -95,13 +95,13 @@ class IniziaTestView(object):
         else:
             self.WordInputLineEdit.setStyleSheet('color: black;')
             self.correctCharacter = self.correctCharacter + 1
-        
+
         if self.WordInputLineEdit.text() == self.TestDisplayLabel.text():
             self.running = False
             self.TestDisplayLabel.setStyleSheet('color: green;')
             self.WordInputLineEdit.setStyleSheet('color: green;')
             self.goToVisualizzaStatisticheView()
-
+    
     def timeThread(self):
         while self.running:
             time.sleep(0.1)
@@ -113,6 +113,7 @@ class IniziaTestView(object):
         self.timeCounter = 0
         self.TimerLabel.setText('0')
         self.WordInputLineEdit.clear()
+        self.WordInputLineEdit.setFocusPolicy(Qt.StrongFocus)
 
     def goToVisualizzaStatisticheView(self):
         try:

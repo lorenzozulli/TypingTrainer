@@ -35,7 +35,7 @@ class LandingPageUtenteView(object):
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
         self.tableWidget.setGeometry(QtCore.QRect(20, 210, 731, 511))
         self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(6)
+        self.tableWidget.setColumnCount(4)
         self.tableWidget.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, item)
@@ -45,17 +45,11 @@ class LandingPageUtenteView(object):
         self.tableWidget.setHorizontalHeaderItem(2, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(3, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(4, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(5, item)
-
-        self.cercaButton = QtWidgets.QPushButton(self.centralwidget)
-        self.cercaButton.setGeometry(QtCore.QRect(380, 170, 75, 30))
-        self.cercaButton.setObjectName("cercaButton")
+        self.tableWidget.setColumnWidth(1,300)
+        self.tableWidget.setColumnWidth(2,200)
 
         self.searchBarInput = QtWidgets.QLineEdit(self.centralwidget)
-        self.searchBarInput.setGeometry(QtCore.QRect(20, 170, 350, 30))
+        self.searchBarInput.setGeometry(QtCore.QRect(20, 170, 500, 30))
         self.searchBarInput.setObjectName("searchBarInput")
         self.searchBarInput.textChanged.connect(self.searchTest)
 
@@ -84,9 +78,8 @@ class LandingPageUtenteView(object):
         item.setText(_translate("MainWindow", "Data Creazione"))
         item = self.tableWidget.horizontalHeaderItem(3)
         item.setText(_translate("MainWindow", "Seleziona"))
-        self.cercaButton.setText(_translate("MainWindow", "Cerca"))
         self.searchBarInput.setText(_translate("MainWindow", ""))
-        self.searchBarInput.setPlaceholderText(_translate("MainWindow", "Inserisci ID oppure Nome"))
+        self.searchBarInput.setPlaceholderText(_translate("MainWindow", "Inserisci ID, Nome oppure Data di Creazione"))
         self.profiloButton.setText(_translate("MainWindow", "Vai a profilo"))
     
     def goToVisualizzaProfiloView(self):

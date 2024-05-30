@@ -49,20 +49,10 @@ class GestioneUtentiView(object):
         self.tableWidget.setColumnWidth(1, 145)
         self.tableWidget.setColumnWidth(2, 145)
 
-
-        self.cercaButton = QtWidgets.QPushButton(self.centralwidget)
-        self.cercaButton.setGeometry(QtCore.QRect(380, 170, 75, 30))
-        self.cercaButton.setObjectName("cercaButton")
-
         self.searchBarInput = QtWidgets.QLineEdit(self.centralwidget)
-        self.searchBarInput.setGeometry(QtCore.QRect(20, 170, 350, 30))
+        self.searchBarInput.setGeometry(QtCore.QRect(20, 170, 500, 30))
         self.searchBarInput.setObjectName("searchBarInput")
         self.searchBarInput.textChanged.connect(self.searchUtente)
-
-
-        self.profiloButton = QtWidgets.QToolButton(self.centralwidget)
-        self.profiloButton.setGeometry(QtCore.QRect(650, 30, 101, 71))
-        self.profiloButton.setObjectName("profiloButton")
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -89,12 +79,8 @@ class GestioneUtentiView(object):
         item = self.tableWidget.horizontalHeaderItem(5)
         item.setText(_translate("MainWindow", "Elimina"))
 
-        self.cercaButton.setText(_translate("MainWindow", "Cerca"))
-
         self.searchBarInput.setText(_translate("MainWindow", ""))
-        self.searchBarInput.setPlaceholderText(_translate("MainWindow", "Inserisci ID oppure Nome"))
-
-        self.profiloButton.setText(_translate("MainWindow", "Vai a profilo"))
+        self.searchBarInput.setPlaceholderText(_translate("MainWindow", "Inserisci ID, Nome, Email oppure Data di Creazione"))
 
     def aggiornaPagina(self):
         self.actionVisualizzaListaUtenti()

@@ -91,10 +91,7 @@ class IniziaTestView(object):
         
         if not self.TestDisplayLabel.text().startswith(self.WordInputLineEdit.text()):
             self.WordInputLineEdit.setStyleSheet('color: red;')
-            try:
-                self.keyPressEvent(self.WordInputLineEdit.text()[-1])
-            except Exception as e:
-                print(e)
+            self.errorCounter = self.errorCounter + 1
         else:
             self.WordInputLineEdit.setStyleSheet('color: black;')
             self.correctCharacter = self.correctCharacter + 1
@@ -104,10 +101,6 @@ class IniziaTestView(object):
             self.TestDisplayLabel.setStyleSheet('color: green;')
             self.WordInputLineEdit.setStyleSheet('color: green;')
             self.goToVisualizzaStatisticheView()
-    
-    def keyPressEvent(self, event):
-        if event.key() != Qt.Key_Backspace:
-            self.errorCounter = self.errorCounter + 1 
     
     def timeThread(self):
         while self.running:

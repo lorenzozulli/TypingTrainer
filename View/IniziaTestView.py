@@ -20,7 +20,7 @@ class IniziaTestView(object):
     def setupUi(self, MainWindow, currentUtilizzatore, testSelezionato):
         self.currentUtilizzatore = currentUtilizzatore
         self.testSelezionato = testSelezionato
-        self.timeCounter = 0
+        self.timeCounter = 0.0
         self.running = False
         self.errorCounter = 0
         self.correctCharacter = 0
@@ -53,10 +53,10 @@ class IniziaTestView(object):
         self.WordInputLineEdit.setFocusPolicy(Qt.StrongFocus)
         self.WordInputLineEdit.textChanged.connect(self.start)
 
-        self.PauseButton = QtWidgets.QPushButton(self.centralwidget)
-        self.PauseButton.setGeometry(QtCore.QRect(310, 560, 150, 30))
-        self.PauseButton.setObjectName("PauseButton")
-        self.PauseButton.clicked.connect(self.reset)
+        self.ResetButton = QtWidgets.QPushButton(self.centralwidget)
+        self.ResetButton.setGeometry(QtCore.QRect(310, 560, 150, 30))
+        self.ResetButton.setObjectName("PauseButton")
+        self.ResetButton.clicked.connect(self.reset)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -74,9 +74,9 @@ class IniziaTestView(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.TimerLabel.setText(_translate("MainWindow", '0'))
+        self.TimerLabel.setText(_translate("MainWindow", str(self.timeCounter)))
         self.TestDisplayLabel.setText(_translate("MainWindow", ''))
-        self.PauseButton.setText(_translate("MainWindow", "Reset"))
+        self.ResetButton.setText(_translate("MainWindow", "Reset"))
         self.WordInputLineEdit.setPlaceholderText(_translate("MainWindow", "Inizia a scrivere per avviare il test!"))
 
     def actionRenderizzaTest(self):
@@ -86,8 +86,8 @@ class IniziaTestView(object):
     def start(self):
         if not self.running:
             self.running = True
-            time = threading.Thread(target=self.timeThread)
-            time.start()
+            timer = threading.Thread(target=self.timeThread)
+            timer.start()
         
         if not self.TestDisplayLabel.text().startswith(self.WordInputLineEdit.text()):
             self.WordInputLineEdit.setStyleSheet('color: red;')
@@ -109,11 +109,11 @@ class IniziaTestView(object):
             self.TimerLabel.setText(str(self.timeCounter))
 
     def reset(self):
-        self.running = False
-        self.timeCounter = 0
-        self.TimerLabel.setText('0')
         self.WordInputLineEdit.clear()
-        self.WordInputLineEdit.setFocusPolicy(Qt.StrongFocus)
+        self.running = False
+        time.sleep(0.1)
+        self.timeCounter = 0.0
+        self.TimerLabel.setText(str(self.timeCounter))
 
     def goToVisualizzaStatisticheView(self):
         try:

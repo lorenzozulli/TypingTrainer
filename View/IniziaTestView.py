@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import *
 from View.VisualizzaStatisticheView import VisualizzaStatisticheView
 
 import time
@@ -23,7 +23,7 @@ class IniziaTestView(object):
         self.timeCounter = 0.0
         self.running = False
         self.errorCounter = 0
-        self.correctCharacter = 0
+        self.correctCounter = 0
 
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 800)
@@ -88,43 +88,43 @@ class IniziaTestView(object):
             self.running = True
             timer = threading.Thread(target=self.timeThread)
             timer.start()
-        
+
         if not self.TestDisplayLabel.text().startswith(self.WordInputLineEdit.text()):
             self.WordInputLineEdit.setStyleSheet('color: red;')
             self.errorCounter = self.errorCounter + 1
         else:
             self.WordInputLineEdit.setStyleSheet('color: black;')
-            self.correctCharacter = self.correctCharacter + 1
+            self.correctCounter = self.correctCounter + 1
 
         if self.WordInputLineEdit.text() == self.TestDisplayLabel.text():
             self.running = False
             self.TestDisplayLabel.setStyleSheet('color: green;')
             self.WordInputLineEdit.setStyleSheet('color: green;')
             self.goToVisualizzaStatisticheView()
-    
+
     def timeThread(self):
         while self.running:
             time.sleep(0.1)
             self.timeCounter = self.timeCounter + 0.1
             self.TimerLabel.setText(str(self.timeCounter))
-
+    
     def reset(self):
         self.WordInputLineEdit.clear()
         self.running = False
         time.sleep(0.1)
         self.timeCounter = 0.0
+        self.errorCounter = 0
+        self.correctCounter = 0
         self.TimerLabel.setText(str(self.timeCounter))
 
     def goToVisualizzaStatisticheView(self):
         try:
             self.visualizzaStatisticheView = QtWidgets.QMainWindow()
             self.ui = VisualizzaStatisticheView()
-            self.ui.setupUi(self.visualizzaStatisticheView, self.currentUtilizzatore, self.errorCounter, self.testSelezionato, self.timeCounter, self.correctCharacter)
+            self.ui.setupUi(self.visualizzaStatisticheView, self.currentUtilizzatore, self.errorCounter, self.testSelezionato, self.timeCounter, self.correctCounter)
             self.ui.actionCalcolaAndAggiornaTotaleTestEseguiti()
             self.ui.actionCalcolaAndAggiornaMediaNumeroParolePerMinuto()
             self.ui.actionCacolaAndAggiornaPrecisioneMedia()
             self.visualizzaStatisticheView.show()
         except Exception as e:
             print(e)
-
-

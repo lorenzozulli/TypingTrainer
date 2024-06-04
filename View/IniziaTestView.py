@@ -93,7 +93,6 @@ class IniziaTestView(object):
             if len(self.WordInputLineEdit.text()) >= self.errorCounter:
                 self.WordInputLineEdit.setStyleSheet('color: red;')
                 self.errorCounter = self.errorCounter + 1
-                print('update')
         else:
             self.WordInputLineEdit.setStyleSheet('color: black;')
             self.correctCounter = self.correctCounter + 1
@@ -120,13 +119,10 @@ class IniziaTestView(object):
         self.TimerLabel.setText(str(self.timeCounter))
 
     def goToVisualizzaStatisticheView(self):
-        try:
-            self.visualizzaStatisticheView = QtWidgets.QMainWindow()
-            self.ui = VisualizzaStatisticheView()
-            self.ui.setupUi(self.visualizzaStatisticheView, self.currentUtilizzatore, self.errorCounter, self.testSelezionato, self.timeCounter, self.correctCounter)
-            self.ui.actionCalcolaAndAggiornaTotaleTestEseguiti()
-            self.ui.actionCalcolaAndAggiornaMediaNumeroParolePerMinuto()
-            self.ui.actionCacolaAndAggiornaPrecisioneMedia()
-            self.visualizzaStatisticheView.show()
-        except Exception as e:
-            print(e)
+        self.visualizzaStatisticheView = QtWidgets.QMainWindow()
+        self.ui = VisualizzaStatisticheView()
+        self.ui.setupUi(self.visualizzaStatisticheView, self.currentUtilizzatore, self.errorCounter, self.testSelezionato, self.timeCounter, self.correctCounter)
+        self.ui.actionCalcolaAndAggiornaTotaleTestEseguiti()
+        self.ui.actionCalcolaAndAggiornaMediaNumeroParolePerMinuto()
+        self.ui.actionCacolaAndAggiornaPrecisioneMedia()
+        self.visualizzaStatisticheView.show()

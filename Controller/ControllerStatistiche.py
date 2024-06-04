@@ -11,8 +11,6 @@ class ControllerStatistiche(object):
             if utilizzatoreDaAggiornare.getIdentifier() == utente.getIdentifier():
                 vecchiaMedia = utente.getMediaErroriPerTest()
                 totaleTest = utente.getTotaleTestEseguiti()
-                print(vecchiaMedia)
-                print(totaleTest)
 
                 nuovaMedia = round(((((totaleTest-1) * vecchiaMedia)+valore)/totaleTest),2)
                 utilizzatoreDaAggiornare.setMediaErroriPerTest(nuovaMedia)
@@ -29,8 +27,6 @@ class ControllerStatistiche(object):
             if utilizzatoreDaAggiornare.getIdentifier() == utente.getIdentifier():
                 vecchiaMedia = utente.getMediaPrecisionePercentuale()
                 totaleTest = utente.getTotaleTestEseguiti()
-                print(vecchiaMedia)
-                print(totaleTest)
 
                 nuovaMedia = round(((((totaleTest-1) * vecchiaMedia)+valore)/totaleTest),2)
                 utilizzatoreDaAggiornare.setMediaPrecisionePercentuale(nuovaMedia)
@@ -48,8 +44,6 @@ class ControllerStatistiche(object):
             if utilizzatoreDaAggiornare.getIdentifier() == utente.getIdentifier():
                 vecchiaMedia = utente.getMediaNumeroParolePerMinuto()
                 totaleTest = utente.getTotaleTestEseguiti()
-                print(vecchiaMedia)
-                print(totaleTest)
 
                 nuovaMedia = round(((((totaleTest-1) * vecchiaMedia)+valore)/totaleTest),2)
 
@@ -58,9 +52,6 @@ class ControllerStatistiche(object):
 
         controllerPickle.salvaListaUtilizzatori()
 
-    def calcolaMediaErroriPerTest():
-        pass
-        
     def calcolaNumeroParolePerMinutoTest(self, numeroParole, tempoDiEsecuzione):
         wpm = round(numeroParole/(tempoDiEsecuzione/60), 2)
         return wpm

@@ -100,4 +100,3 @@ class VisualizzaStatisticheView(object):
     def actionCalcolaAndAggiornaMediaErroriPerTest(self):
         controllerStatistiche = ControllerStatistiche()
         controllerStatistiche.aggiornaMediaErroriPerTest(self.currentUtilizzatore, self.errorCounter)
-

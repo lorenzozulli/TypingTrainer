@@ -74,7 +74,7 @@ class VisualizzaProfiloView(object):
         self.labelMediaWPM.setObjectName("labelMediaWPM")
 
         self.labelMediaErroriPerTest = QtWidgets.QLabel(self.centralwidget)
-        self.labelMediaErroriPerTest.setGeometry(QtCore.QRect(20, 605, 350, 62))
+        self.labelMediaErroriPerTest.setGeometry(QtCore.QRect(20, 605, 400, 62))
         font = QtGui.QFont()
         font.setPointSize(24)
         self.labelMediaErroriPerTest.setFont(font)

@@ -125,4 +125,5 @@ class IniziaTestView(object):
         self.ui.actionCalcolaAndAggiornaTotaleTestEseguiti()
         self.ui.actionCalcolaAndAggiornaMediaNumeroParolePerMinuto()
         self.ui.actionCacolaAndAggiornaPrecisioneMedia()
+        self.ui.actionCalcolaAndAggiornaMediaErroriPerTest()
         self.visualizzaStatisticheView.show()

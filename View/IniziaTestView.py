@@ -88,10 +88,12 @@ class IniziaTestView(object):
             self.running = True
             timer = threading.Thread(target=self.timeThread)
             timer.start()
-
+        
         if not self.TestDisplayLabel.text().startswith(self.WordInputLineEdit.text()):
-            self.WordInputLineEdit.setStyleSheet('color: red;')
-            self.errorCounter = self.errorCounter + 1
+            if len(self.WordInputLineEdit.text()) >= self.errorCounter:
+                self.WordInputLineEdit.setStyleSheet('color: red;')
+                self.errorCounter = self.errorCounter + 1
+                print('update')
         else:
             self.WordInputLineEdit.setStyleSheet('color: black;')
             self.correctCounter = self.correctCounter + 1
@@ -101,13 +103,13 @@ class IniziaTestView(object):
             self.TestDisplayLabel.setStyleSheet('color: green;')
             self.WordInputLineEdit.setStyleSheet('color: green;')
             self.goToVisualizzaStatisticheView()
-
+                    
     def timeThread(self):
         while self.running:
             time.sleep(0.1)
             self.timeCounter = self.timeCounter + 0.1
             self.TimerLabel.setText(str(self.timeCounter))
-    
+
     def reset(self):
         self.WordInputLineEdit.clear()
         self.running = False

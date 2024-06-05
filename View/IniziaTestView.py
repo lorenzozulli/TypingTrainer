@@ -24,13 +24,14 @@ class IniziaTestView(object):
         self.running = False
         self.errorCounter = 0
         self.correctCounter = 0
+        self.lunghezza = 0 
 
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 800)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.TimerLabel = QtWidgets.QLabel(self.centralwidget)
-        self.TimerLabel.setGeometry(QtCore.QRect(325, 100, 141, 90))
+        self.TimerLabel.setGeometry(QtCore.QRect(325, 100, 300, 90))
         font = QtGui.QFont()
         font.setPointSize(55)
         self.TimerLabel.setFont(font)
@@ -81,33 +82,41 @@ class IniziaTestView(object):
 
     def actionRenderizzaTest(self):
         self.testRandomizzato = self.testSelezionato.shuffleTest()
-        self.TestDisplayLabel.setText(self.testSelezionato.shuffleTest())
+        self.TestDisplayLabel.setText(self.testRandomizzato)
     
     def start(self):
         if not self.running:
             self.running = True
-            timer = threading.Thread(target=self.timeThread)
-            timer.start()
+
+            self.timer = QTimer()
+            self.timer.setInterval(100)
+            self.timer.timeout.connect(self.timeThread)
+            self.timer.start()
         
-        if not self.TestDisplayLabel.text().startswith(self.WordInputLineEdit.text()):
-            if len(self.WordInputLineEdit.text()) >= self.errorCounter:
+        if not self.testRandomizzato.startswith(self.WordInputLineEdit.text()):
+            if self.lunghezza <= len(self.WordInputLineEdit.text()):
                 self.WordInputLineEdit.setStyleSheet('color: red;')
+                formatted_text = f'<span style="color: red;">{self.testRandomizzato[:len(self.WordInputLineEdit.text())]}</span>{self.testRandomizzato[len(self.WordInputLineEdit.text()):]}'
+                self.TestDisplayLabel.setText(formatted_text)
                 self.errorCounter = self.errorCounter + 1
         else:
             self.WordInputLineEdit.setStyleSheet('color: black;')
+            formatted_text = f'<span style="color: green;">{self.testRandomizzato[:len(self.WordInputLineEdit.text())]}</span>{self.testRandomizzato[len(self.WordInputLineEdit.text()):]}'
+            self.TestDisplayLabel.setText(formatted_text)
             self.correctCounter = self.correctCounter + 1
 
-        if self.WordInputLineEdit.text() == self.TestDisplayLabel.text():
+        self.lunghezza = len(self.WordInputLineEdit.text())
+
+        if self.WordInputLineEdit.text() == self.testRandomizzato:
             self.running = False
+            self.timer.stop()
             self.TestDisplayLabel.setStyleSheet('color: green;')
             self.WordInputLineEdit.setStyleSheet('color: green;')
             self.goToVisualizzaStatisticheView()
-                    
+                        
     def timeThread(self):
-        while self.running:
-            time.sleep(0.1)
-            self.timeCounter = self.timeCounter + 0.1
-            self.TimerLabel.setText(str(self.timeCounter))
+        self.TimerLabel.setText(str(self.timeCounter))
+        self.timeCounter = self.timeCounter + 0.1
 
     def reset(self):
         self.WordInputLineEdit.clear()
@@ -117,6 +126,7 @@ class IniziaTestView(object):
         self.errorCounter = 0
         self.correctCounter = 0
         self.TimerLabel.setText(str(self.timeCounter))
+        self.TestDisplayLabel.setStyleSheet('color: black;')
 
     def goToVisualizzaStatisticheView(self):
         self.visualizzaStatisticheView = QtWidgets.QMainWindow()

@@ -9,7 +9,8 @@ from datetime import date
 
 class ControllerPickle(object):
     # Serve questo costruttore in quanto, se non esistono i file di listaUtilizzatori e/o listaTest,
-    # vengono creati automaticamente dal sistema
+    # vengono creati automaticamente dal sistema.
+    # Inoltre crea automaticamente la cartella di Backup qualora non presente
     def __init__(self):
         if not os.path.isfile(os.path.join('BaseDiDati', 'listaUtilizzatori.pickle')): 
             admin = Admin()

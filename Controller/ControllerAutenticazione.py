@@ -83,10 +83,10 @@ class ControllerAutenticazione(object):
                 break
 
         if not identificatore_trovato:
-            registrazioneNonOK = QMessageBox()
-            registrazioneNonOK.setWindowTitle("Errore!")
-            registrazioneNonOK.setText("Identificatore non trovato!")
-            registrazioneNonOK.exec_()
+            recuperoNonOK = QMessageBox()
+            recuperoNonOK.setWindowTitle("Errore!")
+            recuperoNonOK.setText("Identificatore non trovato!")
+            recuperoNonOK.exec_()
             return False
 
         controllerPickle.salvaListaUtilizzatori()

@@ -52,10 +52,10 @@ class ControllerTest(object):
                 AggiuntaNonOK.setText('Hai inserito più di 350 caratteri!')
                 AggiuntaNonOK.exec_()
                 raise Exception
-            elif len(words) < 10:
+            elif len(words) < 5:
                 AggiuntaNonOK = QMessageBox()
                 AggiuntaNonOK.setWindowTitle("Errore!")
-                AggiuntaNonOK.setText('Hai inserito meno di 10 parole!')
+                AggiuntaNonOK.setText('Hai inserito meno di 5 parole!')
                 AggiuntaNonOK.exec_()
                 raise Exception
             else:

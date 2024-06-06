@@ -25,6 +25,8 @@ class ControllerPickle(object):
             test.setContenutoTest([test])
             test.setDataCreazione(date.today())
             test.loadTest()
+        if not os.path.isdir(os.path.join('BaseDiDati', 'Backup')):
+            os.mkdir(os.path.join('BaseDiDati', 'Backup'))
         
     def caricaListaUtilizzatori(self):
         with open(os.path.join('BaseDiDati', 'listaUtilizzatori.pickle'), "rb") as f:

@@ -11,7 +11,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from Controller.ControllerStatistiche import ControllerStatistiche
 
-
 class VisualizzaStatisticheView(object):
     def setupUi(self, MainWindow, currentUtilizzatore, errorCounter, testEseguito, tempoDiEsecuzione, caratteriCorretti):
         self.currentUtilizzatore = currentUtilizzatore

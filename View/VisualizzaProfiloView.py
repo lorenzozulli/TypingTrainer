@@ -33,11 +33,6 @@ class VisualizzaProfiloView(object):
         self.modificaProfiloButton.setObjectName("modificaProfiloButton")
         self.modificaProfiloButton.clicked.connect(self.goToModificaProfiloView)
 
-        self.logOutButton = QtWidgets.QPushButton(self.centralwidget)
-        self.logOutButton.setGeometry(QtCore.QRect(440, 260, 150, 30))
-        self.logOutButton.setObjectName("logOutButton")
-        self.logOutButton.clicked.connect(self.actionLogOut)
-
         self.joinedInLabel = QtWidgets.QLabel(self.centralwidget)
         self.joinedInLabel.setGeometry(QtCore.QRect(150, 270, 71, 21))
         font = QtGui.QFont()
@@ -98,7 +93,6 @@ class VisualizzaProfiloView(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.usernameLabel.setText(_translate("MainWindow", str(self.currentUtilizzatore.getUsername())))
         self.modificaProfiloButton.setText(_translate("MainWindow", "Modifica Profilo"))
-        self.logOutButton.setText(_translate("MainWindow", "Log Out"))
         self.joinedInLabel.setText(_translate("MainWindow", "Joined in,"))
         self.dateLabel.setText(_translate("MainWindow", str(self.currentUtilizzatore.getDataCreazione())))
         self.labelTotaleTestEseguiti.setText(_translate("MainWindow", f"Totale Test Eseguiti: {str(self.currentUtilizzatore.getTotaleTestEseguiti())}"))
@@ -114,9 +108,5 @@ class VisualizzaProfiloView(object):
         
         self.ui.ModificaButton.clicked.connect(self.aggiornaPagina)
         
-    def actionLogOut(self):
-        self.controllerAutenticazione = ControllerAutenticazione()
-        self.controllerAutenticazione.logOut()
-    
     def aggiornaPagina(self):
         self.usernameLabel.setText(self.currentUtilizzatore.getUsername())

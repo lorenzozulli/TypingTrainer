@@ -17,8 +17,8 @@ class ControllerTest(object):
             for self.i in listaTest:
                 nuovoTest.setIdentifier(self.controllaIdentificatoreUnivoco(identifierCandidato))
                 nuovoTest.setNome(self.controllaNomeUnivoco(nome))
+                nuovoTest.setContenutoTest(self.assegnaContenutoTest(contenuto))
 
-            nuovoTest.setContenutoTest(self.assegnaContenutoTest(contenuto))
             nuovoTest.setDataCreazione(date.today())
 
             listaTest.append(nuovoTest)
@@ -45,7 +45,21 @@ class ControllerTest(object):
 
     def assegnaContenutoTest(self, contenuto):
             words = contenuto.split(",")
-            return words
+            lunghezzaCaratteri = len([carattere for parola in words for carattere in parola])
+            if lunghezzaCaratteri > 350:
+                AggiuntaNonOK = QMessageBox()
+                AggiuntaNonOK.setWindowTitle("Errore!")
+                AggiuntaNonOK.setText('Hai inserito più di 350 caratteri!')
+                AggiuntaNonOK.exec_()
+                raise Exception
+            elif len(words) < 10:
+                AggiuntaNonOK = QMessageBox()
+                AggiuntaNonOK.setWindowTitle("Errore!")
+                AggiuntaNonOK.setText('Hai inserito meno di 10 parole!')
+                AggiuntaNonOK.exec_()
+                raise Exception
+            else:
+                return words
 
     def eliminaTest(self, identifier):
         try:

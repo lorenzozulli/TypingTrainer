@@ -1,5 +1,4 @@
 from datetime import date
-import re
 
 from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtCore import *
@@ -75,13 +74,13 @@ class ControllerAutenticazione(object):
         controllerPickle.caricaListaUtilizzatori()
         listaUtilizzatori = controllerPickle.listaUtilizzatori
 
-        identificatore_trovato = False  # Aggiungi un flag per tenere traccia se l'identificatore è stato trovato
+        identificatore_trovato = False
 
         for i in listaUtilizzatori:
             if identifier == i.getIdentifier():
                 i.setPassword(nuovaPassword)
                 identificatore_trovato = True
-                break  # Uscire dal ciclo una volta trovato l'identificatore
+                break
 
         if not identificatore_trovato:
             registrazioneNonOK = QMessageBox()

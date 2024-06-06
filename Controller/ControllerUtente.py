@@ -54,7 +54,6 @@ class ControllerUtente(object):
                     utenteDaModificare.setEmail(nuovaEmail)
                     utenteDaModificare.setPassword(nuovaPassword)
 
-
             controllerPickle.salvaListaUtilizzatori()
             return True
         except Exception:

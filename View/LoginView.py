@@ -120,7 +120,6 @@ class LoginView(object):
                 self.ui.setupUi(self.authorizedUtente, self.loginResult[1])
                 self.authorizedUtente.show()
                 self.ui.actionVisualizzaListaTest()
-
             case "PasswordErrata":
                 popup = QMessageBox()
                 popup.setText("Password errata")

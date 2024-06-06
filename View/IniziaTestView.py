@@ -12,9 +12,6 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import *
 from View.VisualizzaStatisticheView import VisualizzaStatisticheView
 
-import time
-import threading
-
 class IniziaTestView(object):
 
     def setupUi(self, MainWindow, currentUtilizzatore, testSelezionato):
@@ -31,14 +28,14 @@ class IniziaTestView(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.TimerLabel = QtWidgets.QLabel(self.centralwidget)
-        self.TimerLabel.setGeometry(QtCore.QRect(325, 100, 300, 90))
+        self.TimerLabel.setGeometry(QtCore.QRect(325, 100, 600, 90))
         font = QtGui.QFont()
         font.setPointSize(55)
         self.TimerLabel.setFont(font)
         self.TimerLabel.setObjectName("TimerLabel")
 
         self.TestDisplayLabel = QtWidgets.QLabel(self.centralwidget)
-        self.TestDisplayLabel.setGeometry(QtCore.QRect(90, 260, 600, 180))
+        self.TestDisplayLabel.setGeometry(QtCore.QRect(90, 260, 600, 400))
         font = QtGui.QFont()
         font.setPointSize(16)
         self.TestDisplayLabel.setFont(font)
@@ -46,7 +43,7 @@ class IniziaTestView(object):
         self.TestDisplayLabel.setWordWrap(True)
 
         self.WordInputLineEdit = QtWidgets.QLineEdit(self.centralwidget)
-        self.WordInputLineEdit.setGeometry(QtCore.QRect(90, 500, 600, 40))
+        self.WordInputLineEdit.setGeometry(QtCore.QRect(90, 600, 600, 40))
         font = QtGui.QFont()
         font.setPointSize(16)
         self.WordInputLineEdit.setFont(font)
@@ -55,7 +52,7 @@ class IniziaTestView(object):
         self.WordInputLineEdit.textChanged.connect(self.start)
 
         self.ResetButton = QtWidgets.QPushButton(self.centralwidget)
-        self.ResetButton.setGeometry(QtCore.QRect(310, 560, 150, 30))
+        self.ResetButton.setGeometry(QtCore.QRect(310, 660, 150, 30))
         self.ResetButton.setObjectName("PauseButton")
         self.ResetButton.clicked.connect(self.reset)
 
@@ -115,13 +112,16 @@ class IniziaTestView(object):
             self.goToVisualizzaStatisticheView()
                         
     def timeThread(self):
-        self.TimerLabel.setText(str(self.timeCounter))
-        self.timeCounter = self.timeCounter + 0.1
+        if self.timeCounter < 999:
+            self.timeCounter = self.timeCounter + 0.1
+            self.TimerLabel.setText(str(round(self.timeCounter, 1)))
+        else:
+            self.reset()
 
     def reset(self):
         self.WordInputLineEdit.clear()
         self.running = False
-        time.sleep(0.1)
+        self.timer.stop()
         self.timeCounter = 0.0
         self.errorCounter = 0
         self.correctCounter = 0

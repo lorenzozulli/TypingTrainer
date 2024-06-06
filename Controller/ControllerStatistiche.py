@@ -31,7 +31,6 @@ class ControllerStatistiche(object):
                 utilizzatoreDaAggiornare.setMediaPrecisionePercentuale(nuovaMedia)
                 utente.setMediaPrecisionePercentuale(nuovaMedia)
 
-
         controllerPickle.salvaListaUtilizzatori()
 
     def aggiornaMediaNumeroParolePerMinuto(self, utilizzatoreDaAggiornare, valore):

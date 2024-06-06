@@ -11,10 +11,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 from View.GestioneUtentiView import GestioneUtentiView
 from View.GestioneTestView import GestioneTestView
-from Model import Admin
 
-from Controller import ControllerAutenticazione
-
+from Controller.ControllerBackup import ControllerBackup
 
 class LandingPageAdminView(object):
     def setupUi(self, MainWindow, currentUtilizzatore):
@@ -36,10 +34,10 @@ class LandingPageAdminView(object):
         self.gestioneUtentiButton.setObjectName("gestioneUtentiButton")
         self.gestioneUtentiButton.clicked.connect(self.goToGestioneUtentiView)
 
-        self.logOutButton = QtWidgets.QPushButton(self.centralwidget)
-        self.logOutButton.setGeometry(QtCore.QRect(440, 260, 150, 30))
-        self.logOutButton.setObjectName("logOutButton")
-        self.logOutButton.clicked.connect(self.actionLogOut)
+        self.backupButton = QtWidgets.QPushButton(self.centralwidget)
+        self.backupButton.setGeometry(QtCore.QRect(440, 260, 150, 30))
+        self.backupButton.setObjectName("backupButton")
+        self.backupButton.clicked.connect(self.actionBackup)
 
         self.gestioneTestButton = QtWidgets.QPushButton(self.centralwidget)
         self.gestioneTestButton.setGeometry(QtCore.QRect(440, 160, 150, 30))
@@ -63,7 +61,7 @@ class LandingPageAdminView(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.adminLabel.setText(_translate("MainWindow", "Admin"))
         self.gestioneUtentiButton.setText(_translate("MainWindow", "Gestione Utenti"))
-        self.logOutButton.setText(_translate("MainWindow", "Log Out"))
+        self.backupButton.setText(_translate("MainWindow", "Backup"))
         self.gestioneTestButton.setText(_translate("MainWindow", "Gestione Test"))
 
     def goToGestioneUtentiView(self):
@@ -80,7 +78,6 @@ class LandingPageAdminView(object):
         self.gestioneTest.show()
         self.ui.actionVisualizzaListaTest()
 
-    def actionLogOut(self):
-        controllerAutenticazione = ControllerAutenticazione()
-        controllerAutenticazione.logOut()
-
+    def actionBackup(self):
+        controllerBackup = ControllerBackup()
+        controllerBackup.effettuaBackup()

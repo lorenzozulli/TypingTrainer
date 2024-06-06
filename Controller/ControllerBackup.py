@@ -1,9 +1,9 @@
 class ControllerBackup(object):
     def effettuaBackup():
-        #TODO: fare questa funzione
+        pass
     
     def getDatiUtenti():
-        #TODO: fare questa funzione
+        pass
         
     def getDatiTest():
-        #TODO: fare questa funzione
+        pass

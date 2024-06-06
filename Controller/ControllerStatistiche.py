@@ -1,4 +1,3 @@
-from Model.Utente import Utente
 from Controller.ControllerPickle import ControllerPickle
 
 class ControllerStatistiche(object):

@@ -24,8 +24,7 @@ class ControllerTest(object):
             listaTest.append(nuovoTest)
             controllerPickle.salvaListaTest()
             return True
-        except Exception as e:
-            print(e)
+        except Exception:
             return False
     
     def controllaIdentificatoreUnivoco(self, identifierCandidato):
@@ -78,8 +77,7 @@ class ControllerTest(object):
 
             controllerPickle.salvaListaTest()
             return True
-        except Exception as e:
-            print(e)
+        except Exception:
             return False
         
     def controllaNomeTestModificabile(self, nuovoNome, listaTest, testDaModificare):

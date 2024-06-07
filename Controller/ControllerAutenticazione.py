@@ -70,24 +70,27 @@ class ControllerAutenticazione(object):
             raise Exception
         
     def recuperaPassword(self, identifier, nuovaPassword):
-        controllerPickle = ControllerPickle()
-        controllerPickle.caricaListaUtilizzatori()
-        listaUtilizzatori = controllerPickle.listaUtilizzatori
+        try:
+            controllerPickle = ControllerPickle()
+            controllerPickle.caricaListaUtilizzatori()
+            listaUtilizzatori = controllerPickle.listaUtilizzatori
 
-        identificatore_trovato = False
+            identificatore_trovato = False
 
-        for i in listaUtilizzatori:
-            if identifier == i.getIdentifier():
-                i.setPassword(nuovaPassword)
-                identificatore_trovato = True
-                break
+            for i in listaUtilizzatori:
+                if identifier == i.getIdentifier():
+                    i.setPassword(nuovaPassword)
+                    identificatore_trovato = True
+                    break
 
-        if not identificatore_trovato:
-            recuperoNonOK = QMessageBox()
-            recuperoNonOK.setWindowTitle("Errore!")
-            recuperoNonOK.setText("Identificatore non trovato!")
-            recuperoNonOK.exec_()
+            if not identificatore_trovato:
+                recuperoNonOK = QMessageBox()
+                recuperoNonOK.setWindowTitle("Errore!")
+                recuperoNonOK.setText("Identificatore non trovato!")
+                recuperoNonOK.exec_()
+                return False
+
+            controllerPickle.salvaListaUtilizzatori()
+        except Exception:
             return False
-
-        controllerPickle.salvaListaUtilizzatori()
         return True

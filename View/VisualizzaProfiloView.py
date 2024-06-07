@@ -22,7 +22,7 @@ class VisualizzaProfiloView(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.usernameLabel = QtWidgets.QLabel(self.centralwidget)
-        self.usernameLabel.setGeometry(QtCore.QRect(140, 190, 251, 81))
+        self.usernameLabel.setGeometry(QtCore.QRect(100, 190, 300, 81))
         font = QtGui.QFont()
         font.setPointSize(24)
         self.usernameLabel.setFont(font)
@@ -91,7 +91,7 @@ class VisualizzaProfiloView(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.usernameLabel.setText(_translate("MainWindow", str(self.currentUtilizzatore.getUsername())))
+        self.usernameLabel.setText(_translate("MainWindow", f'{str(self.currentUtilizzatore.getUsername())} (Id: #{str(self.currentUtilizzatore.getIdentifier())})'))
         self.modificaProfiloButton.setText(_translate("MainWindow", "Modifica Profilo"))
         self.joinedInLabel.setText(_translate("MainWindow", "Joined in,"))
         self.dateLabel.setText(_translate("MainWindow", str(self.currentUtilizzatore.getDataCreazione())))

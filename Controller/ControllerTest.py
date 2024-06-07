@@ -44,7 +44,7 @@ class ControllerTest(object):
             raise Exception
 
     def assegnaContenutoTest(self, contenuto):
-            words = contenuto.split(",")
+            words = [parola.strip() for parola in contenuto.split(",")]
             lunghezzaCaratteri = len([carattere for parola in words for carattere in parola])
             if lunghezzaCaratteri > 350:
                 AggiuntaNonOK = QMessageBox()

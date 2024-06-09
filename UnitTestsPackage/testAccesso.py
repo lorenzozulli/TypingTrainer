@@ -14,6 +14,10 @@ class MyTestCase(unittest.TestCase):
     def testLogin(self):
         controllerAutenticazione = ControllerAutenticazione()
 
+        controllerPickle = ControllerPickle()
+        controllerPickle.caricaListaUtilizzatori()
+        listaUtilizzatori = controllerPickle.listaUtilizzatori
+
         self.assertEqual(controllerAutenticazione.logIn("UtenteTest", "PasswordTest00"), ("Utente", Utente.Utente()))
         self.assertEqual(controllerAutenticazione.logIn("Administrator", "Administrator00"), ("Admin", Admin.Admin()))
         self.assertEqual(controllerAutenticazione.logIn("UtenteTest", "passErrata"), ("PasswordErrata", "errore"))

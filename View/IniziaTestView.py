@@ -35,7 +35,7 @@ class IniziaTestView(object):
         self.TimerLabel.setObjectName("TimerLabel")
 
         self.TestDisplayLabel = QtWidgets.QLabel(self.centralwidget)
-        self.TestDisplayLabel.setGeometry(QtCore.QRect(90, 120, 600, 400))
+        self.TestDisplayLabel.setGeometry(QtCore.QRect(70, 120, 650, 400))
         font = QtGui.QFont()
         font.setPointSize(16)
         self.TestDisplayLabel.setFont(font)

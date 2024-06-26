@@ -1,5 +1,4 @@
 from Controller.ControllerPickle import ControllerPickle
-from Controller.ControllerAutenticazione import ControllerAutenticazione
 from PyQt5.QtWidgets import *
 
 class ControllerUtente(object):

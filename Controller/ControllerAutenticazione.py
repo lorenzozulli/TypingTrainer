@@ -33,8 +33,7 @@ class ControllerAutenticazione(object):
 
             for self.i in listaUtilizzatori:
                 nuovoUtente.setIdentifier(self.controllaIdentificatoreUnivoco(identifierCandidato))
-                if self.controllaUsernameUnivoco(username) == True:
-                    nuovoUtente.setUsername(username)
+                nuovoUtente.setUsername(self.controllaUsernameUnivoco(username))
                 nuovoUtente.setPassword(password)
                 nuovoUtente.setEmail(email)
 
@@ -61,7 +60,7 @@ class ControllerAutenticazione(object):
         
     def controllaUsernameUnivoco(self, username):
         if not (username == self.i.getUsername()):
-            return True
+            return username
         else:
             registrazioneNonOK = QMessageBox()
             registrazioneNonOK.setWindowTitle("Errore!")

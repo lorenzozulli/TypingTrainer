@@ -46,6 +46,14 @@ class ControllerTest(object):
     def assegnaContenutoTest(self, contenuto):
             words = [parola.strip() for parola in contenuto.split(",")]
             lunghezzaCaratteri = len([carattere for parola in words for carattere in parola])
+            for word in words:
+                if len(word) > 50:
+                    AggiuntaNonOK = QMessageBox()
+                    AggiuntaNonOK.setWindowTitle("Errore!")
+                    AggiuntaNonOK.setText('Hai inserito una parola con più di 50 caratteri!')
+                    AggiuntaNonOK.exec_()
+                    raise Exception
+
             if lunghezzaCaratteri > 350:
                 AggiuntaNonOK = QMessageBox()
                 AggiuntaNonOK.setWindowTitle("Errore!")

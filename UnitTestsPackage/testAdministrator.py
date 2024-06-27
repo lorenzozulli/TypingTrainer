@@ -6,6 +6,7 @@ from Controller.ControllerTest import ControllerTest
 from Model import Utilizzatore, Utente, Admin
 
 class TestAdministrator(unittest.TestCase):
+    pass
     '''
     def setUp(self):
         utente1 = Utente.Utente()
@@ -30,8 +31,7 @@ class TestAdministrator(unittest.TestCase):
         pass
     def testModificaTest(self):
         pass
+'''
 
 if __name__ == '__main__':
     unittest.main()
-
-'''

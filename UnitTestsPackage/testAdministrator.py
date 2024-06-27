@@ -1,37 +1,31 @@
 import unittest
 
-from Controller.ControllerPickle import ControllerPickle
-from Controller.ControllerUtente import ControllerUtente
-from Controller.ControllerTest import ControllerTest
-from Model import Utilizzatore, Utente, Admin
+from Model import Test
 
 class TestAdministrator(unittest.TestCase):
-    pass
-    '''
     def setUp(self):
-        utente1 = Utente.Utente()
-        utente1.setIdentifier(1)
+        self.test1 = Test.Test()
+        self.test1.setIdentifier(1)
 
-        utente2 = Utente.Utente()
-        utente2.setIdentifier(2)
+        self.test2 = Test.Test()
+        self.test2.setIdentifier(2)
 
-        self.listaUtilizzatori = [
-            utente1,
-            utente2
+        self.miaListaTest = [
+            self.test1,
+            self.test2
         ]
-    def testEliminaUtente(self):
-        controllerUtente = ControllerUtente()
-        controllerUtente.eliminaUtente(1)
-        self.assertEqual(len(self.listaUtilizzatori), 1)
-    def testModificaUtente(self):
-        pass
-    def testAggiungiTest(self):
-        pass
+    def eliminaTest(self, identifier):
+        try:
+            for i in self.miaListaTest:
+                if identifier == i.getIdentifier():
+                    self.miaListaTest.remove(i)
+            return True
+        except Exception:
+            return False
+    
     def testEliminaTest(self):
-        pass
-    def testModificaTest(self):
-        pass
-'''
+        result = self.eliminaTest(1)
+        self.assertEqual(result, True)
 
 if __name__ == '__main__':
     unittest.main()

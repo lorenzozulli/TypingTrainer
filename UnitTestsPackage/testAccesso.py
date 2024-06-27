@@ -35,19 +35,19 @@ class MyTestCase(unittest.TestCase):
                 return "PasswordErrata", "errore"
         return "UsernameNonTrovato", "errore"
 
-    def test_login_utente(self):
+    def testLoginUtente(self):
         result = self.logIn('username1', 'pass1')
         self.assertEqual(result, ("Utente", self.utente_normale))
 
-    def test_login_admin(self):
+    def testLoginAdmin(self):
         result = self.logIn('administrator', 'adminpass0')
         self.assertEqual(result, ("Admin", self.utente_admin))
 
-    def test_login_password_errata(self):
+    def testLoginPasswordErrata(self):
         result = self.logIn('username2', 'wrongpass1')
         self.assertEqual(result, ("PasswordErrata", "errore"))
 
-    def test_login_username_non_trovato(self):
+    def testLoginUsernameNonTrovato(self):
         result = self.logIn('nonexistent', 'nopass1')
         self.assertEqual(result, ("UsernameNonTrovato", "errore"))
 

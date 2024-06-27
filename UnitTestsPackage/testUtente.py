@@ -1,16 +1,18 @@
 import unittest
+import pickle
 
-from Controller.ControllerAutenticazione import ControllerAutenticazione
+from Controller.ControllerUtente import ControllerUtente
 from Controller.ControllerPickle import ControllerPickle
-from Model import Utilizzatore, Utente, Admin
+from Model import Utente 
 
 class TestUtente(unittest.TestCase):
-    def testVisualizzaProfilo(self):
-        pass
     def testModificaProfilo(self):
-        pass
+        with open('listaUtilizzatori.pickle', "rb") as f:
+            listaUtilizzatori = pickle.load(f)
+
+        controllerUtente = ControllerUtente()
+
+        self.assertTrue(controllerUtente.modificaProfilo(self.utenteTest, "Plutone17", "utenteTest@gmail.com", "Marte77"))
 
 if __name__ == '__main__':
     unittest.main()
-
-

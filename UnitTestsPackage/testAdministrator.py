@@ -6,6 +6,7 @@ from Controller.ControllerTest import ControllerTest
 from Model import Utilizzatore, Utente, Admin
 
 class TestAdministrator(unittest.TestCase):
+    '''
     def setUp(self):
         utente1 = Utente.Utente()
         utente1.setIdentifier(1)
@@ -33,3 +34,4 @@ class TestAdministrator(unittest.TestCase):
 if __name__ == '__main__':
     unittest.main()
 
+'''

@@ -1,8 +1,8 @@
 import unittest
+import pickle
 
 from Controller.ControllerAutenticazione import ControllerAutenticazione
 from Controller.ControllerPickle import ControllerPickle
-from Model import Utilizzatore, Utente, Admin
 
 class MyTestCase(unittest.TestCase):
     def testCaricaListaUtilizzatori(self):
@@ -13,6 +13,8 @@ class MyTestCase(unittest.TestCase):
 
     def testLogin(self):
         controllerAutenticazione = ControllerAutenticazione()
+        with open('listaUtilizzatori.pickle', "rb") as f:
+            listaUtilizzatori = pickle.load(f)
 
         self.assertIsNotNone(controllerAutenticazione.logIn("Administrator", "Administrator00"))
         self.assertIsNotNone(controllerAutenticazione.logIn("UtenteTest", "PasswordTest00"))

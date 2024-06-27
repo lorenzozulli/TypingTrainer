@@ -23,7 +23,7 @@ class ControllerPickle(object):
             test = Test()
             test.setIdentifier(0)
             test.setNome("Test1")
-            test.setContenutoTest([test])
+            test.setContenutoTest(["modificami","come","preferisci","sono","solamente","un","template"])
             test.setDataCreazione(date.today())
             test.loadTest()
         if not os.path.isdir(os.path.join('BaseDiDati', 'Backup')):

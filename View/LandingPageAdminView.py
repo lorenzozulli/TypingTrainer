@@ -22,24 +22,24 @@ class LandingPageAdminView(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.adminLabel = QtWidgets.QLabel(self.centralwidget)
-        self.adminLabel.setGeometry(QtCore.QRect(140, 190, 251, 81))
+        self.adminLabel.setGeometry(QtCore.QRect(20, 190, 400, 81))
         font = QtGui.QFont()
-        font.setPointSize(40)
+        font.setPointSize(24)
         self.adminLabel.setFont(font)
         self.adminLabel.setObjectName("adminLabel")
 
         self.gestioneUtentiButton = QtWidgets.QPushButton(self.centralwidget)
-        self.gestioneUtentiButton.setGeometry(QtCore.QRect(440, 210, 150, 30))
+        self.gestioneUtentiButton.setGeometry(QtCore.QRect(550, 210, 150, 30))
         self.gestioneUtentiButton.setObjectName("gestioneUtentiButton")
         self.gestioneUtentiButton.clicked.connect(self.goToGestioneUtentiView)
 
         self.backupButton = QtWidgets.QPushButton(self.centralwidget)
-        self.backupButton.setGeometry(QtCore.QRect(440, 260, 150, 30))
+        self.backupButton.setGeometry(QtCore.QRect(550, 260, 150, 30))
         self.backupButton.setObjectName("backupButton")
         self.backupButton.clicked.connect(self.actionBackup)
 
         self.gestioneTestButton = QtWidgets.QPushButton(self.centralwidget)
-        self.gestioneTestButton.setGeometry(QtCore.QRect(440, 160, 150, 30))
+        self.gestioneTestButton.setGeometry(QtCore.QRect(550, 160, 150, 30))
         self.gestioneTestButton.setObjectName("gestioneTestButton")
         self.gestioneTestButton.clicked.connect(self.goToGestioneTestView)
 
@@ -58,7 +58,7 @@ class LandingPageAdminView(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.adminLabel.setText(_translate("MainWindow", "Admin"))
+        self.adminLabel.setText(_translate("MainWindow", f"{self.currentUtilizzatore.getUsername()} (Id: #{str(self.currentUtilizzatore.getIdentifier())})"))
         self.gestioneUtentiButton.setText(_translate("MainWindow", "Gestione Utenti"))
         self.backupButton.setText(_translate("MainWindow", "Backup"))
         self.gestioneTestButton.setText(_translate("MainWindow", "Gestione Test"))

@@ -21,14 +21,14 @@ class VisualizzaProfiloView(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.usernameLabel = QtWidgets.QLabel(self.centralwidget)
-        self.usernameLabel.setGeometry(QtCore.QRect(100, 190, 300, 81))
+        self.usernameLabel.setGeometry(QtCore.QRect(20, 190, 400, 81))
         font = QtGui.QFont()
         font.setPointSize(24)
         self.usernameLabel.setFont(font)
         self.usernameLabel.setObjectName("usernameLabel")
 
         self.modificaProfiloButton = QtWidgets.QPushButton(self.centralwidget)
-        self.modificaProfiloButton.setGeometry(QtCore.QRect(440, 210, 150, 30))
+        self.modificaProfiloButton.setGeometry(QtCore.QRect(550, 210, 150, 30))
         self.modificaProfiloButton.setObjectName("modificaProfiloButton")
         self.modificaProfiloButton.clicked.connect(self.goToModificaProfiloView)
 

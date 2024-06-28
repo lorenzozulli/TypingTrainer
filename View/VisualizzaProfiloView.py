@@ -109,4 +109,4 @@ class VisualizzaProfiloView(object):
         self.ui.ModificaButton.clicked.connect(self.aggiornaPagina)
         
     def aggiornaPagina(self):
-        self.usernameLabel.setText(self.currentUtilizzatore.getUsername())
+        self.usernameLabel.setText(f'{str(self.currentUtilizzatore.getUsername())} (Id: #{str(self.currentUtilizzatore.getIdentifier())})')

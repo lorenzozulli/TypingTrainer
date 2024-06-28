@@ -13,7 +13,6 @@ from View.IniziaTestView import IniziaTestView
 from Controller.ControllerPickle import ControllerPickle
 from PyQt5.QtCore import *
 
-
 class LandingPageUtenteView(object):
     def setupUi(self, MainWindow, currentUtilizzatore):
         self.currentUtilizzatore = currentUtilizzatore

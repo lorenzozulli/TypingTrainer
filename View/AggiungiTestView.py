@@ -12,7 +12,6 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 from Controller.ControllerTest import ControllerTest
 
-
 class AggiungiTestView(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")

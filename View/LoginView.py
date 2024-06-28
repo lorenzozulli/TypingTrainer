@@ -14,7 +14,6 @@ from View.RegistrazioneView import RegistrazioneView
 from View.RecuperaPasswordView import RecuperaPasswordView
 from View.LandingPageUtenteView import LandingPageUtenteView
 from View.LandingPageAdminView import LandingPageAdminView
-
 from Controller.ControllerAutenticazione import ControllerAutenticazione
 
 class LoginView(object):

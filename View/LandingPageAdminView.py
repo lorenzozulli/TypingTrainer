@@ -11,7 +11,6 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 from View.GestioneUtentiView import GestioneUtentiView
 from View.GestioneTestView import GestioneTestView
-
 from Controller.ControllerBackup import ControllerBackup
 
 class LandingPageAdminView(object):

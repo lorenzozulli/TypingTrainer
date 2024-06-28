@@ -20,7 +20,8 @@ class IniziaTestView(object):
         self.running = False
         self.errorCounter = 0
         self.correctCounter = 0
-        self.lunghezza = 0 
+        self.lunghezza = 0
+        self.ended = False 
 
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 800)
@@ -83,6 +84,7 @@ class IniziaTestView(object):
     def start(self):
         if not self.running:
             self.running = True
+            self.ended = False
 
             self.timer = QTimer()
             self.timer.setInterval(100)
@@ -105,6 +107,7 @@ class IniziaTestView(object):
 
         if self.WordInputLineEdit.text() == self.testRandomizzato:
             self.running = False
+            self.ended = True
             self.timer.stop()
             self.TestDisplayLabel.setStyleSheet('color: green;')
             self.WordInputLineEdit.setStyleSheet('color: green;')
@@ -118,9 +121,10 @@ class IniziaTestView(object):
             self.reset()
 
     def reset(self):
-        if self.running:
+        if self.running or self.ended:
             self.WordInputLineEdit.clear()
             self.running = False
+            self.ended = False
             self.timer.stop()
             self.timeCounter = 0.0
             self.errorCounter = 0

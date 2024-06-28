@@ -119,14 +119,15 @@ class IniziaTestView(object):
             self.reset()
 
     def reset(self):
-        self.WordInputLineEdit.clear()
-        self.running = False
-        self.timer.stop()
-        self.timeCounter = 0.0
-        self.errorCounter = 0
-        self.correctCounter = 0
-        self.TimerLabel.setText(str(self.timeCounter))
-        self.TestDisplayLabel.setStyleSheet('color: black;')
+        if self.running:
+            self.WordInputLineEdit.clear()
+            self.running = False
+            self.timer.stop()
+            self.timeCounter = 0.0
+            self.errorCounter = 0
+            self.correctCounter = 0
+            self.TimerLabel.setText(str(self.timeCounter))
+            self.TestDisplayLabel.setStyleSheet('color: black;')
 
     def goToVisualizzaStatisticheView(self):
         self.visualizzaStatisticheView = QtWidgets.QMainWindow()
